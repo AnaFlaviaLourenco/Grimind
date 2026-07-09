@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sistema da Ana</title>
+<title>Grimlist</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23fdfaf7'/%3E%3Ccircle cx='28' cy='30' r='10' fill='%23f1eaf8' stroke='%238b6fb8' stroke-width='3'/%3E%3Cg stroke='%238b6fb8' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M28 9v7M28 44v7M7 30h7M42 30h7M13 15l5 5M38 40l5 5M43 15l-5 5M18 40l-5 5'/%3E%3C/g%3E%3Cpath d='M43 17c-7 2-12 8-12 16s5 14 12 16c-10 2-20-6-20-16s10-18 20-16Z' fill='%23fdfaf7' stroke='%236b4f96' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M48 12h4M50 10v4M15 48h4M17 46v4' stroke='%23d9789f' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -102,7 +103,12 @@ a{color:inherit;}
 
 #app{display:flex;height:100vh;overflow:hidden;}
 #sidebar{width:250px;flex-shrink:0;background:var(--bg-sidebar);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:16px 10px;overflow-y:auto;transition:background .25s ease,border-color .25s ease;}
-.sidebar-title{font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--text);padding:6px 10px 14px;letter-spacing:.01em;}
+.brand-mark{display:flex;align-items:center;gap:10px;color:var(--text);}
+.sidebar-title{padding:6px 10px 14px;}
+.brand-icon{width:34px;height:34px;flex-shrink:0;color:var(--accent-strong);}
+.brand-word{font-family:var(--font-display);font-size:19px;font-weight:700;letter-spacing:.01em;line-height:1;}
+.brand-sub{font-size:9px;text-transform:uppercase;letter-spacing:.18em;color:var(--text-tertiary);font-weight:900;margin-top:4px;}
+.brand-stars{color:var(--accent);opacity:.7;}
 .nav-item{display:flex;align-items:center;gap:9px;padding:8px 12px;border-radius:10px;cursor:pointer;color:var(--text);font-size:14px;font-weight:600;user-select:none;transition:background .15s ease,color .15s ease;}
 .nav-item:hover{background:var(--hover);}
 .nav-item.active{background:var(--accent-soft);color:var(--accent-soft-text);font-weight:800;}
@@ -120,7 +126,7 @@ a{color:inherit;}
 .swatch:hover{transform:scale(1.12);}
 .swatch.sel{border-color:var(--bg-card);box-shadow:0 0 0 2px var(--bg-card),0 0 0 3.5px var(--accent);}
 
-#content{flex:1;overflow-y:auto;padding:56px clamp(48px,6vw,128px);max-width:none;width:100%;}
+#content{flex:1;overflow-y:auto;padding:56px clamp(44px,5vw,96px);max-width:none;width:100%;}
 @media (max-width:880px){#content{padding:32px;max-width:100%;}}
 
 .page-header{display:flex;align-items:center;gap:12px;margin-bottom:26px;}
@@ -171,6 +177,8 @@ a{color:inherit;}
 .btn-primary:hover{filter:brightness(1.06);}
 .btn-danger{color:var(--danger);}
 .btn-row{margin-top:16px;display:flex;gap:8px;}
+.btn-return-project{margin-bottom:14px;background:var(--accent-soft);border-color:var(--accent);color:var(--accent-soft-text);}
+.btn-return-project:hover{background:var(--hover);border-color:var(--accent-strong);}
 
 .board{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;align-items:flex-start;padding-bottom:14px;}
 .board-col{min-width:0;background:var(--bg-subtle);border-radius:16px;padding:12px;}
@@ -203,6 +211,7 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
 
 .modal-overlay{position:fixed;inset:0;background:var(--overlay);display:flex;align-items:flex-start;justify-content:center;padding:6vh 20px;overflow-y:auto;z-index:100;}
 .modal{background:var(--bg-card);border-radius:20px;width:100%;max-width:540px;padding:28px 32px;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+.modal.task-modal,.modal.project-modal{max-width:min(60vw,980px);}
 .modal.wide-note{max-width:900px;min-height:72vh;display:flex;flex-direction:column;}
 .modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;}
 .modal-header h2{margin:0;font-size:20px;font-family:var(--font-display);font-weight:600;}
@@ -215,13 +224,32 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
 .field input[type=text],.field input[type=date],.field input[type=number],.field select,.field textarea{width:100%;padding:9px 11px;border:1.5px solid var(--border-strong);border-radius:var(--radius-sm);font-size:14px;font-family:inherit;background:var(--bg-input);color:var(--text);}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);}
 .field textarea{min-height:66px;resize:vertical;}
+.field-check{display:flex;align-items:center;gap:8px;margin:2px 0 14px;color:var(--text-secondary);font-size:13px;font-weight:800;}
+.field-check input{width:auto;margin:0;accent-color:var(--accent);}
+.project-status-select{font-weight:900;border-width:2px!important;}
+.project-status-select.status-ativo{background:var(--green-bg)!important;color:var(--green-text)!important;border-color:var(--success)!important;}
+.project-status-select.status-em-andamento{background:var(--accent-soft)!important;color:var(--accent-soft-text)!important;border-color:var(--accent)!important;}
+.project-status-select.status-pausado{background:var(--yellow-bg)!important;color:var(--yellow-text)!important;border-color:var(--yellow-text)!important;}
+.project-status-select.status-concluido{background:var(--bg-input)!important;color:var(--text)!important;border-color:var(--border-strong)!important;}
+.project-status-select.status-aguardando{background:var(--blue-bg)!important;color:var(--blue-text)!important;border-color:var(--blue-text)!important;}
 .note-expanded-textarea{flex:1;min-height:52vh!important;font-size:16px!important;line-height:1.65!important;padding:18px!important;}
+.note-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;padding:8px;border:1px solid var(--border);border-radius:12px;background:var(--bg-subtle);}
+.note-tool{border:1px solid var(--border-strong);background:var(--bg-card);color:var(--text);border-radius:8px;min-width:34px;height:32px;font-weight:900;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0 9px;}
+.note-tool:hover{background:var(--hover);border-color:var(--accent);}
+.note-expanded-editor{flex:1;min-height:52vh!important;font-size:16px!important;line-height:1.65!important;padding:18px!important;border:1.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg-input);color:var(--text);overflow:auto;outline:none;}
+.note-expanded-editor:focus{border-color:var(--accent);}
+.note-inline-editor{min-height:82px;max-height:170px;width:100%;padding:9px 11px;border:1.5px solid var(--border-strong);border-radius:var(--radius-sm);font-size:14px;font-family:inherit;background:var(--bg-input);color:var(--text);outline:none;overflow-y:auto;}
+.note-inline-editor:focus{border-color:var(--accent);}
 .field-row{display:flex;gap:10px;flex-wrap:wrap;}
 .field-row .field{flex:1;min-width:120px;}
 .icon-btn{background:none;border:none;font-size:17px;cursor:pointer;color:var(--text-tertiary);padding:2px 4px;}
 .icon-btn:hover{color:var(--text);}
 .subtask{display:flex;align-items:center;gap:9px;padding:7px 2px;border-bottom:1px solid var(--border);font-size:13.5px;}
 .subtask .task-date{margin-left:auto;}
+.task-row.drag-enabled,.subtask.drag-enabled{cursor:grab;}
+.task-row.drag-enabled:active,.subtask.drag-enabled:active{cursor:grabbing;}
+.task-row.drag-over,.subtask.drag-over{background:var(--accent-soft);outline:1.5px dashed var(--accent);outline-offset:-2px;}
+.drag-handle{color:var(--text-tertiary);font-weight:900;letter-spacing:-2px;padding-right:2px;cursor:grab;user-select:none;}
 .multiselect{display:flex;flex-wrap:wrap;gap:6px;}
 .multiselect .chip{padding:6px 12px;border-radius:var(--radius-pill);border:1.5px solid var(--border-strong);font-size:12.5px;cursor:pointer;font-weight:600;color:var(--text);}
 .multiselect .chip.sel{background:var(--accent);color:#fff;border-color:var(--accent);}
@@ -320,6 +348,7 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
   #sidebar .nav-item[data-page="pessoal"]{display:none;}
   #content{padding:22px 18px 96px;height:auto;min-height:calc(100vh - 49px);}
   .modal{max-width:100%;padding:22px 20px;}
+  .modal.task-modal,.modal.project-modal{max-width:100%;}
   .bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:35;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:1px solid var(--border);box-shadow:0 -10px 28px rgba(80,60,100,.10);backdrop-filter:blur(12px);}
   html[data-theme="dark"] .bottom-nav{background:rgba(26,23,32,.96);}
   .bottom-nav-item{border:0;background:transparent;border-radius:12px;color:var(--text-secondary);font-size:11px;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:48px;padding:4px 2px;cursor:pointer;}
@@ -427,6 +456,8 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
 .project-badges{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;}
 .project-badge{border-radius:999px;padding:5px 10px;font-size:12px;font-weight:800;background:var(--accent-soft);color:var(--accent-soft-text);}
 .project-badge.soft{background:var(--bg-subtle);color:var(--text-secondary);}
+.project-metric-badge{border-radius:999px;padding:10px 14px;font-size:12px;font-weight:900;background:var(--bg-subtle);color:var(--text-secondary);display:flex;flex-direction:column;align-items:flex-start;gap:7px;min-width:122px;}
+.project-metric-label{line-height:1;}
 .project-next{background:var(--bg-subtle);border:1px solid var(--border);border-radius:9px;padding:12px 13px;margin:12px 0;}
 .project-next-label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-strong);font-weight:900;margin-bottom:5px;}
 .project-next-text{font-size:14px;color:var(--text);line-height:1.4;font-weight:700;}
@@ -439,8 +470,22 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
 .project-detail-title{font-family:var(--font-display);font-size:25px;color:var(--text);margin:0 0 8px;}
 .project-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
 .project-mini-box{border:1px solid var(--border);border-radius:10px;padding:12px;background:var(--bg-card);}
+.project-mini-box.choice{cursor:pointer;text-align:left;min-height:72px;font-family:inherit;color:inherit;width:100%;}
+.project-mini-box.choice:hover{border-color:var(--accent);background:var(--hover);}
 .project-mini-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-strong);font-weight:900;margin-bottom:5px;}
 .project-mini-text{font-size:14px;color:var(--text);line-height:1.4;}
+.project-choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:14px;}
+.project-priority-dots{display:flex;gap:5px;align-items:center;}
+.project-priority-dot{width:13px;height:13px;border-radius:999px;background:var(--border-strong);box-shadow:0 0 0 1px rgba(255,255,255,.7) inset;}
+.project-priority-dot.on.low{background:var(--success);}
+.project-priority-dot.on.medium{background:#d98c4a;}
+.project-priority-dot.on.high{background:var(--danger);}
+.project-energy-bolts{font-size:15px;letter-spacing:1px;color:var(--accent-strong);font-weight:900;line-height:1;}
+.project-add-task-box{border:1.5px dashed var(--border-strong);border-radius:12px;padding:14px;background:var(--bg-card);margin-top:8px;}
+.project-add-task-title{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-strong);font-weight:900;margin-bottom:10px;}
+.project-add-task-box input{min-width:160px;padding:8px 11px;border:1.5px solid var(--border-strong);border-radius:var(--radius-sm);font-size:13.5px;background:var(--bg-input);color:var(--text);margin:0 8px 8px 0;}
+.project-add-task-box .btn{margin-bottom:8px;}
+.project-date-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
 .tarot-card-art{width:82px;height:128px;border-radius:8px;border:1.5px solid var(--accent);background:linear-gradient(180deg,#fffdfb 0%,var(--accent-soft) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;color:var(--accent-strong);box-shadow:0 10px 24px rgba(120,90,150,.12);flex-shrink:0;}
 .tarot-card-art::before{content:'';position:absolute;inset:6px;border:1px solid var(--accent);border-radius:5px;opacity:.65;}
 .tarot-symbol{font-size:34px;line-height:1;margin-bottom:8px;z-index:1;}
@@ -449,10 +494,108 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
 .moon-icon{width:38px;height:38px;border-radius:999px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;color:var(--accent-strong);font-size:22px;flex-shrink:0;}
 .moon-title{font-family:var(--font-display);font-size:17px;color:var(--text);line-height:1.1;margin-bottom:4px;}
 .moon-sub{font-size:11.5px;color:var(--text-secondary);font-weight:700;line-height:1.35;}
+.habits-page{max-width:min(100%,1320px);margin:0 auto;padding-bottom:42px;}
+.habits-header{display:flex;align-items:flex-start;justify-content:space-between;gap:22px;margin-bottom:24px;}
+.habits-subtitle{font-size:14px;color:var(--text-secondary);margin:8px 0 0;}
+.habits-year-grid{display:grid;grid-template-columns:repeat(12,minmax(82px,1fr));gap:10px;margin:18px 0 28px;}
+.habit-month-card{border:1px solid var(--border);background:var(--bg-card);border-radius:12px;padding:12px 10px;min-height:84px;}
+.habit-month-name{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-secondary);font-weight:900;}
+.habit-month-score{font-family:var(--font-display);font-size:24px;color:var(--accent-strong);line-height:1;margin:10px 0 8px;}
+.habit-month-bar{height:6px;border-radius:999px;background:var(--accent-soft);overflow:hidden;}
+.habit-month-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-strong));border-radius:999px;}
+.habit-control-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:18px;overflow-x:auto;}
+.habit-table{width:100%;border-collapse:collapse;min-width:760px;}
+.habit-table th,.habit-table td{border-bottom:1px solid var(--border);padding:8px 6px;text-align:center;font-size:12px;}
+.habit-table th:first-child,.habit-table td:first-child{text-align:left;position:sticky;left:0;background:var(--bg-card);z-index:1;min-width:190px;}
+.habit-day-cell{width:28px;height:28px;border-radius:8px;border:1.5px solid var(--border-strong);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:transparent;background:var(--bg-input);font-weight:900;}
+.habit-day-cell.done{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-strong);}
+.habit-name-cell{display:flex;align-items:center;gap:9px;font-weight:800;color:var(--text);}
+.habit-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;}
+.review-page{max-width:min(100%,1320px);margin:0 auto;padding-bottom:42px;}
+.review-grid{display:grid;grid-template-columns:minmax(320px,.9fr) minmax(420px,1.1fr);gap:20px;align-items:start;}
+.review-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:18px;}
+.review-card.highlight{background:var(--accent-soft);}
+.review-title{font-family:var(--font-display);font-size:22px;color:var(--text);margin:0 0 8px;}
+.review-sub{font-size:13px;color:var(--text-secondary);font-weight:700;margin-bottom:14px;}
+.review-check{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
+.review-check:last-child{border-bottom:none;}
+.review-check-text{flex:1;font-size:14px;color:var(--text);font-weight:700;line-height:1.35;}
+.review-check small{display:block;color:var(--text-secondary);font-size:12px;font-weight:700;margin-top:3px;}
+.review-project-list{display:grid;gap:12px;}
+.review-project-card{border:1px solid var(--border);background:var(--bg-card);border-radius:12px;padding:14px;}
+.review-project-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px;}
+.review-project-title{font-family:var(--font-display);font-size:18px;color:var(--text);font-weight:600;}
+.review-inbox-list{display:grid;gap:8px;margin-top:10px;}
+.review-inbox-pill{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:10px;padding:9px 11px;background:var(--bg-card);font-weight:800;color:var(--text);}
+.lendo-page{max-width:min(100%,1440px);margin:0 auto;padding-bottom:44px;}
+.lendo-header{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:18px;}
+.lendo-subtitle{font-size:14px;color:var(--text-secondary);font-weight:700;margin:6px 0 0;}
+.lendo-metrics{display:grid;grid-template-columns:repeat(5,minmax(150px,1fr));gap:14px;margin:18px 0 22px;}
+.lendo-metric{border:1px solid var(--border);background:var(--bg-card);border-radius:14px;padding:16px;min-height:112px;display:flex;justify-content:space-between;gap:12px;box-shadow:0 8px 24px rgba(120,90,150,.04);}
+.lendo-metric.pink{background:linear-gradient(135deg,var(--pink-bg),var(--bg-card));}
+.lendo-metric.purple{background:linear-gradient(135deg,var(--purple-bg),var(--bg-card));}
+.lendo-metric.blue{background:linear-gradient(135deg,var(--blue-bg),var(--bg-card));}
+.lendo-metric.green{background:linear-gradient(135deg,var(--green-bg),var(--bg-card));}
+.lendo-metric.orange{background:linear-gradient(135deg,var(--orange-bg),var(--bg-card));}
+.lendo-metric-label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-secondary);font-weight:900;margin-bottom:8px;}
+.lendo-metric-num{font-family:var(--font-display);font-size:32px;line-height:1;color:var(--text);font-weight:700;}
+.lendo-metric-sub{font-size:12px;color:var(--text-secondary);font-weight:800;margin-top:8px;}
+.lendo-metric-icon{width:48px;height:48px;border-radius:999px;background:rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--accent-strong);flex-shrink:0;}
+.lendo-workflow{border:1px solid var(--border);border-radius:16px;background:var(--bg-card);padding:18px;margin-bottom:18px;}
+.lendo-section-title{display:flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:20px;color:var(--accent-strong);font-weight:700;margin:0 0 16px;}
+.lendo-flow-board{display:grid;grid-template-columns:repeat(4,minmax(210px,1fr));gap:16px;align-items:start;}
+.lendo-flow-col{border-radius:14px;padding:12px;min-height:260px;background:var(--bg-subtle);}
+.lendo-flow-col.todo{background:linear-gradient(180deg,var(--purple-bg),var(--bg-subtle));}
+.lendo-flow-col.doing{background:linear-gradient(180deg,var(--orange-bg),var(--bg-subtle));}
+.lendo-flow-col.waiting{background:linear-gradient(180deg,var(--pink-bg),var(--bg-subtle));}
+.lendo-flow-col.done{background:linear-gradient(180deg,var(--green-bg),var(--bg-subtle));}
+.lendo-flow-head{display:flex;align-items:center;justify-content:space-between;color:var(--accent-strong);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;padding:0 4px;}
+.lendo-flow-count{color:var(--text-tertiary);margin-left:5px;}
+.lendo-task-card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:13px;margin-bottom:10px;cursor:pointer;box-shadow:0 8px 18px rgba(120,90,150,.06);transition:transform .15s ease,border-color .15s ease;}
+.lendo-task-card:hover{transform:translateY(-1px);border-color:var(--accent);}
+.lendo-task-title{font-weight:900;color:var(--text);font-size:14px;line-height:1.35;margin-bottom:9px;}
+.lendo-task-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--text-tertiary);font-size:12px;font-weight:800;}
+.lendo-add-task{border:0;background:transparent;color:var(--text-secondary);font-weight:900;font-size:13px;cursor:pointer;padding:8px 4px;}
+.lendo-bottom-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
+.lendo-panel{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:18px;min-height:250px;}
+.lendo-panel-title{font-family:var(--font-display);font-size:19px;font-weight:700;color:var(--accent-strong);margin:0 0 14px;}
+.lendo-progress-row,.lendo-idea-row,.lendo-ref-row{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);}
+.lendo-progress-row:last-child,.lendo-idea-row:last-child,.lendo-ref-row:last-child{border-bottom:none;}
+.lendo-progress-name,.lendo-idea-name,.lendo-ref-name{flex:1;font-size:13.5px;color:var(--text);font-weight:800;line-height:1.35;}
+.lendo-progress-track{width:92px;height:5px;background:var(--accent-soft);border-radius:999px;overflow:hidden;}
+.lendo-progress-fill{height:100%;background:var(--accent-strong);border-radius:999px;}
+.lendo-panel-link{display:inline-flex;margin-top:14px;color:var(--accent-strong);font-size:13px;font-weight:900;cursor:pointer;}
+.lendo-ref-count{background:var(--accent-soft);color:var(--accent-soft-text);border-radius:999px;padding:2px 9px;font-size:12px;font-weight:900;}
+.lendo-page .btn-primary{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 3px 10px rgba(120,90,150,.18);}
+.lendo-page .btn-primary:hover{background:var(--accent-strong);filter:none;}
+.lendo-page .lendo-add-task{background:transparent;}
+.lendo-ideas-layout,.lendo-generator-layout{display:grid;grid-template-columns:minmax(320px,1fr) minmax(320px,.9fr);gap:18px;align-items:start;}
+.lendo-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+.lendo-book-card{border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:10px;background:var(--bg-card);}
+.lendo-book-title{font-weight:900;color:var(--text);font-size:14px;margin-bottom:3px;}
+.lendo-book-meta{font-size:12px;color:var(--text-secondary);font-weight:800;line-height:1.4;}
+.lendo-generated-list{display:grid;gap:10px;margin-top:12px;}
+.lendo-generated-item{border:1px solid var(--border);border-radius:10px;padding:12px;background:var(--bg-subtle);}
+.lendo-generated-item a{color:var(--accent-strong);font-weight:900;text-decoration:none;}
+.lendo-trope-grid{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+.lendo-trope-chip{border:1.5px solid var(--border-strong);background:var(--bg-card);color:var(--text);border-radius:999px;padding:9px 13px;font-size:13px;font-weight:900;cursor:pointer;}
+.lendo-trope-chip.active,.lendo-trope-chip:hover{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-soft-text);}
+.lendo-book-list{margin-top:14px;}
+.lendo-history-list{display:none;margin-top:12px;}
+.lendo-history-list.open{display:grid;gap:10px;}
+.lendo-history-card{border:1px solid var(--border);border-radius:10px;padding:12px;background:var(--bg-card);}
+.lendo-history-title{font-weight:900;color:var(--accent-strong);font-size:13px;margin-bottom:8px;}
 @media (max-width:880px){
   .projects-header,.project-focus-strip{display:block;}
   .projects-overview{grid-template-columns:repeat(2,1fr);margin-top:18px;}
   .project-detail-grid{grid-template-columns:1fr;}
+  .habits-header{display:block;}
+  .habits-year-grid{grid-template-columns:repeat(3,1fr);}
+  .review-grid{grid-template-columns:1fr;}
+  .lendo-header{display:block;}
+  .lendo-metrics{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .lendo-flow-board,.lendo-bottom-grid{grid-template-columns:1fr;}
+  .lendo-ideas-layout,.lendo-generator-layout{grid-template-columns:1fr;}
 }
 @media (max-width:720px){
   #content{padding-left:16px;padding-right:16px;}
@@ -470,6 +613,8 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
   .month-dot-task{font-size:10px;}
   .projects-overview{grid-template-columns:1fr 1fr;}
   .project-gallery{grid-template-columns:1fr;}
+  .habits-year-grid{grid-template-columns:repeat(2,1fr);}
+  .lendo-metrics{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -477,12 +622,37 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
 
 <div class="mobile-bar">
   <button class="icon-btn" onclick="toggleSidebar()">☰</button>
-  <strong>Sistema da Ana</strong>
+  <div class="brand-mark">
+    <svg class="brand-icon" viewBox="0 0 64 64" aria-hidden="true">
+      <circle cx="28" cy="30" r="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5"/>
+      <g stroke="var(--accent)" stroke-width="2.3" stroke-linecap="round">
+        <path d="M28 9v7M28 44v7M7 30h7M42 30h7M13 15l5 5M38 40l5 5M43 15l-5 5M18 40l-5 5"/>
+      </g>
+      <path d="M43 17c-7 2-12 8-12 16s5 14 12 16c-10 2-20-6-20-16s10-18 20-16Z" fill="var(--bg-sidebar)" stroke="currentColor" stroke-width="2.7" stroke-linejoin="round"/>
+      <path class="brand-stars" d="M49 12h4M51 10v4M15 48h4M17 46v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+    </svg>
+    <div><div class="brand-word">Grimlist</div></div>
+  </div>
 </div>
 
 <div id="app">
   <nav id="sidebar">
-    <div class="sidebar-title">Sistema da Ana</div>
+    <div class="sidebar-title">
+      <div class="brand-mark">
+        <svg class="brand-icon" viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="28" cy="30" r="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2.5"/>
+          <g stroke="var(--accent)" stroke-width="2.3" stroke-linecap="round">
+            <path d="M28 9v7M28 44v7M7 30h7M42 30h7M13 15l5 5M38 40l5 5M43 15l-5 5M18 40l-5 5"/>
+          </g>
+          <path d="M43 17c-7 2-12 8-12 16s5 14 12 16c-10 2-20-6-20-16s10-18 20-16Z" fill="var(--bg-sidebar)" stroke="currentColor" stroke-width="2.7" stroke-linejoin="round"/>
+          <path class="brand-stars" d="M49 12h4M51 10v4M15 48h4M17 46v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <div class="brand-word">Grimlist</div>
+          <div class="brand-sub">rituais de foco</div>
+        </div>
+      </div>
+    </div>
     <div class="nav-item" data-page="hoje" onclick="setPage('hoje')"><span class="nav-emoji" data-emoji-page="hoje" onclick="event.stopPropagation();changePageEmoji('hoje')" title="Trocar emoji">🏠</span>Hoje</div>
     <div class="nav-item" data-page="inbox" onclick="setPage('inbox')"><span class="nav-emoji" data-emoji-page="inbox" onclick="event.stopPropagation();changePageEmoji('inbox')" title="Trocar emoji">📥</span>Inbox</div>
     <div class="nav-item" data-page="projetos" onclick="setPage('projetos')"><span class="nav-emoji" data-emoji-page="projetos" onclick="event.stopPropagation();changePageEmoji('projetos')" title="Trocar emoji">✦</span>Projetos</div>
@@ -491,6 +661,8 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
     <div class="nav-item" data-page="brivia" onclick="setPage('brivia')"><span class="nav-emoji" data-emoji-page="brivia" onclick="event.stopPropagation();changePageEmoji('brivia')" title="Trocar emoji">🏢</span>Brivia</div>
     <div class="nav-item" data-page="lendosaficos" onclick="setPage('lendosaficos')"><span class="nav-emoji" data-emoji-page="lendosaficos" onclick="event.stopPropagation();changePageEmoji('lendosaficos')" title="Trocar emoji">📚</span>Lendo Sáficos</div>
     <div class="nav-item" data-page="pessoal" onclick="setPage('pessoal')"><span class="nav-emoji" data-emoji-page="pessoal" onclick="event.stopPropagation();changePageEmoji('pessoal')" title="Trocar emoji">🌱</span>Pessoal</div>
+    <div class="nav-item" data-page="revisao" onclick="setPage('revisao')"><span class="nav-emoji" data-emoji-page="revisao" onclick="event.stopPropagation();changePageEmoji('revisao')" title="Trocar emoji">🔎</span>Revisão</div>
+    <div class="nav-item" data-page="habitos" onclick="setPage('habitos')"><span class="nav-emoji" data-emoji-page="habitos" onclick="event.stopPropagation();changePageEmoji('habitos')" title="Trocar emoji">📅</span>Hábitos</div>
     <div class="nav-item" data-page="recursos" onclick="setPage('recursos')"><span class="nav-emoji" data-emoji-page="recursos" onclick="event.stopPropagation();changePageEmoji('recursos')" title="Trocar emoji">🗂️</span>Recursos &amp; Arquivo</div>
     <div class="sidebar-footer">
       <svg class="footer-flourish" width="100%" height="34" viewBox="0 0 160 34" xmlns="http://www.w3.org/2000/svg">
@@ -527,7 +699,7 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
 const AREAS = ['Publique','Marketing Personnallité','Brivia','Lendo Sáficos','Pessoal'];
 const AREA_COLOR = {'Publique':'blue','Marketing Personnallité':'purple','Brivia':'orange','Lendo Sáficos':'pink','Pessoal':'green','':'gray'};
 const TIPOS = ['Tarefa única','Projeto','Recorrente com horário','Recorrente flexível'];
-const STATUSES = ['A fazer','Fazendo','Feito'];
+const STATUSES = ['A fazer','Fazendo','Aguardando','Feito'];
 const STATUS_ENTREGA = ['A fazer','Fazendo','Entregue'];
 const PRIORIDADES = ['Urgente','Normal','Quando der'];
 const PROJECT_STATUSES = ['Ativo','Em andamento','Aguardando','Pausado','Concluído'];
@@ -536,9 +708,10 @@ const ENERGY_LEVELS = ['Baixa','Média','Alta'];
 const VENDA_ITENS = ['Stories','Post feed','Vídeo-resenha','Reels','Combo'];
 const STORAGE_KEY = 'ana-state';
 const THEME_KEY = 'ana-theme-prefs';
+const UI_KEY = 'ana-ui-prefs';
 const DEFAULT_PAGE_EMOJIS = {
   hoje:'🏠', inbox:'📥', projetos:'✦', publique:'🏢', personnallite:'🏢', brivia:'🏢',
-  lendosaficos:'📚', pessoal:'🌱', recursos:'🗂️'
+  lendosaficos:'📚', pessoal:'🌱', revisao:'🔎', habitos:'📅', recursos:'🗂️'
 };
 const MAJOR_ARCANA = [
   {num:'0', nome:'O Louco', icon:'🌬️', sub:'começo leve, presença e coragem'},
@@ -581,7 +754,11 @@ const ACCENTS = [
 let state = null;
 let ui = { page:'hoje', openToggles:{}, lendoTab:'conteudo', vendasTab:'vendido', recursosTab:'recursos', projetosTab:'ativos', hojeView:'dia' };
 let modalState = null;
+let draggedTaskId = null;
+let dragClickGuard = false;
+let uiSaveTimer = null;
 let themePrefs = { mode:'light', accent:'lavanda' };
+let lendoCurrentGeneratedList = [];
 
 /* ---------- utilidades ---------- */
 function genId(){ return 't'+Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
@@ -593,6 +770,10 @@ function startOfWeek(d=new Date()){ const x=new Date(d); const diff=(x.getDay()+
 function addDaysToDate(d,n){ const x=new Date(d); x.setDate(x.getDate()+n); return x; }
 function escapeHtml(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function escapeAttr(s){ return escapeHtml(s).replace(/"/g,'&quot;'); }
+function jsArg(s){ return escapeAttr(JSON.stringify(String(s==null?'':s))); }
+function plainTextFromHtml(s){
+  return String(s||'').replace(/<br\s*\/?>/gi,' ').replace(/<\/p>/gi,' ').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+}
 function priorityClass(p){ return p==='Urgente'?'urgente':(p==='Quando der'?'quandoder':'normal'); }
 function formatDate(d){
   if(!d) return '';
@@ -604,6 +785,14 @@ function formatDate(d){
 }
 function formatShortDate(d){ return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'}); }
 function byPriority(a,b){ const order={'Urgente':0,'Normal':1,'Quando der':2}; return (order[a.prioridade]??1)-(order[b.prioridade]??1); }
+function shuffleList(list){
+  const arr = list.slice();
+  for(let i=arr.length-1;i>0;i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
 function areaContextKey(area){
   return area==='Publique'?'publique': area==='Marketing Personnallité'?'personnallite': area==='Brivia'?'brivia': area==='Lendo Sáficos'?'lendosaficos':'pessoal';
 }
@@ -642,8 +831,12 @@ function projectProgress(projectId){
   return Math.round(tasks.filter(t=>t.status==='Feito').length / tasks.length * 100);
 }
 function projectNextAction(p){
-  if(p.proximaAcao && p.proximaAcao.trim()) return p.proximaAcao.trim();
-  const next = projectOpenTasks(p.id).sort(byPriority)[0];
+  const next = projectOpenTasks(p.id).sort((a,b)=>{
+    const ad = a.data ? daysUntil(a.data) : 99999;
+    const bd = b.data ? daysUntil(b.data) : 99999;
+    if(ad !== bd) return ad - bd;
+    return byPriority(a,b);
+  })[0];
   return next ? next.nome : '';
 }
 function visibleTasksForDate(dateStr){
@@ -651,6 +844,9 @@ function visibleTasksForDate(dateStr){
 }
 function ensureProjectFields(){
   if(!state.tasks) return;
+  if(!state.lendoBooks) state.lendoBooks = [];
+  if(!state.lendoGeneratedHistory) state.lendoGeneratedHistory = [];
+  if(!state.lendoGenerationMemory) state.lendoGenerationMemory = [];
   state.tasks.forEach(t=>{
     if(isProject(t)){
       if(!t.projectStatus) t.projectStatus = projectStatusFromTaskStatus(t.status);
@@ -659,12 +855,41 @@ function ensureProjectFields(){
       if(!t.proximaAcao) t.proximaAcao = '';
       if(!t.objetivo) t.objetivo = '';
       if(!t.referencias) t.referencias = '';
+      if(!t.dataInicio) t.dataInicio = '';
+      if(!t.dataFim) t.dataFim = t.data || '';
       t.parentId = null;
     } else {
       if(!t.energia) t.energia = 'Média';
       if(!t.tempoEstimado) t.tempoEstimado = '';
+      if(typeof t.isConteudo === 'undefined') t.isConteudo = t.area==='Lendo Sáficos' && !/^Revisão de/.test(t.nome||'');
     }
   });
+  if(!state.revisaoLog) state.revisaoLog = {};
+}
+function projectPriorityLevel(p){
+  const priority = p.projectPriority || priorityToProjectPriority(p.prioridade);
+  if(priority==='Alta') return 3;
+  if(priority==='Baixa') return 1;
+  return 2;
+}
+function renderProjectPriorityDots(p){
+  const level = projectPriorityLevel(p);
+  const cls = level===3 ? 'high' : (level===2 ? 'medium' : 'low');
+  return `<span class="project-priority-dots" title="Prioridade ${escapeAttr(p.projectPriority||'Média')}">
+    ${[1,2,3].map(i=>`<span class="project-priority-dot ${i<=level?'on '+cls:''}"></span>`).join('')}
+  </span>`;
+}
+function energyLevelValue(energy){
+  if(energy==='Alta') return 3;
+  if(energy==='Baixa') return 1;
+  return 2;
+}
+function renderEnergyBolts(energy){
+  return `<span class="project-energy-bolts" title="Energia ${escapeAttr(energy||'Média')}">${'⚡️'.repeat(energyLevelValue(energy||'Média'))}</span>`;
+}
+function projectStatusClass(status){
+  const key = String(status||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,'-');
+  return `status-${key || 'ativo'}`;
 }
 function dateSeed(dateStr){ return String(dateStr).split('').reduce((sum,ch)=>sum+ch.charCodeAt(0),0); }
 function dailyTarot(dateStr=todayStr()){ return MAJOR_ARCANA[dateSeed(dateStr) % MAJOR_ARCANA.length]; }
@@ -743,12 +968,45 @@ async function loadState(){
       if(res && res.value) return JSON.parse(res.value);
     }
   }catch(e){ /* ainda não existe - primeira vez */ }
+  try{
+    const local = window.localStorage && window.localStorage.getItem(STORAGE_KEY);
+    if(local) return JSON.parse(local);
+  }catch(e){ console.error('Erro ao ler localStorage', e); }
   return null;
 }
 async function saveState(){
   try{
     if(window.storage){ await window.storage.set(STORAGE_KEY, JSON.stringify(state), false); }
   }catch(e){ console.error('Erro ao salvar', e); }
+  try{
+    if(window.localStorage){ window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  }catch(e){ console.error('Erro ao salvar no localStorage', e); }
+}
+
+function currentScrollTop(){
+  return document.getElementById('content')?.scrollTop || 0;
+}
+function saveUiPrefs(scrollTopOverride=null){
+  try{
+    ui.scrollTop = scrollTopOverride == null ? currentScrollTop() : scrollTopOverride;
+    if(window.localStorage){ window.localStorage.setItem(UI_KEY, JSON.stringify(ui)); }
+  }catch(e){ console.error('Erro ao salvar posição da interface', e); }
+}
+function scheduleSaveUiPrefs(){
+  clearTimeout(uiSaveTimer);
+  uiSaveTimer = setTimeout(saveUiPrefs, 120);
+}
+function loadUiPrefs(){
+  try{
+    const local = window.localStorage && window.localStorage.getItem(UI_KEY);
+    if(local) return JSON.parse(local);
+  }catch(e){ console.error('Erro ao ler posição da interface', e); }
+  return null;
+}
+function restoreContentScroll(scrollTop){
+  const content = document.getElementById('content');
+  if(!content) return;
+  requestAnimationFrame(()=>{ content.scrollTop = scrollTop || 0; });
 }
 
 /* ---------- tema ---------- */
@@ -759,12 +1017,19 @@ async function loadThemePrefs(){
       if(res && res.value) return JSON.parse(res.value);
     }
   }catch(e){ /* ainda não existe - primeira vez */ }
+  try{
+    const local = window.localStorage && window.localStorage.getItem(THEME_KEY);
+    if(local) return JSON.parse(local);
+  }catch(e){ console.error('Erro ao ler tema local', e); }
   return null;
 }
 async function saveThemePrefs(){
   try{
     if(window.storage){ await window.storage.set(THEME_KEY, JSON.stringify(themePrefs), false); }
   }catch(e){ console.error('Erro ao salvar tema', e); }
+  try{
+    if(window.localStorage){ window.localStorage.setItem(THEME_KEY, JSON.stringify(themePrefs)); }
+  }catch(e){ console.error('Erro ao salvar tema no localStorage', e); }
 }
 function applyTheme(){
   document.documentElement.setAttribute('data-theme', themePrefs.mode);
@@ -800,10 +1065,12 @@ function rolloverRecurring(){
 
 /* ---------- navegação ---------- */
 function setPage(p){
+  ui.scrollTop = 0;
   ui.page = p;
+  saveUiPrefs(0);
   const sb = document.getElementById('sidebar');
   if(sb) sb.classList.remove('open');
-  render();
+  render({scrollTop:0});
 }
 function changePageEmoji(page){
   if(!state) return;
@@ -832,22 +1099,24 @@ function savePageEmoji(page){
     saveState();
   }
   closeEmojiModal();
-  render();
+  render({preserveScroll:true});
 }
 function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('open'); }
-function toggleSection(key){ ui.openToggles[key] = !ui.openToggles[key]; render(); }
-function setLendoTab(t){ ui.lendoTab = t; render(); }
-function setVendasTab(t){ ui.vendasTab = t; render(); }
-function setRecursosTab(t){ ui.recursosTab = t; render(); }
-function setProjetosTab(t){ ui.projetosTab = t; render(); }
-function setHojeView(t){ ui.hojeView = t; render(); }
+function toggleSection(key){ ui.openToggles[key] = !ui.openToggles[key]; render({preserveScroll:true}); saveUiPrefs(); }
+function setLendoTab(t){ ui.lendoTab = t; render({scrollTop:0}); saveUiPrefs(0); }
+function setVendasTab(t){ ui.vendasTab = t; render({scrollTop:0}); saveUiPrefs(0); }
+function setRecursosTab(t){ ui.recursosTab = t; render({scrollTop:0}); saveUiPrefs(0); }
+function setProjetosTab(t){ ui.projetosTab = t; render({scrollTop:0}); saveUiPrefs(0); }
+function setHojeView(t){ ui.hojeView = t; render({scrollTop:0}); saveUiPrefs(0); }
 
 /* ---------- render raiz ---------- */
-function render(){
+function render(options={}){
+  const scrollTop = options.preserveScroll ? currentScrollTop() : (options.scrollTop ?? ui.scrollTop ?? 0);
   document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.page===ui.page));
   document.querySelectorAll('.bottom-nav-item[data-page]').forEach(el => el.classList.toggle('active', el.dataset.page===ui.page));
   document.querySelectorAll('[data-emoji-page]').forEach(el => { el.innerText = pageEmoji(el.dataset.emojiPage); });
   document.getElementById('content').innerHTML = renderPage(ui.page);
+  restoreContentScroll(scrollTop);
 }
 function renderPage(page){
   let content = '';
@@ -859,6 +1128,8 @@ function renderPage(page){
   else if(page==='brivia') content = renderArea('Brivia');
   else if(page==='lendosaficos') content = renderLendoSaficos();
   else if(page==='pessoal') content = renderArea('Pessoal');
+  else if(page==='revisao') content = renderRevisao();
+  else if(page==='habitos') content = renderHabitos();
   else if(page==='recursos') content = renderRecursos();
 
   const coverUrl = state.covers && state.covers[page];
@@ -880,14 +1151,14 @@ function promptCover(page){
     if(!state.covers) state.covers = {};
     state.covers[page] = url;
     saveState();
-    render();
+    render({preserveScroll:true});
   }
 }
 function removeCover(page){
   if(state.covers && state.covers[page]){
     delete state.covers[page];
     saveState();
-    render();
+    render({preserveScroll:true});
   }
 }
 function promptTaskCover(){
@@ -902,6 +1173,7 @@ function promptTaskCover(){
 function renderHoje(){
   const today = todayStr();
   const listaHoje = visibleTasksForDate(today);
+  const concluidasHoje = state.tasks.filter(t=>isActionTask(t) && t.status==='Feito' && (t.data===today || (t.completedAt && fmt(new Date(t.completedAt))===today))).length;
   const atrasadas = state.tasks.filter(t=>isActionTask(t) && t.data && t.data<today && t.status!=='Feito').sort(byPriority);
 
   const habitos = state.habitos || [];
@@ -961,7 +1233,7 @@ function renderHoje(){
         </div>
 
         <div class="today-list-head">
-          <div class="section-label-hoje" style="margin-bottom:0">Lista de hoje <span class="count">${listaHoje.length}</span></div>
+          <div class="section-label-hoje" style="margin-bottom:0">Lista de hoje <span class="count">${listaHoje.length}</span><span class="count" title="Concluídas hoje">✓ ${concluidasHoje}</span></div>
           ${renderHojeViewSwitch()}
         </div>
         ${renderHojeView(listaHoje, atrasadas)}
@@ -1038,17 +1310,22 @@ function renderMesCalendario(){
 }
 
 /* ---------- lista de tarefas (compartilhada) ---------- */
-function renderTaskList(tasks){
+function renderTaskList(tasks, returnProjectId=null){
   if(!tasks.length) return '<div class="empty">Nada por aqui.</div>';
-  return '<div class="task-list">' + tasks.map(renderTaskRow).join('') + '</div>';
+  return '<div class="task-list">' + tasks.map(t=>renderTaskRow(t, {returnProjectId, draggable:!!returnProjectId})).join('') + '</div>';
 }
-function renderTaskRow(t){
+function renderTaskRow(t, options=null){
+  if(!options || typeof options!=='object') options = {};
+  const returnProjectId = options.returnProjectId || null;
+  const draggable = !!options.draggable;
   const children = state.tasks.filter(c=>c.parentId===t.id);
   const sub = children.length ? `<span class="task-date">${children.filter(c=>c.status==='Feito').length}/${children.length} sub.</span>` : '';
   const areaTag = t.area ? `<span class="tag tag-${AREA_COLOR[t.area]||'gray'}">${escapeHtml(t.area)}</span>` : '';
   const project = getTaskProject(t);
-  const projectTag = project ? `<span class="tag tag-purple" title="Projeto relacionado">${escapeHtml(project.nome)}</span>` : (isProject(t) ? '<span class="tag tag-purple">Projeto</span>' : '');
-  return `<div class="task-row ${t.status==='Feito'?'done':''}" onclick="openTaskModal('${t.id}')">
+  const projectTag = project ? `<span class="tag tag-purple" title="Abrir projeto" onclick="event.stopPropagation();openProjectPortal('${project.id}')">${escapeHtml(project.nome)}</span>` : (isProject(t) ? '<span class="tag tag-purple">Projeto</span>' : '');
+  const dragAttrs = draggable ? ` draggable="true" ondragstart="startTaskDrag(event,'${t.id}')" ondragover="allowTaskDrop(event)" ondragleave="clearDragOver(event)" ondrop="dropTaskOnSibling(event,'${t.id}','${returnProjectId}')" ondragend="endTaskDrag(event)"` : '';
+  return `<div class="task-row ${t.status==='Feito'?'done':''} ${draggable?'drag-enabled':''}"${dragAttrs} onclick="if(ignoreDragClick()) return; openTaskModal('${t.id}'${returnProjectId ? `,{returnToProjectId:'${returnProjectId}'}` : ''})">
+    ${draggable ? '<span class="drag-handle" title="Arrastar para reorganizar">⋮⋮</span>' : ''}
     <span class="chk ${t.status==='Feito'?'checked':''}" onclick="event.stopPropagation();toggleTaskDone('${t.id}')">${t.status==='Feito'?'✓':''}</span>
     <span class="dot ${priorityClass(t.prioridade)}"></span>
     <span class="task-name">${escapeHtml(t.nome)}</span>
@@ -1058,15 +1335,81 @@ function renderTaskRow(t){
     <span class="task-date">${formatDate(t.data)}</span>
   </div>`;
 }
+function startTaskDrag(event, id){
+  draggedTaskId = id;
+  dragClickGuard = true;
+  event.stopPropagation();
+  if(event.dataTransfer){
+    event.dataTransfer.effectAllowed = 'move';
+    event.dataTransfer.setData('text/plain', id);
+  }
+}
+function allowTaskDrop(event){
+  event.preventDefault();
+  event.stopPropagation();
+  event.currentTarget.classList.add('drag-over');
+}
+function clearDragOver(event){
+  event.currentTarget.classList.remove('drag-over');
+}
+function endTaskDrag(event){
+  event.currentTarget.classList.remove('drag-over');
+  setTimeout(()=>{ dragClickGuard = false; draggedTaskId = null; }, 0);
+}
+function ignoreDragClick(){
+  if(!dragClickGuard) return false;
+  dragClickGuard = false;
+  return true;
+}
+function dropTaskOnSibling(event, targetId, parentId){
+  event.preventDefault();
+  event.stopPropagation();
+  event.currentTarget.classList.remove('drag-over');
+  const sourceId = (event.dataTransfer && event.dataTransfer.getData('text/plain')) || draggedTaskId;
+  if(!sourceId || sourceId===targetId) return;
+  reorderSiblingTasks(parentId || null, sourceId, targetId);
+  saveState();
+  render({preserveScroll:true});
+  renderModal({preserveScroll:true});
+}
+function reorderSiblingTasks(parentId, sourceId, targetId){
+  const sameParent = t => (t.parentId || null) === (parentId || null);
+  const siblings = state.tasks.filter(sameParent);
+  if(!siblings.some(t=>t.id===sourceId) || !siblings.some(t=>t.id===targetId)) return;
+  const reordered = siblings.filter(t=>t.id!==sourceId);
+  const source = siblings.find(t=>t.id===sourceId);
+  const targetIndex = reordered.findIndex(t=>t.id===targetId);
+  reordered.splice(targetIndex, 0, source);
+  const siblingIds = new Set(siblings.map(t=>t.id));
+  let inserted = false;
+  state.tasks = state.tasks.reduce((acc, task)=>{
+    if(siblingIds.has(task.id)){
+      if(!inserted){
+        acc.push(...reordered);
+        inserted = true;
+      }
+      return acc;
+    }
+    acc.push(task);
+    return acc;
+  }, []);
+}
 function toggleTaskDone(id){
   const t = state.tasks.find(x=>x.id===id);
   if(!t) return;
   if(t.status==='Feito'){ t.status='A fazer'; }
   else { t.status='Feito'; t.completedAt=Date.now(); }
   saveState();
-  render();
+  render({preserveScroll:true});
   if(modalState && modalState.id===id){ modalState.draft.status=t.status; }
-  renderModal();
+  renderModal({preserveScroll:true});
+}
+function openProjectPortal(id){
+  ui.page = 'projetos';
+  ui.scrollTop = 0;
+  saveUiPrefs(0);
+  render({scrollTop:0});
+  openTaskModal(id);
 }
 
 /* ---------- Projetos ---------- */
@@ -1170,8 +1513,8 @@ function renderProjectCard(p){
       <span class="project-badge">${escapeHtml(p.projectStatus||projectStatusFromTaskStatus(p.status))}</span>
     </div>
     <div class="project-badges">
-      <span class="project-badge soft">Prioridade ${escapeHtml(p.projectPriority||'Média')}</span>
-      <span class="project-badge soft">Energia ${escapeHtml(p.energia||'Média')}</span>
+      <span class="project-metric-badge"><span class="project-metric-label">Prioridade</span>${renderProjectPriorityDots(p)}</span>
+      <span class="project-metric-badge"><span class="project-metric-label">Energia</span>${renderEnergyBolts(p.energia||'Média')}</span>
     </div>
     <div class="project-next">
       <div class="project-next-label">Próxima ação</div>
@@ -1183,6 +1526,81 @@ function renderProjectCard(p){
     </div>
     <div class="project-progress"><div class="project-progress-bar" style="width:${progress}%"></div></div>
     <div class="project-card-meta"><span>Progresso</span><span>${progress}%</span></div>
+  </article>`;
+}
+
+/* ---------- Revisão ---------- */
+function reviewChecked(key){
+  const date = todayStr();
+  return !!(state.revisaoLog && state.revisaoLog[date] && state.revisaoLog[date][key]);
+}
+function toggleReviewCheck(key){
+  const date = todayStr();
+  if(!state.revisaoLog) state.revisaoLog = {};
+  if(!state.revisaoLog[date]) state.revisaoLog[date] = {};
+  state.revisaoLog[date][key] = !state.revisaoLog[date][key];
+  saveState();
+  render({preserveScroll:true});
+}
+function renderReviewCheck(key, text, sub=''){
+  const done = reviewChecked(key);
+  return `<div class="review-check" onclick="toggleReviewCheck('${key}')">
+    <span class="chk ${done?'checked':''}">${done?'✓':''}</span>
+    <div class="review-check-text">${escapeHtml(text)}${sub?`<small>${escapeHtml(sub)}</small>`:''}</div>
+  </div>`;
+}
+function renderRevisao(){
+  const projects = getProjects();
+  const inboxTasks = state.tasks.filter(t=>isActionTask(t) && !t.parentId && (!t.area || /whats|email|inbox|mensagem|responder|coment/i.test((t.nome||'')+' '+(t.notas||''))) && t.status!=='Feito');
+  const today = todayStr();
+  const doneCount = Object.values((state.revisaoLog && state.revisaoLog[today]) || {}).filter(Boolean).length;
+  return `<section class="review-page">
+    <header class="projects-header">
+      <div>
+        <div class="projects-kicker">✦ Ritual de clareza</div>
+        <h1 class="projects-title"><span class="page-emoji">${pageEmoji('revisao')}</span> Revisão</h1>
+        <p class="projects-subtitle">Checklists para fechar pontas, responder mensagens e destravar projetos.</p>
+      </div>
+      <div class="project-stat" style="min-width:170px">
+        <div class="project-stat-num">${doneCount}</div>
+        <div class="project-stat-label">Checks feitos hoje</div>
+      </div>
+    </header>
+    <div class="review-grid">
+      <div class="review-card highlight">
+        <h2 class="review-title">Inboxes e mensagens</h2>
+        <div class="review-sub">Foco especial em WhatsApp, email, DMs e respostas rápidas.</div>
+        ${renderReviewCheck('inbox-whatsapp','Responder WhatsApp','Olhar conversas fixadas e mensagens não respondidas.')}
+        ${renderReviewCheck('inbox-email','Responder emails','Responder o que leva menos de 5 minutos e marcar o resto.')}
+        ${renderReviewCheck('inbox-dms','Responder DMs e comentários','Instagram, editoras, autoras, clientes e parcerias.')}
+        ${renderReviewCheck('inbox-triagem','Transformar mensagens em tarefas','O que virou pedido precisa sair da cabeça e entrar no sistema.')}
+        <div class="review-inbox-list">
+          ${inboxTasks.length ? inboxTasks.slice(0,6).map(t=>`<div class="review-inbox-pill" onclick="openTaskModal('${t.id}')"><span>↳</span><span>${escapeHtml(t.nome)}</span></div>`).join('') : '<div class="empty">Nenhuma tarefa de inbox pedindo atenção agora.</div>'}
+        </div>
+      </div>
+      <div class="review-card">
+        <h2 class="review-title">Projetos</h2>
+        <div class="review-sub">Cada projeto precisa ter próxima ação clara ou ser pausado sem culpa.</div>
+        <div class="review-project-list">
+          ${projects.length ? projects.map(renderReviewProjectCard).join('') : '<div class="empty">Nenhum projeto ainda.</div>'}
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+function renderReviewProjectCard(p){
+  const open = projectOpenTasks(p.id);
+  return `<article class="review-project-card">
+    <div class="review-project-head">
+      <div>
+        <div class="review-project-title">${escapeHtml(p.nome)}</div>
+        <div class="project-card-meta" style="margin:5px 0 0"><span>${escapeHtml(p.area||'Sem área')}</span><span>${open.length} abertas</span></div>
+      </div>
+      <button class="btn" onclick="openTaskModal('${p.id}')">Abrir</button>
+    </div>
+    ${renderReviewCheck(`project-${p.id}-next`,'Próxima ação definida',projectNextAction(p)||'Ainda precisa definir.')}
+    ${renderReviewCheck(`project-${p.id}-deadline`,'Prazo e datas conferidos',`${p.dataInicio||'sem início'} → ${p.dataFim||p.data||'sem fim'}`)}
+    ${renderReviewCheck(`project-${p.id}-tasks`,'Tarefas vinculadas revisadas',`${open.length} tarefa${open.length===1?'':'s'} aberta${open.length===1?'':'s'}.`)}
   </article>`;
 }
 
@@ -1227,19 +1645,256 @@ function renderCard(t){
 /* ---------- Lendo Sáficos ---------- */
 function renderLendoSaficos(){
   const tab = ui.lendoTab;
-  return `<div class="page-header"><span class="page-emoji">${pageEmoji('lendosaficos')}</span><h1 class="page-title">Lendo Sáficos</h1></div>
+  return `<section class="lendo-page">
+  <header class="lendo-header">
+    <div>
+      <div class="projects-kicker">♡ Conteúdo, parcerias e leituras</div>
+      <h1 class="projects-title"><span class="page-emoji">${pageEmoji('lendosaficos')}</span> Lendo Sáficos</h1>
+      <p class="lendo-subtitle">Ideias, projetos, entregas, referências e financeiro no mesmo painel.</p>
+    </div>
+    <button class="btn btn-primary" onclick="openNewLendoTask()">+ Novo conteúdo</button>
+  </header>
   <div class="pill-tabs">
-    <div class="pill-tab ${tab==='conteudo'?'active':''}" onclick="setLendoTab('conteudo')">Conteúdo</div>
+    <div class="pill-tab ${tab==='conteudo'?'active':''}" onclick="setLendoTab('conteudo')">Painel</div>
+    <div class="pill-tab ${tab==='ideias'?'active':''}" onclick="setLendoTab('ideias')">Ideias</div>
+    <div class="pill-tab ${tab==='listas'?'active':''}" onclick="setLendoTab('listas')">Gerador de listas</div>
     <div class="pill-tab ${tab==='vendas'?'active':''}" onclick="setLendoTab('vendas')">Vendas &amp; Financeiro</div>
     <div class="pill-tab ${tab==='revisao'?'active':''}" onclick="setLendoTab('revisao')">Revisão semanal</div>
   </div>
-  ${tab==='conteudo' ? renderLendoConteudo() : (tab==='vendas' ? renderLendoVendas() : renderLendoRevisao())}`;
+  ${tab==='conteudo' ? renderLendoConteudo() : (tab==='ideias' ? renderLendoIdeiasPage() : (tab==='listas' ? renderLendoListGenerator() : (tab==='vendas' ? renderLendoVendas() : renderLendoRevisao())))}
+  </section>`;
 }
 function renderLendoConteudo(){
-  const filtered = state.tasks.filter(t=>t.area==='Lendo Sáficos' && !t.parentId && t.nome.indexOf('Revisão de')!==0);
-  const cols = STATUSES.map(s=>({status:s, items:filtered.filter(t=>t.status===s)}));
-  return `<button class="btn" onclick="openQuickAdd('lendosaficos')">+ Nova tarefa</button>
-  <div class="board" style="margin-top:18px">${cols.map(c=>renderBoardCol(c.status,c.items)).join('')}</div>`;
+  const tasks = lendoTasks();
+  const projects = lendoProjects();
+  const monthTasks = tasks.filter(t=>t.isConteudo && t.status==='Feito' && isSameMonth(t.data));
+  const open = tasks.filter(t=>t.status!=='Feito');
+  const doneMonth = monthTasks.filter(t=>t.status==='Feito');
+  const columns = [
+    {status:'A fazer', label:'A fazer', cls:'todo'},
+    {status:'Fazendo', label:'Fazendo', cls:'doing'},
+    {status:'Aguardando', label:'Aguardando', cls:'waiting'},
+    {status:'Feito', label:'Feito', cls:'done'}
+  ];
+  return `${renderLendoMetrics(tasks, projects, monthTasks, open, doneMonth)}
+  <section class="lendo-workflow">
+    <h2 class="lendo-section-title">▦ Fluxo de trabalho</h2>
+    <div class="lendo-flow-board">
+      ${columns.map(c=>renderLendoFlowColumn(c, tasks.filter(t=>t.status===c.status))).join('')}
+    </div>
+  </section>
+  <div class="lendo-bottom-grid">
+    ${renderLendoProjectsPanel(projects)}
+    ${renderLendoIdeasPanel(tasks)}
+    ${renderLendoReferencesPanel()}
+  </div>`;
+}
+function lendoTasks(){
+  return state.tasks.filter(t=>t.area==='Lendo Sáficos' && !isProject(t) && t.nome.indexOf('Revisão de')!==0);
+}
+function lendoProjects(){
+  return getProjects().filter(p=>p.area==='Lendo Sáficos');
+}
+function isSameMonth(dateStr){
+  if(!dateStr) return false;
+  const d = new Date(dateStr + 'T00:00:00');
+  const now = new Date();
+  return d.getFullYear()===now.getFullYear() && d.getMonth()===now.getMonth();
+}
+function renderLendoMetrics(tasks, projects, monthTasks, open, doneMonth){
+  const ideas = tasks.filter(t=>t.status==='A fazer').length;
+  const activeProjects = projects.filter(p=>!['Pausado','Concluído'].includes(p.projectStatus)).length;
+  const doing = tasks.filter(t=>t.status==='Fazendo').length;
+  return `<div class="lendo-metrics">
+    ${renderLendoMetric('Ideias', ideas, '+ novas para lapidar', '💡', 'orange', "setLendoTab('ideias')")}
+    ${renderLendoMetric('Projetos ativos', activeProjects, 'Ver todos →', '📖', 'purple', "openLendoActiveProjects()")}
+    ${renderLendoMetric('Conteúdos no mês', monthTasks.length, 'Meta: 30', '♡', 'pink')}
+    ${renderLendoMetric('Em andamento', doing, `${open.length} tarefas`, '◌', 'blue')}
+    ${renderLendoMetric('Concluídos (mês)', doneMonth.length, doneMonth.length ? 'Arrasou!' : 'Em construção', '✓', 'green')}
+  </div>`;
+}
+function renderLendoMetric(label, num, sub, icon, tone, action=''){
+  return `<article class="lendo-metric ${tone}" ${action?`onclick="${action}" style="cursor:pointer"`:''}>
+    <div>
+      <div class="lendo-metric-label">${escapeHtml(label)}</div>
+      <div class="lendo-metric-num">${num}</div>
+      <div class="lendo-metric-sub">${escapeHtml(sub)}</div>
+    </div>
+    <div class="lendo-metric-icon">${icon}</div>
+  </article>`;
+}
+function renderLendoFlowColumn(col, items){
+  return `<div class="lendo-flow-col ${col.cls}">
+    <div class="lendo-flow-head"><span>${col.label} <span class="lendo-flow-count">${items.length}</span></span><span>⋮</span></div>
+    ${items.slice(0,8).map(renderLendoTaskCard).join('') || '<div class="empty">Vazio</div>'}
+    <button class="lendo-add-task" onclick="openNewLendoTask('${col.status}')">+ Nova tarefa</button>
+  </div>`;
+}
+function renderLendoTaskCard(t){
+  const project = getTaskProject(t);
+  const typeTag = inferLendoType(t);
+  return `<article class="lendo-task-card" onclick="openTaskModal('${t.id}')">
+    <div class="lendo-task-title">${escapeHtml(t.nome)}</div>
+    <div class="lendo-task-meta">
+      <span class="tag ${lendoTypeTagClass(typeTag)}">${escapeHtml(typeTag)}</span>
+      ${project ? `<span class="tag tag-purple" onclick="event.stopPropagation();openTaskModal('${project.id}')">${escapeHtml(project.nome)}</span>` : ''}
+      ${t.data ? `<span>□ ${formatDate(t.data)}</span>` : '<span>—</span>'}
+    </div>
+  </article>`;
+}
+function inferLendoType(t){
+  const text = `${t.nome||''} ${t.notas||''}`.toLowerCase();
+  if(text.includes('stories')) return 'Stories';
+  if(text.includes('reels') || text.includes('vídeo') || text.includes('video')) return 'Reels';
+  if(text.includes('parceria') || text.includes('autora') || text.includes('editora')) return 'Parcerias';
+  if(text.includes('thread') || text.includes('post')) return 'Conteúdo X';
+  if(text.includes('comunidade')) return 'Comunidade';
+  return 'Instagram';
+}
+function lendoTypeTagClass(type){
+  if(type==='Stories') return 'tag-orange';
+  if(type==='Reels' || type==='Instagram') return 'tag-pink';
+  if(type==='Parcerias' || type==='Conteúdo X') return 'tag-purple';
+  if(type==='Comunidade') return 'tag-green';
+  return 'tag-gray';
+}
+function renderLendoProjectsPanel(projects){
+  const list = projects.filter(p=>p.projectStatus!=='Concluído').slice(0,5);
+  return `<section class="lendo-panel">
+    <h2 class="lendo-panel-title">Projetos em andamento</h2>
+    ${list.length ? list.map(p=>{
+      const progress = projectProgress(p.id);
+      return `<div class="lendo-progress-row" onclick="openTaskModal('${p.id}')" style="cursor:pointer">
+        <div class="lendo-progress-name">${escapeHtml(p.nome)}</div>
+        <div class="lendo-progress-track"><div class="lendo-progress-fill" style="width:${progress}%"></div></div>
+        <span class="task-date">${progress}%</span>
+      </div>`;
+    }).join('') : '<div class="empty">Nenhum projeto em andamento.</div>'}
+    <span class="lendo-panel-link" onclick="openLendoActiveProjects()">Ver todos os projetos →</span>
+  </section>`;
+}
+function renderLendoIdeasPanel(tasks){
+  const ideas = tasks.filter(t=>t.status!=='Feito').slice(0,5);
+  return `<section class="lendo-panel">
+    <h2 class="lendo-panel-title">Ideias recentes</h2>
+    ${ideas.length ? ideas.map(t=>`<div class="lendo-idea-row" onclick="openTaskModal('${t.id}')" style="cursor:pointer">
+      <div class="lendo-idea-name">${escapeHtml(t.nome)}</div>
+      <span class="tag ${lendoTypeTagClass(inferLendoType(t))}">${escapeHtml(inferLendoType(t))}</span>
+    </div>`).join('') : '<div class="empty">Sem ideias recentes.</div>'}
+    <span class="lendo-panel-link" onclick="openNewLendoTask('A fazer')">Adicionar ideia →</span>
+  </section>`;
+}
+function renderLendoReferencesPanel(){
+  const refs = state.recursos || [];
+  return `<section class="lendo-panel">
+    <h2 class="lendo-panel-title">Referências rápidas</h2>
+    ${refs.slice(0,5).map((r,i)=>`<div class="lendo-ref-row">
+      <span>${['▣','♧','♙','✣','☷'][i]||'✦'}</span>
+      <div class="lendo-ref-name">${escapeHtml(r.titulo)}</div>
+      <span class="lendo-ref-count">${r.link ? 'link' : 0}</span>
+    </div>`).join('') || '<div class="empty">Nenhuma referência ainda.</div>'}
+    <span class="lendo-panel-link" onclick="setPage('recursos')">Ver todas as referências →</span>
+  </section>`;
+}
+function renderLendoIdeiasPage(){
+  const ideas = lendoTasks().filter(t=>t.status==='A fazer');
+  return `<div class="lendo-ideas-layout">
+    <section class="lendo-panel">
+      <h2 class="lendo-panel-title">Ideias para lapidar</h2>
+      ${ideas.length ? ideas.map(t=>`<div class="lendo-idea-row" onclick="openTaskModal('${t.id}')" style="cursor:pointer">
+        <div class="lendo-idea-name">${escapeHtml(t.nome)}</div>
+        <span class="tag ${lendoTypeTagClass(inferLendoType(t))}">${escapeHtml(inferLendoType(t))}</span>
+      </div>`).join('') : '<div class="empty">Nenhuma ideia pendente.</div>'}
+    </section>
+    <section class="lendo-panel">
+      <h2 class="lendo-panel-title">Adicionar ideia</h2>
+      <div class="quick-add">
+        <input type="text" id="novaIdeiaLendo" placeholder="Ex: Thread sobre livros sáficos cozy">
+        <button class="btn btn-primary" onclick="addLendoIdea()">+ Ideia</button>
+      </div>
+      <p class="lendo-subtitle">Ideias entram como tarefas em “A fazer” e podem virar conteúdo depois.</p>
+    </section>
+  </div>`;
+}
+function renderLendoListGenerator(){
+  const books = state.lendoBooks || [];
+  const tropes = lendoTropeGroups(books);
+  const selectedTrope = ui.selectedLendoTrope && tropes[ui.selectedLendoTrope] ? ui.selectedLendoTrope : Object.keys(tropes)[0] || '';
+  if(selectedTrope) ui.selectedLendoTrope = selectedTrope;
+  return `<div class="lendo-generator-layout">
+    <section class="lendo-panel">
+      <h2 class="lendo-panel-title">Biblioteca para listas</h2>
+      <div class="lendo-form-grid">
+        <div class="field"><label>Nome do livro</label><input type="text" id="bookTitle" placeholder="Ex: A Priory..."></div>
+        <div class="field"><label>Autora</label><input type="text" id="bookAuthor" placeholder="Nome da autora"></div>
+      </div>
+      <div class="field"><label>Link da Amazon</label><input type="text" id="bookLink" placeholder="https://..."></div>
+      <div class="field"><label>Tropes</label><input type="text" id="bookTropes" placeholder="slow burn, rivals to lovers, fantasia"></div>
+      <button class="btn btn-primary" onclick="addLendoBook()">+ Adicionar livro</button>
+      <div class="lendo-trope-grid">
+        ${Object.keys(tropes).length ? Object.keys(tropes).sort((a,b)=>a.localeCompare(b)).map(trope=>`<button class="lendo-trope-chip ${trope===selectedTrope?'active':''}" onclick="selectLendoTrope(${jsArg(trope)})">${escapeHtml(trope)} · ${tropes[trope].length}</button>`).join('') : '<div class="empty">Cadastre tropes para organizar os livros.</div>'}
+      </div>
+      <div class="lendo-book-list">
+        ${selectedTrope ? `<h3 class="lendo-panel-title" style="font-size:17px">${escapeHtml(selectedTrope)}</h3>${tropes[selectedTrope].map(renderLendoBookCard).join('')}` : ''}
+      </div>
+    </section>
+    <section class="lendo-panel">
+      <h2 class="lendo-panel-title">Gerar lista por trope</h2>
+      <p class="lendo-subtitle">Escolha um trope e eu peço a quantidade de livros. A lista sai mesclada e evita repetir livros usados nas últimas 5 gerações.</p>
+      <div class="field"><label>Trope desejado</label><input type="text" id="generateTrope" value="${escapeAttr(selectedTrope)}" placeholder="Ex: slow burn"></div>
+      <button class="btn btn-primary" onclick="generateLendoList()">Gerar lista</button>
+      <button class="btn" style="margin-left:8px" onclick="toggleGeneratedHistory()">Listas que já gerei</button>
+      <div class="lendo-generated-list">
+        ${lendoCurrentGeneratedList.map((b,i)=>`<div class="lendo-generated-item">
+          <div class="lendo-book-title">${i+1}. ${escapeHtml(b.titulo)}</div>
+          <div class="lendo-book-meta">${escapeHtml(b.autora)} · ${escapeHtml((b.tropes||[]).join(', '))}</div>
+          ${b.link ? `<a href="${escapeAttr(b.link)}" target="_blank" rel="noopener">Abrir link</a>` : ''}
+        </div>`).join('')}
+      </div>
+      <div class="lendo-history-list ${ui.showLendoGeneratedHistory?'open':''}">
+        ${(state.lendoGeneratedHistory || []).length ? state.lendoGeneratedHistory.map(renderGeneratedHistoryCard).join('') : '<div class="empty">Nenhuma lista salva como referência ainda.</div>'}
+      </div>
+    </section>
+  </div>`;
+}
+function renderLendoBookCard(book){
+  return `<div class="lendo-book-card">
+    <div class="lendo-book-title">${escapeHtml(book.titulo)}</div>
+    <div class="lendo-book-meta">${escapeHtml(book.autora)} · ${escapeHtml((book.tropes||[]).join(', '))}</div>
+    ${book.link ? `<a href="${escapeAttr(book.link)}" target="_blank" rel="noopener" class="lendo-panel-link" style="margin-top:6px">Amazon →</a>` : ''}
+    <button class="icon-btn" style="float:right;margin-top:-26px" onclick="deleteLendoBook('${book.id}')">✕</button>
+  </div>`;
+}
+function renderGeneratedHistoryCard(entry){
+  return `<div class="lendo-history-card">
+    <div class="lendo-history-title">${escapeHtml(entry.trope)} · ${escapeHtml(entry.date||'')}</div>
+    ${(entry.books || []).map((b,i)=>`<div class="lendo-book-meta">${i+1}. ${escapeHtml(b.titulo)} · ${escapeHtml(b.autora)}</div>`).join('')}
+  </div>`;
+}
+function lendoTropeGroups(books){
+  return books.reduce((groups, book)=>{
+    (book.tropes || []).forEach(t=>{
+      const trope = t.trim();
+      if(!trope) return;
+      if(!groups[trope]) groups[trope] = [];
+      groups[trope].push(book);
+    });
+    return groups;
+  }, {});
+}
+function selectLendoTrope(trope){
+  ui.selectedLendoTrope = trope;
+  saveUiPrefs(currentScrollTop());
+  render({preserveScroll:true});
+}
+function toggleGeneratedHistory(){
+  ui.showLendoGeneratedHistory = !ui.showLendoGeneratedHistory;
+  render({preserveScroll:true});
+  saveUiPrefs(currentScrollTop());
+}
+function openLendoActiveProjects(){
+  ui.projetosTab = 'ativos';
+  setPage('projetos');
 }
 function renderLendoVendas(){
   const vtab = ui.vendasTab;
@@ -1321,9 +1976,9 @@ function addRecurso(){
   if(!nome) return;
   state.recursos.push({id:genId(), titulo:nome, link:''});
   saveState();
-  render();
+  render({preserveScroll:true});
 }
-function deleteRecurso(id){ state.recursos = state.recursos.filter(r=>r.id!==id); saveState(); render(); }
+function deleteRecurso(id){ state.recursos = state.recursos.filter(r=>r.id!==id); saveState(); render({preserveScroll:true}); }
 function renderArquivo(){
   const feitas = state.tasks.filter(t=>t.status==='Feito').sort((a,b)=>(b.completedAt||0)-(a.completedAt||0)).slice(0,30);
   const entregues = state.vendas.filter(v=>v.statusEntrega==='Entregue');
@@ -1346,47 +2001,140 @@ function openQuickAdd(context){
 function openNewTaskForDate(dateStr){
   openNewTaskModal('', dateStr);
 }
+function openNewLendoTask(status='A fazer'){
+  modalState = { type:'task', id:null, draft:{ nome:'', area:'Lendo Sáficos', tipo:'Tarefa única', status, data:'', prioridade:'Normal', notas:'', link:'', parentId:null, recorrencia:null, energia:'Média', tempoEstimado:'', isConteudo:true } };
+  renderModal();
+}
+function addLendoIdea(){
+  const input = document.getElementById('novaIdeiaLendo');
+  const nome = input ? input.value.trim() : '';
+  if(!nome) return;
+  state.tasks.push({id:genId(), nome, area:'Lendo Sáficos', tipo:'Tarefa única', status:'A fazer', data:'', prioridade:'Normal', notas:'', link:'', parentId:null, recorrencia:null, completedAt:null, energia:'Média', tempoEstimado:'', isConteudo:false});
+  saveState();
+  render({preserveScroll:true});
+}
+function addLendoBook(){
+  const titulo = document.getElementById('bookTitle')?.value.trim();
+  const autora = document.getElementById('bookAuthor')?.value.trim();
+  const link = document.getElementById('bookLink')?.value.trim();
+  const tropesRaw = document.getElementById('bookTropes')?.value.trim();
+  if(!titulo || !autora){ alert('Preencha pelo menos nome do livro e autora.'); return; }
+  if(!state.lendoBooks) state.lendoBooks = [];
+  state.lendoBooks.push({id:genId(), titulo, autora, link:link||'', tropes:(tropesRaw||'').split(',').map(t=>t.trim()).filter(Boolean)});
+  saveState();
+  render({preserveScroll:true});
+}
+function deleteLendoBook(id){
+  state.lendoBooks = (state.lendoBooks || []).filter(b=>b.id!==id);
+  saveState();
+  render({preserveScroll:true});
+}
+function generateLendoList(){
+  const trope = document.getElementById('generateTrope')?.value.trim();
+  if(!trope){ alert('Digite um trope para gerar a lista.'); return; }
+  const qty = Number(prompt('Quantos livros você quer nessa lista?'));
+  if(!qty || qty < 1) return;
+  const normalized = trope.toLowerCase();
+  const seen = new Set();
+  const matches = (state.lendoBooks || []).filter(b=>{
+    const key = `${(b.titulo||'').toLowerCase()}|${(b.autora||'').toLowerCase()}`;
+    if(seen.has(key)) return false;
+    const ok = (b.tropes||[]).some(t=>t.toLowerCase().includes(normalized));
+    if(ok) seen.add(key);
+    return ok;
+  });
+  const recentIds = new Set((state.lendoGenerationMemory || []).flat());
+  const fresh = shuffleList(matches.filter(b=>!recentIds.has(b.id)));
+  const recent = shuffleList(matches.filter(b=>recentIds.has(b.id)));
+  const selected = fresh.slice(0, qty);
+  if(selected.length < qty && recent.length){
+    selected.push(recent[0]);
+  }
+  lendoCurrentGeneratedList = selected;
+  if(!state.lendoGeneratedHistory) state.lendoGeneratedHistory = [];
+  if(!state.lendoGenerationMemory) state.lendoGenerationMemory = [];
+  state.lendoGeneratedHistory.unshift({
+    id: genId(),
+    trope,
+    date: new Date().toLocaleDateString('pt-BR'),
+    books: selected.map(b=>({titulo:b.titulo, autora:b.autora, link:b.link, tropes:b.tropes || []}))
+  });
+  state.lendoGeneratedHistory = state.lendoGeneratedHistory.slice(0, 30);
+  state.lendoGenerationMemory.unshift(selected.map(b=>b.id));
+  state.lendoGenerationMemory = state.lendoGenerationMemory.slice(0, 5);
+  saveState();
+  render({preserveScroll:true});
+  if(selected.length < qty) alert(`Consegui montar ${selected.length} livro(s) sem passar do limite de repetição das últimas 5 listas.`);
+}
 
 /* ---------- modal de tarefa ---------- */
-function openTaskModal(id){
+function openTaskModal(id, options={}){
   const t = state.tasks.find(x=>x.id===id);
   if(!t) return;
-  modalState = { type:'task', id, draft:Object.assign({}, t) };
+  const returnToProjectId = options.returnToProjectId || (modalState && modalState.draft && modalState.draft.tipo==='Projeto' ? modalState.id : null);
+  modalState = { type:'task', id, draft:Object.assign({}, t), returnToProjectId };
   renderModal();
 }
 function openNewTaskModal(prefillArea, prefillData){
-  modalState = { type:'task', id:null, draft:{ nome:'', area:prefillArea||'', tipo:'Tarefa única', status:'A fazer', data:prefillData||'', prioridade:'Normal', notas:'', link:'', parentId:null, recorrencia:null, energia:'Média', tempoEstimado:'' } };
+  modalState = { type:'task', id:null, draft:{ nome:'', area:prefillArea||'', tipo:'Tarefa única', status:'A fazer', data:prefillData||'', prioridade:'Normal', notas:'', link:'', parentId:null, recorrencia:null, energia:'Média', tempoEstimado:'', isConteudo:prefillArea==='Lendo Sáficos' } };
   renderModal();
 }
 function openNewProjectModal(){
-  modalState = { type:'task', id:null, draft:{ nome:'', area:'', tipo:'Projeto', status:'A fazer', data:'', prioridade:'Normal', notas:'', link:'', parentId:null, recorrencia:null, energia:'Média', tempoEstimado:'', projectStatus:'Ativo', projectPriority:'Média', proximaAcao:'', objetivo:'', referencias:'' } };
+  modalState = { type:'task', id:null, draft:{ nome:'', area:'', tipo:'Projeto', status:'A fazer', data:'', prioridade:'Normal', notas:'', link:'', parentId:null, recorrencia:null, energia:'Média', tempoEstimado:'', projectStatus:'Ativo', projectPriority:'Média', proximaAcao:'', objetivo:'', referencias:'', dataInicio:'', dataFim:'' } };
   renderModal();
 }
 function closeModal(){ modalState=null; document.getElementById('modal-root').innerHTML=''; }
-function renderModal(){
+function returnToProjectModal(){
+  if(!modalState || !modalState.returnToProjectId) return;
+  openTaskModal(modalState.returnToProjectId);
+}
+function currentModalScrollTop(){
+  return document.querySelector('#modal-root .modal-overlay')?.scrollTop || 0;
+}
+function restoreModalScroll(scrollTop){
+  const overlay = document.querySelector('#modal-root .modal-overlay');
+  if(!overlay) return;
+  requestAnimationFrame(()=>{ overlay.scrollTop = scrollTop || 0; });
+}
+function renderModal(options={}){
+  const scrollTop = options.preserveScroll ? currentModalScrollTop() : 0;
   const root = document.getElementById('modal-root');
   if(!modalState){ root.innerHTML=''; return; }
   root.innerHTML = modalState.type==='task' ? renderTaskModal() : renderVendaModal();
+  restoreModalScroll(scrollTop);
 }
 function openExpandedNotes(){
   if(!modalState || modalState.type!=='task') return;
-  const currentTextarea = document.getElementById('taskNotesTextarea');
-  if(currentTextarea) modalState.draft.notas = currentTextarea.value;
+  const currentEditor = document.getElementById('taskNotesEditor');
+  if(currentEditor) modalState.draft.notas = currentEditor.innerHTML;
   const title = modalState.draft.nome ? `Notas · ${modalState.draft.nome}` : 'Notas da tarefa';
   document.getElementById('modal-root').innerHTML = `<div class="modal-overlay">
     <div class="modal wide-note">
       <div class="modal-header"><h2>${escapeHtml(title)}</h2><button class="icon-btn" onclick="saveExpandedNotes()">✕</button></div>
-      <textarea id="expandedNotesTextarea" class="note-expanded-textarea" placeholder="Escreva tudo aqui, sem espremer a ideia...">${escapeHtml(modalState.draft.notas||'')}</textarea>
+      <div class="note-toolbar">
+        <button class="note-tool" onclick="noteFormat('bold')" title="Negrito"><b>B</b></button>
+        <button class="note-tool" onclick="noteFormat('italic')" title="Itálico"><i>I</i></button>
+        <button class="note-tool" onclick="noteFormat('underline')" title="Sublinhado"><u>U</u></button>
+        <button class="note-tool" onclick="noteFormat('foreColor','#b1547c')" title="Colorido">Cor</button>
+        <button class="note-tool" onclick="noteFormat('backColor','#fbe9ef')" title="Marcado">Marcado</button>
+        <button class="note-tool" onclick="noteFormat('backColor','#fff1a8')" title="Destacado">Destaque</button>
+      </div>
+      <div id="expandedNotesEditor" class="note-expanded-editor" contenteditable="true" data-placeholder="Escreva tudo aqui, sem espremer a ideia...">${modalState.draft.notas||''}</div>
       <div class="btn-row">
         <button class="btn btn-primary" onclick="saveExpandedNotes()">Voltar para tarefa</button>
       </div>
     </div>
   </div>`;
-  setTimeout(()=>document.getElementById('expandedNotesTextarea')?.focus(),0);
+  setTimeout(()=>document.getElementById('expandedNotesEditor')?.focus(),0);
+}
+function noteFormat(command, value=null){
+  const editor = document.getElementById('expandedNotesEditor');
+  if(editor) editor.focus();
+  document.execCommand(command, false, value);
 }
 function saveExpandedNotes(){
-  const expanded = document.getElementById('expandedNotesTextarea');
-  if(expanded && modalState) modalState.draft.notas = expanded.value;
+  const expanded = document.getElementById('expandedNotesEditor');
+  if(expanded && modalState) modalState.draft.notas = expanded.innerHTML;
   renderModal();
 }
 function renderTaskModal(){
@@ -1395,6 +2143,7 @@ function renderTaskModal(){
   const children = modalState.id ? state.tasks.filter(c=>c.parentId===modalState.id) : [];
   const projects = getProjects().filter(p=>p.id!==modalState.id);
   const isProjectDraft = d.tipo==='Projeto';
+  const returnProject = modalState.returnToProjectId ? state.tasks.find(t=>t.id===modalState.returnToProjectId) : null;
   const coverHTML = d.cover ? `
     <div class="modal-cover" style="background-image: url('${escapeAttr(d.cover)}')">
       <div class="cover-actions">
@@ -1406,10 +2155,11 @@ function renderTaskModal(){
   const addCoverHTML = !d.cover ? `<div style="margin-bottom:12px;margin-left:-8px"><button class="add-cover-btn" onclick="promptTaskCover()">🖼️ Adicionar capa</button></div>` : '';
 
   return `<div class="modal-overlay" onclick="if(event.target===this) closeModal()">
-    <div class="modal">
+    <div class="modal ${isProjectDraft?'project-modal':'task-modal'}">
       ${coverHTML}
       ${addCoverHTML}
       <div class="modal-header"><h2>${isProjectDraft ? (isNew?'Novo projeto':'Editar projeto') : (isNew?'Nova tarefa':'Editar tarefa')}</h2><button class="icon-btn" onclick="closeModal()">✕</button></div>
+      ${returnProject && !isProjectDraft ? `<button class="btn btn-return-project" onclick="returnToProjectModal()">← Voltar para ${escapeHtml(returnProject.nome)}</button>` : ''}
       <div class="field"><label>Nome</label><input type="text" value="${escapeAttr(d.nome)}" oninput="modalState.draft.nome=this.value" placeholder="Nome da tarefa"></div>
       <div class="field-row">
         <div class="field"><label>Área</label><select onchange="modalState.draft.area=this.value">
@@ -1419,35 +2169,39 @@ function renderTaskModal(){
         <div class="field"><label>Tipo</label><select onchange="modalState.draft.tipo=this.value; if(this.value==='Projeto'){ modalState.draft.parentId=null; } renderModal();">
           ${TIPOS.map(x=>`<option value="${x}" ${d.tipo===x?'selected':''}>${x}</option>`).join('')}
         </select></div>
+        ${isProjectDraft ? `<div class="field"><label>Status</label><select onchange="modalState.draft.status=this.value">
+          ${STATUSES.map(s=>`<option value="${s}" ${d.status===s?'selected':''}>${s}</option>`).join('')}
+        </select></div>` : ''}
       </div>
       <div class="field-row">
-        <div class="field"><label>Status</label><select onchange="modalState.draft.status=this.value">
+        ${!isProjectDraft ? `<div class="field"><label>Status</label><select onchange="modalState.draft.status=this.value">
           ${STATUSES.map(s=>`<option value="${s}" ${d.status===s?'selected':''}>${s}</option>`).join('')}
-        </select></div>
-        <div class="field"><label>Data</label><input type="date" value="${d.data||''}" onchange="modalState.draft.data=this.value"></div>
+        </select></div>` : ''}
+        ${!isProjectDraft ? `<div class="field"><label>Data</label><input type="date" value="${d.data||''}" onchange="modalState.draft.data=this.value"></div>
         <div class="field"><label>Prioridade</label><select onchange="modalState.draft.prioridade=this.value">
           ${PRIORIDADES.map(p=>`<option value="${p}" ${d.prioridade===p?'selected':''}>${p}</option>`).join('')}
-        </select></div>
+        </select></div>` : ''}
       </div>
-      <div class="field-row">
+      ${!isProjectDraft ? `<div class="field-row">
         <div class="field"><label>Projeto relacionado</label><select onchange="modalState.draft.parentId=this.value||null" ${isProjectDraft?'disabled':''}>
           <option value="" ${!d.parentId?'selected':''}>Sem projeto</option>
           ${projects.map(p=>`<option value="${p.id}" ${d.parentId===p.id?'selected':''}>${escapeHtml(p.nome)}</option>`).join('')}
         </select></div>
-        <div class="field"><label>Energia necessária</label><select onchange="modalState.draft.energia=this.value">
+        <div class="field"><label>Energia necessária</label><select onchange="modalState.draft.energia=this.value; if(modalState.draft.tipo==='Projeto') renderModal();">
           ${ENERGY_LEVELS.map(e=>`<option value="${e}" ${(d.energia||'Média')===e?'selected':''}>${e}</option>`).join('')}
         </select></div>
         <div class="field"><label>Tempo estimado</label><input type="text" value="${escapeAttr(d.tempoEstimado||'')}" oninput="modalState.draft.tempoEstimado=this.value" placeholder="ex: 25 min"></div>
-      </div>
+      </div>` : ''}
       ${isProjectDraft ? renderProjectFields(d) : ''}
+      ${!isProjectDraft && d.area==='Lendo Sáficos' ? `<label class="field-check"><input type="checkbox" ${d.isConteudo?'checked':''} onchange="modalState.draft.isConteudo=this.checked"> Contabilizar como conteúdo do mês</label>` : ''}
       <div class="field">
         <div class="field-label-row">
           <label>Notas</label>
           <button class="field-link-btn" onclick="openExpandedNotes()">Ver maior</button>
         </div>
-        <textarea id="taskNotesTextarea" oninput="modalState.draft.notas=this.value">${escapeHtml(d.notas||'')}</textarea>
+        <div id="taskNotesEditor" class="note-inline-editor" contenteditable="true" oninput="modalState.draft.notas=this.innerHTML">${d.notas||''}</div>
       </div>
-      <div class="field"><label>Link</label><input type="text" value="${escapeAttr(d.link||'')}" oninput="modalState.draft.link=this.value" placeholder="https://..."></div>
+      ${!isProjectDraft ? `<div class="field"><label>Link</label><input type="text" value="${escapeAttr(d.link||'')}" oninput="modalState.draft.link=this.value" placeholder="https://..."></div>` : ''}
       ${(!isNew && isProjectDraft) ? renderProjectPortal(modalState.id, d, children) : (!isNew ? renderSubtasksBlock(modalState.id, children) : '')}
       ${(!isNew && d.tipo==='Recorrente flexível') ? `<button class="btn recur-btn" onclick="completeAndRepeat('${modalState.id}')">✓ Concluir e repetir</button>` : ''}
       <div class="btn-row">
@@ -1458,57 +2212,64 @@ function renderTaskModal(){
     </div>
   </div>`;
 }
-function renderSubtasksBlock(parentId, children){
-  return `<div class="field"><label>Subtarefas</label>
-    ${children.length ? children.map(c=>`<div class="subtask">
-      <span class="chk ${c.status==='Feito'?'checked':''}" onclick="toggleTaskDone('${c.id}');renderModal();">${c.status==='Feito'?'✓':''}</span>
+function renderSubtasksBlock(parentId, children, featured=false){
+  return `<div class="field">${featured?'':'<label>Subtarefas</label>'}
+    ${(!featured && children.length) ? children.map(c=>`<div class="subtask drag-enabled" draggable="true" ondragstart="startTaskDrag(event,'${c.id}')" ondragover="allowTaskDrop(event)" ondragleave="clearDragOver(event)" ondrop="dropTaskOnSibling(event,'${c.id}','${parentId}')" ondragend="endTaskDrag(event)">
+      <span class="drag-handle" title="Arrastar para reorganizar">⋮⋮</span>
+      <span class="chk ${c.status==='Feito'?'checked':''}" onclick="toggleTaskDone('${c.id}');renderModal({preserveScroll:true});">${c.status==='Feito'?'✓':''}</span>
       <span>${escapeHtml(c.nome)}</span>
       <span class="task-date">${formatDate(c.data)}</span>
-    </div>`).join('') : '<div class="empty" style="padding:8px 2px">Sem subtarefas ainda.</div>'}
-    <div class="quick-add">
+    </div>`).join('') : (!featured ? '<div class="empty" style="padding:8px 2px">Sem subtarefas ainda.</div>' : '')}
+    <div class="${featured?'project-add-task-box':'quick-add'}">
+      ${featured?'<div class="project-add-task-title">+ Adicionar tarefa neste projeto</div>':''}
       <input type="text" id="newSubName" placeholder="Nova subtarefa...">
       <input type="date" id="newSubDate" style="max-width:150px">
       <button class="btn" onclick="addSubtask('${parentId}')">+</button>
     </div>
   </div>`;
 }
+function cycleProjectPriority(){
+  const order = ['Baixa','Média','Alta'];
+  const current = modalState.draft.projectPriority || priorityToProjectPriority(modalState.draft.prioridade);
+  modalState.draft.projectPriority = order[(order.indexOf(current) + 1) % order.length];
+  renderModal();
+}
+function cycleProjectEnergy(){
+  const order = ['Baixa','Média','Alta'];
+  const current = modalState.draft.energia || 'Média';
+  modalState.draft.energia = order[(order.indexOf(current) + 1) % order.length];
+  renderModal();
+}
 function renderProjectFields(d){
+  const projectStatus = d.projectStatus || projectStatusFromTaskStatus(d.status);
   return `<div class="project-detail-hero">
-    <div class="field-row">
-      <div class="field"><label>Status do projeto</label><select onchange="modalState.draft.projectStatus=this.value">
-        ${PROJECT_STATUSES.map(s=>`<option value="${s}" ${(d.projectStatus||projectStatusFromTaskStatus(d.status))===s?'selected':''}>${s}</option>`).join('')}
-      </select></div>
-      <div class="field"><label>Prioridade do projeto</label><select onchange="modalState.draft.projectPriority=this.value">
-        ${PROJECT_PRIORITIES.map(p=>`<option value="${p}" ${(d.projectPriority||priorityToProjectPriority(d.prioridade))===p?'selected':''}>${p}</option>`).join('')}
-      </select></div>
+    <div class="project-date-row">
+      <div class="field"><label>Data de início</label><input type="date" value="${d.dataInicio||''}" onchange="modalState.draft.dataInicio=this.value"></div>
+      <div class="field"><label>Data de fim</label><input type="date" value="${d.dataFim||d.data||''}" onchange="modalState.draft.dataFim=this.value; modalState.draft.data=this.value"></div>
     </div>
+    <div class="project-choice-grid">
+      <button type="button" class="project-mini-box choice" onclick="cycleProjectPriority()" title="Clique para alternar a prioridade">
+        <div class="project-mini-label">Prioridade</div>
+        <div class="project-mini-text">${renderProjectPriorityDots(d)}</div>
+      </button>
+      <button type="button" class="project-mini-box choice" onclick="cycleProjectEnergy()" title="Clique para alternar a energia">
+        <div class="project-mini-label">Energia necessária</div>
+        <div class="project-mini-text">${renderEnergyBolts(d.energia||'Média')}</div>
+      </button>
+    </div>
+    <div class="field"><label>Status do projeto</label><select class="project-status-select ${projectStatusClass(projectStatus)}" onchange="modalState.draft.projectStatus=this.value; renderModal({preserveScroll:true});">
+      ${PROJECT_STATUSES.map(s=>`<option value="${s}" ${projectStatus===s?'selected':''}>${s}</option>`).join('')}
+    </select></div>
     <div class="field"><label>Objetivo</label><textarea oninput="modalState.draft.objetivo=this.value" placeholder="O que este projeto precisa entregar?">${escapeHtml(d.objetivo||'')}</textarea></div>
-    <div class="field"><label>Próxima ação</label><input type="text" value="${escapeAttr(d.proximaAcao||'')}" oninput="modalState.draft.proximaAcao=this.value" placeholder="A menor próxima ação visível"></div>
     <div class="field"><label>Links e referências</label><textarea oninput="modalState.draft.referencias=this.value" placeholder="Links, pastas, briefing, arquivos importantes">${escapeHtml(d.referencias||'')}</textarea></div>
   </div>`;
 }
 function renderProjectPortal(parentId, d, children){
-  const progress = projectProgress(parentId);
-  const open = children.filter(c=>c.status!=='Feito');
   return `<div class="project-detail">
-    <div class="project-detail-hero">
-      <h3 class="project-detail-title">Portal do projeto</h3>
-      <div class="project-detail-grid">
-        <div class="project-mini-box"><div class="project-mini-label">Resumo</div><div class="project-mini-text">${escapeHtml(d.notas||'Sem resumo ainda.')}</div></div>
-        <div class="project-mini-box"><div class="project-mini-label">Objetivo</div><div class="project-mini-text">${escapeHtml(d.objetivo||'Definir objetivo.')}</div></div>
-        <div class="project-mini-box"><div class="project-mini-label">Prazo</div><div class="project-mini-text">${escapeHtml(formatDate(d.data)||'Sem prazo')}</div></div>
-        <div class="project-mini-box"><div class="project-mini-label">Próxima ação</div><div class="project-mini-text">${escapeHtml(projectNextAction(Object.assign({}, d, {id:parentId}))||'Definir próxima ação.')}</div></div>
-      </div>
-      <div class="project-progress"><div class="project-progress-bar" style="width:${progress}%"></div></div>
-      <div class="project-card-meta"><span>${open.length} tarefa${open.length===1?'':'s'} pendente${open.length===1?'':'s'}</span><span>${progress}% concluído</span></div>
-    </div>
-    <div class="field"><label>Checklist rápido</label>
-      ${renderSubtasksBlock(parentId, children)}
-    </div>
     <div class="field"><label>Tarefas vinculadas</label>
-      ${children.length ? renderTaskList(children) : '<div class="empty">Sem tarefas vinculadas ainda.</div>'}
+      ${children.length ? renderTaskList(children, parentId) : '<div class="empty">Sem tarefas vinculadas ainda.</div>'}
+      ${renderSubtasksBlock(parentId, [], true)}
     </div>
-    <div class="project-mini-box"><div class="project-mini-label">Referências</div><div class="project-mini-text">${escapeHtml(d.referencias||'Sem referências ainda.')}</div></div>
   </div>`;
 }
 function addSubtask(parentId){
@@ -1519,17 +2280,20 @@ function addSubtask(parentId){
   const parent = state.tasks.find(t=>t.id===parentId);
   state.tasks.push({id:genId(), nome, area:parent.area, tipo:'Tarefa única', status:'A fazer', data:dateEl.value||'', prioridade:'Normal', notas:'', link:'', parentId, recorrencia:null, completedAt:null, energia:'Média', tempoEstimado:''});
   saveState();
-  renderModal();
-  render();
+  render({preserveScroll:true});
+  renderModal({preserveScroll:true});
 }
 function saveModalTask(){
   const d = modalState.draft;
+  const returnToProjectId = modalState.returnToProjectId;
   if(!d.nome || !d.nome.trim()){ alert('Dá um nome pra essa tarefa antes de salvar.'); return; }
   if(d.tipo==='Projeto'){
     d.parentId = null;
     d.projectStatus = d.projectStatus || projectStatusFromTaskStatus(d.status);
     d.projectPriority = d.projectPriority || priorityToProjectPriority(d.prioridade);
     d.energia = d.energia || 'Média';
+    d.dataFim = d.dataFim || d.data || '';
+    d.data = d.dataFim || d.data;
   }
   if(modalState.id){
     const idx = state.tasks.findIndex(t=>t.id===modalState.id);
@@ -1538,15 +2302,19 @@ function saveModalTask(){
     state.tasks.push(Object.assign({id:genId(), parentId:null, recorrencia:null, completedAt:null}, d));
   }
   saveState();
-  closeModal();
-  render();
+  render({preserveScroll:true});
+  if(returnToProjectId && state.tasks.some(t=>t.id===returnToProjectId)){
+    openTaskModal(returnToProjectId);
+  } else {
+    closeModal();
+  }
 }
 function deleteTask(id){
   if(!confirm('Excluir esta tarefa e suas subtarefas?')) return;
   state.tasks = state.tasks.filter(t=>t.id!==id && t.parentId!==id);
   saveState();
   closeModal();
-  render();
+  render({preserveScroll:true});
 }
 function completeAndRepeat(id){
   const idx = state.tasks.findIndex(t=>t.id===id);
@@ -1557,11 +2325,74 @@ function completeAndRepeat(id){
   state.tasks.push(novo);
   saveState();
   closeModal();
-  render();
+  render({preserveScroll:true});
 }
 function updateFocus(txt){ state.focus = txt; saveState(); }
 
 /* ---------- H\u00e1bitos ---------- */
+function habitMonthProgress(year, month){
+  const habits = state.habitos || [];
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const total = habits.length * daysInMonth;
+  if(!total) return 0;
+  let done = 0;
+  for(let day=1; day<=daysInMonth; day++){
+    const dateStr = fmt(new Date(year, month, day));
+    const log = (state.habitosLog && state.habitosLog[dateStr]) || [];
+    done += habits.filter(h=>log.includes(h.id)).length;
+  }
+  return Math.round(done / total * 100);
+}
+function renderHabitos(){
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const habits = state.habitos || [];
+  const monthNames = Array.from({length:12},(_,i)=>new Date(year,i,1).toLocaleDateString('pt-BR',{month:'short'}).replace('.',''));
+  const yearCards = monthNames.map((name,i)=>{
+    const progress = habitMonthProgress(year, i);
+    return `<div class="habit-month-card">
+      <div class="habit-month-name">${escapeHtml(name)}</div>
+      <div class="habit-month-score">${progress}%</div>
+      <div class="habit-month-bar"><div class="habit-month-fill" style="width:${progress}%"></div></div>
+    </div>`;
+  }).join('');
+  const headDays = Array.from({length:daysInMonth},(_,i)=>`<th>${i+1}</th>`).join('');
+  const rows = habits.map(h=>{
+    const cells = Array.from({length:daysInMonth},(_,i)=>{
+      const dateStr = fmt(new Date(year, month, i+1));
+      const done = state.habitosLog && state.habitosLog[dateStr] && state.habitosLog[dateStr].includes(h.id);
+      return `<td><span class="habit-day-cell ${done?'done':''}" onclick="toggleHabit('${h.id}','${dateStr}')">${done?'✓':''}</span></td>`;
+    }).join('');
+    return `<tr>
+      <td><div class="habit-name-cell"><span>${escapeHtml(h.icone||'✦')}</span><span>${escapeHtml(h.nome)}</span><button class="icon-btn" style="margin-left:auto" onclick="deleteHabit('${h.id}')">✕</button></div></td>
+      ${cells}
+    </tr>`;
+  }).join('');
+  const currentProgress = habitMonthProgress(year, month);
+  return `<section class="habits-page">
+    <header class="habits-header">
+      <div>
+        <div class="projects-kicker">✦ Ritmo e presença</div>
+        <h1 class="projects-title"><span class="page-emoji">${pageEmoji('habitos')}</span> Hábitos</h1>
+        <p class="habits-subtitle">Uma visão clara dos meses, sem cobrança infinita.</p>
+      </div>
+      <div class="project-stat" style="min-width:170px">
+        <div class="project-stat-num">${currentProgress}%</div>
+        <div class="project-stat-label">Progresso deste mês</div>
+      </div>
+    </header>
+    <div class="habit-actions">
+      <button class="btn btn-primary" onclick="promptNewHabit()">+ Novo hábito</button>
+    </div>
+    <div class="habits-year-grid">${yearCards}</div>
+    <div class="habit-control-card">
+      <div class="section-label-hoje" style="margin-bottom:14px">${now.toLocaleDateString('pt-BR',{month:'long',year:'numeric'})}</div>
+      ${habits.length ? `<table class="habit-table"><thead><tr><th>Hábito</th>${headDays}</tr></thead><tbody>${rows}</tbody></table>` : '<div class="empty">Nenhum hábito cadastrado ainda.</div>'}
+    </div>
+  </section>`;
+}
 function toggleHabit(id, dateStr){
   if(!state.habitosLog) state.habitosLog = {};
   if(!state.habitosLog[dateStr]) state.habitosLog[dateStr] = [];
@@ -1569,7 +2400,7 @@ function toggleHabit(id, dateStr){
   const idx = log.indexOf(id);
   if(idx >= 0) log.splice(idx, 1); else log.push(id);
   saveState();
-  render();
+  render({preserveScroll:true});
 }
 function promptNewHabit(){
   const nome = prompt('Nome do novo h\u00e1bito (ex: Meditar 10 min):');
@@ -1578,7 +2409,18 @@ function promptNewHabit(){
   if(!state.habitos) state.habitos = [];
   state.habitos.push({ id: genId(), nome: nome.trim(), icone });
   saveState();
-  render();
+  render({preserveScroll:true});
+}
+function deleteHabit(id){
+  if(!confirm('Excluir este hábito? O histórico dele será removido.')) return;
+  state.habitos = (state.habitos || []).filter(h=>h.id!==id);
+  if(state.habitosLog){
+    Object.keys(state.habitosLog).forEach(dateStr=>{
+      state.habitosLog[dateStr] = state.habitosLog[dateStr].filter(hid=>hid!==id);
+    });
+  }
+  saveState();
+  render({preserveScroll:true});
 }
 
 /* ---------- modal de venda ---------- */
@@ -1655,14 +2497,14 @@ function saveModalVenda(){
   }
   saveState();
   closeModal();
-  render();
+  render({preserveScroll:true});
 }
 function deleteVenda(id){
   if(!confirm('Excluir esta venda?')) return;
   state.vendas = state.vendas.filter(v=>v.id!==id);
   saveState();
   closeModal();
-  render();
+  render({preserveScroll:true});
 }
 
 /* ---------- inicialização ---------- */
@@ -1686,12 +2528,20 @@ async function init(){
     ensurePageEmojis();
     ensureProjectFields();
   }
+
+  const savedUi = loadUiPrefs();
+  if(savedUi){
+    ui = Object.assign({}, ui, savedUi);
+  }
   
   const sn = document.getElementById('storage-note');
   if(window.storage) sn.innerText = 'Sincronizado na nuvem';
-  else sn.innerText = 'Salvo localmente';
+  else sn.innerText = 'Salvo no navegador';
   
-  render();
+  render({scrollTop:ui.scrollTop || 0});
+  const content = document.getElementById('content');
+  if(content) content.addEventListener('scroll', scheduleSaveUiPrefs, {passive:true});
+  window.addEventListener('beforeunload', saveUiPrefs);
 }
 init();
 </script>
