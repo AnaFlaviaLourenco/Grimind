@@ -110,16 +110,16 @@ a{color:inherit;}
 .footer-flourish{display:block;opacity:.55;margin-bottom:6px;}
 .footer-flourish path{stroke:var(--accent);fill:none;}
 .footer-flourish circle{fill:var(--accent);}
-.theme-switcher{margin-bottom:10px;}
-.theme-toggle-row{display:flex;align-items:center;gap:6px;margin-bottom:9px;}
+.theme-switcher{margin-bottom:10px;display:flex;flex-direction:column;align-items:center;}
+.theme-toggle-row{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:9px;width:100%;}
 .theme-mode-btn{flex:1;display:flex;align-items:center;justify-content:center;padding:6px 4px;border-radius:var(--radius-sm);border:1.5px solid var(--border-strong);background:var(--bg-card);cursor:pointer;font-size:13px;color:var(--text-secondary);transition:all .15s ease;}
 .theme-mode-btn.active{background:var(--accent-soft);color:var(--accent-soft-text);border-color:var(--accent);}
-.swatch-row{display:flex;gap:7px;padding:0 2px;}
+.swatch-row{display:flex;justify-content:center;gap:7px;padding:0 2px;width:100%;}
 .swatch{width:19px;height:19px;border-radius:50%;cursor:pointer;border:2px solid transparent;box-shadow:0 0 0 1px var(--border-strong) inset;transition:transform .15s ease;}
 .swatch:hover{transform:scale(1.12);}
 .swatch.sel{border-color:var(--bg-card);box-shadow:0 0 0 2px var(--bg-card),0 0 0 3.5px var(--accent);}
 
-#content{flex:1;overflow-y:auto;padding:52px 68px;max-width:900px;}
+#content{flex:1;overflow-y:auto;padding:56px clamp(48px,6vw,128px);max-width:none;width:100%;}
 @media (max-width:880px){#content{padding:32px;max-width:100%;}}
 
 .page-header{display:flex;align-items:center;gap:12px;margin-bottom:26px;}
@@ -202,13 +202,19 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
 
 .modal-overlay{position:fixed;inset:0;background:var(--overlay);display:flex;align-items:flex-start;justify-content:center;padding:6vh 20px;overflow-y:auto;z-index:100;}
 .modal{background:var(--bg-card);border-radius:20px;width:100%;max-width:540px;padding:28px 32px;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+.modal.wide-note{max-width:900px;min-height:72vh;display:flex;flex-direction:column;}
 .modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;}
 .modal-header h2{margin:0;font-size:20px;font-family:var(--font-display);font-weight:600;}
 .field{margin-bottom:14px;}
 .field label{display:block;font-size:11.5px;font-weight:800;color:var(--text-secondary);margin-bottom:5px;text-transform:uppercase;letter-spacing:.02em;}
+.field-label-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:5px;}
+.field-label-row label{margin-bottom:0;}
+.field-link-btn{border:0;background:transparent;color:var(--accent-strong);font-size:12px;font-weight:800;cursor:pointer;padding:4px 0;}
+.field-link-btn:hover{text-decoration:underline;}
 .field input[type=text],.field input[type=date],.field input[type=number],.field select,.field textarea{width:100%;padding:9px 11px;border:1.5px solid var(--border-strong);border-radius:var(--radius-sm);font-size:14px;font-family:inherit;background:var(--bg-input);color:var(--text);}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);}
 .field textarea{min-height:66px;resize:vertical;}
+.note-expanded-textarea{flex:1;min-height:52vh!important;font-size:16px!important;line-height:1.65!important;padding:18px!important;}
 .field-row{display:flex;gap:10px;flex-wrap:wrap;}
 .field-row .field{flex:1;min-width:120px;}
 .icon-btn{background:none;border:none;font-size:17px;cursor:pointer;color:var(--text-tertiary);padding:2px 4px;}
@@ -310,6 +316,134 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
   #content{padding:22px 18px;height:calc(100vh - 49px);}
   .modal{max-width:100%;padding:22px 20px;}
 }
+
+/* ---------- layout hoje ---------- */
+.hoje-layout { display: grid; grid-template-columns: minmax(620px, 760px) 300px; gap: 44px; align-items: flex-start; justify-content: center; width: 100%; max-width: 1120px; margin: 0 auto; }
+.hoje-main { min-width: 0; }
+.hoje-sidebar { width: 300px; flex-shrink: 0; display: flex; flex-direction: column; gap: 16px; }
+@media (max-width: 1100px) {
+  .hoje-layout { grid-template-columns: minmax(520px, 1fr); max-width: 760px; }
+  .hoje-sidebar { width: 100%; }
+}
+@media (max-width: 880px) { .hoje-layout { display:block; } .hoje-sidebar { width: 100%; margin-top:24px; } }
+
+/* ---------- page header hoje ---------- */
+.hoje-title-row { display: flex; align-items: center; gap: 12px; margin: 0 auto 2px; width: 100%; max-width: 1120px; }
+.hoje-star { font-size: 26px; line-height: 1; }
+.hoje-subtitle { font-size: 12.5px; color: var(--text-tertiary); margin: 0 auto 28px; width: 100%; max-width: 1120px; font-style: italic; }
+
+/* ---------- callout resultado ---------- */
+.callout-resultado { background: var(--accent-soft); border: 1px solid var(--border); border-radius: 14px; padding: 18px 22px; margin-bottom: 28px; }
+.callout-resultado-label { font-size: 10.5px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent-strong); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.callout-resultado-text { font-size: 14px; color: var(--text-secondary); font-style: italic; min-height: 22px; outline: none; }
+.callout-resultado-text:empty::before { content: attr(data-placeholder); opacity: 0.5; }
+
+/* ---------- section label hoje ---------- */
+.section-label-hoje { font-size: 10.5px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+
+/* ---------- task list card ---------- */
+.task-list-card { background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border); padding: 0 8px; overflow: hidden; }
+.task-list-card .task-row { border-radius: 0; }
+.task-list-card .task-row:last-child { border-bottom: none; }
+
+/* ---------- btn nova tarefa ---------- */
+.btn-nova-tarefa { background: var(--bg-card); color: var(--accent-strong); border: 1.5px solid var(--border-strong); padding: 8px 18px; border-radius: 999px; font-size: 13.5px; font-weight: 700; cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; }
+.btn-nova-tarefa:hover { background: var(--hover); border-color: var(--accent); }
+
+/* ---------- widgets direita ---------- */
+.widget { background: var(--bg-card); border-radius: 14px; border: 1px solid var(--border); padding: 18px 20px; }
+.widget-title { font-size: 11px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
+.habito-row { display: flex; align-items: center; gap: 10px; padding: 9px 12px; background: var(--bg-page); border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: background 0.15s; }
+.habito-row:hover { background: var(--hover); }
+.habito-chk { width: 20px; height: 20px; border-radius: 6px; border: 1.5px solid var(--border-strong); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; background: var(--bg-input); color: transparent; transition: all 0.15s; }
+.habito-chk.done { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-strong); }
+.habito-nome { font-size: 13.5px; font-weight: 600; color: var(--text); flex: 1; }
+.habitos-list { display: flex; flex-direction: column; gap: 8px; }
+
+/* ---------- carta do dia ---------- */
+.carta-inner { display: flex; align-items: center; gap: 16px; }
+.carta-img-box { width: 82px; height: 128px; border-radius: 8px; border: 1.5px solid var(--border-strong); background: linear-gradient(135deg, var(--grad-a), var(--grad-b)); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 28px; position: relative; }
+.carta-img-box::after { content: ''; position: absolute; inset: 5px; border: 1px solid rgba(255,255,255,0.6); border-radius: 4px; pointer-events: none; }
+.carta-info-title { font-family: var(--font-display); font-size: 17px; font-weight: 600; color: var(--text); }
+.carta-info-sub { font-size: 11.5px; color: var(--text-tertiary); font-style: italic; margin-top: 4px; }
+
+/* ---------- projetos e visualizações ---------- */
+.nav-emoji{cursor:pointer;border-radius:6px;}
+.nav-emoji:hover{background:var(--hover);}
+.sidebar-footer{position:sticky;bottom:0;background:var(--bg-sidebar);box-shadow:0 -10px 18px var(--bg-sidebar);}
+.footer-flourish{display:none;}
+.today-list-head{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.view-switch{display:inline-flex;align-items:center;gap:4px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:4px;margin-left:auto;}
+.view-switch button{border:0;background:transparent;color:var(--text-secondary);border-radius:999px;padding:6px 10px;font-size:12px;font-weight:800;cursor:pointer;}
+.view-switch button.active{background:var(--accent-soft);color:var(--accent-soft-text);}
+.week-board{display:grid;grid-template-columns:repeat(7,minmax(145px,1fr));gap:12px;overflow-x:auto;padding-bottom:10px;}
+.week-col{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;min-height:260px;padding:12px;}
+.week-col.today{border-color:var(--accent);background:linear-gradient(180deg,var(--accent-soft),var(--bg-card));}
+.week-col-head{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-secondary);font-weight:900;margin-bottom:10px;}
+.week-task{border:1px solid var(--border);border-radius:9px;padding:10px;margin-bottom:8px;background:var(--bg-card);cursor:pointer;}
+.week-task-title{font-size:13px;color:var(--text);font-weight:800;line-height:1.3;}
+.week-task-meta{font-size:11px;color:var(--text-tertiary);margin-top:5px;}
+.day-add-btn{border:1px solid var(--border-strong);background:var(--bg-card);color:var(--accent-strong);border-radius:999px;font-size:12px;font-weight:900;line-height:1;min-width:25px;height:25px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;}
+.day-add-btn:hover{background:var(--accent-soft);border-color:var(--accent);}
+.month-calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;}
+.month-head{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-secondary);font-weight:900;text-align:center;padding:0 0 5px;}
+.month-day{height:128px;background:var(--bg-card);border:1px solid var(--border);border-radius:9px;padding:8px;overflow-y:auto;overflow-x:hidden;}
+.month-day.muted{opacity:.42;}
+.month-day.today{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent-soft) inset;}
+.month-date{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:12px;font-weight:900;color:var(--text-secondary);margin-bottom:5px;}
+.month-dot-task{font-size:11px;line-height:1.25;color:var(--text);background:var(--accent-soft);border-radius:6px;padding:4px 5px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;}
+.projects-page{max-width:1180px;margin:0 auto;padding-bottom:42px;}
+.projects-header{display:flex;align-items:flex-start;justify-content:space-between;gap:28px;margin-bottom:24px;}
+.projects-kicker{font-size:12px;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;font-weight:800;margin-bottom:6px;}
+.projects-title{font-family:var(--font-display);font-size:42px;line-height:1;margin:0;color:var(--text);font-weight:600;}
+.projects-subtitle{font-size:14px;color:var(--text-secondary);margin:12px 0 0;}
+.projects-overview{display:grid;grid-template-columns:repeat(4,minmax(112px,1fr));gap:12px;flex:1;max-width:650px;}
+.project-stat{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;min-height:78px;}
+.project-stat-num{font-family:var(--font-display);font-size:27px;color:var(--accent-strong);line-height:1;}
+.project-stat-label{font-size:12px;color:var(--text-secondary);margin-top:8px;font-weight:700;}
+.project-focus-strip{display:grid;grid-template-columns:minmax(260px,1.2fr) minmax(220px,.8fr);gap:16px;margin:18px 0 24px;}
+.project-focus-box{background:var(--accent-soft);border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
+.project-focus-label{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-strong);font-weight:800;margin-bottom:8px;}
+.project-focus-text{font-size:15px;color:var(--text);font-weight:700;line-height:1.45;}
+.project-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 22px;}
+.project-tab{border:1px solid var(--border);background:var(--bg-card);border-radius:999px;padding:8px 14px;font-size:13px;color:var(--text-secondary);font-weight:800;cursor:pointer;}
+.project-tab.active{background:var(--accent-soft);color:var(--accent-soft-text);border-color:var(--accent);}
+.project-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;}
+.project-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:20px;cursor:pointer;box-shadow:0 8px 26px rgba(150,90,120,.05);transition:transform .15s ease,border-color .15s ease;}
+.project-card:hover{transform:translateY(-2px);border-color:var(--accent);}
+.project-card-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:14px;}
+.project-card-title{font-family:var(--font-display);font-size:23px;color:var(--text);line-height:1.18;margin:0;}
+.project-card-area{font-size:12px;color:var(--text-secondary);font-weight:800;margin-top:6px;}
+.project-badges{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;}
+.project-badge{border-radius:999px;padding:5px 10px;font-size:12px;font-weight:800;background:var(--accent-soft);color:var(--accent-soft-text);}
+.project-badge.soft{background:var(--bg-subtle);color:var(--text-secondary);}
+.project-next{background:var(--bg-subtle);border:1px solid var(--border);border-radius:9px;padding:12px 13px;margin:12px 0;}
+.project-next-label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-strong);font-weight:900;margin-bottom:5px;}
+.project-next-text{font-size:14px;color:var(--text);line-height:1.4;font-weight:700;}
+.project-card-meta{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--text-secondary);margin:12px 0;}
+.project-progress{height:8px;background:var(--accent-soft);border-radius:999px;overflow:hidden;margin-top:12px;}
+.project-progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-strong));border-radius:999px;}
+.project-empty{background:var(--bg-card);border:1px dashed var(--border-strong);border-radius:12px;padding:26px;color:var(--text-secondary);font-size:14px;text-align:center;}
+.project-detail{display:grid;gap:16px;}
+.project-detail-hero{background:var(--bg-subtle);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:14px;}
+.project-detail-title{font-family:var(--font-display);font-size:25px;color:var(--text);margin:0 0 8px;}
+.project-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.project-mini-box{border:1px solid var(--border);border-radius:10px;padding:12px;background:var(--bg-card);}
+.project-mini-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-strong);font-weight:900;margin-bottom:5px;}
+.project-mini-text{font-size:14px;color:var(--text);line-height:1.4;}
+.tarot-card-art{width:82px;height:128px;border-radius:8px;border:1.5px solid var(--accent);background:linear-gradient(180deg,#fffdfb 0%,var(--accent-soft) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;color:var(--accent-strong);box-shadow:0 10px 24px rgba(120,90,150,.12);flex-shrink:0;}
+.tarot-card-art::before{content:'';position:absolute;inset:6px;border:1px solid var(--accent);border-radius:5px;opacity:.65;}
+.tarot-symbol{font-size:34px;line-height:1;margin-bottom:8px;z-index:1;}
+.tarot-num{font-size:10px;letter-spacing:.12em;font-weight:900;z-index:1;}
+.moon-box{margin-top:16px;border-top:1px solid var(--border);padding-top:14px;display:flex;gap:12px;align-items:flex-start;}
+.moon-icon{width:38px;height:38px;border-radius:999px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;color:var(--accent-strong);font-size:22px;flex-shrink:0;}
+.moon-title{font-family:var(--font-display);font-size:17px;color:var(--text);line-height:1.1;margin-bottom:4px;}
+.moon-sub{font-size:11.5px;color:var(--text-secondary);font-weight:700;line-height:1.35;}
+@media (max-width:880px){
+  .projects-header,.project-focus-strip{display:block;}
+  .projects-overview{grid-template-columns:repeat(2,1fr);margin-top:18px;}
+  .project-detail-grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
@@ -322,14 +456,15 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
 <div id="app">
   <nav id="sidebar">
     <div class="sidebar-title">Sistema da Ana</div>
-    <div class="nav-item" data-page="hoje" onclick="setPage('hoje')"><span class="nav-emoji">🏠</span>Hoje</div>
-    <div class="nav-item" data-page="inbox" onclick="setPage('inbox')"><span class="nav-emoji">📥</span>Inbox</div>
-    <div class="nav-item" data-page="publique" onclick="setPage('publique')"><span class="nav-emoji">🏢</span>Publique</div>
-    <div class="nav-item" data-page="personnallite" onclick="setPage('personnallite')"><span class="nav-emoji">🏢</span>Marketing Personnallité</div>
-    <div class="nav-item" data-page="brivia" onclick="setPage('brivia')"><span class="nav-emoji">🏢</span>Brivia</div>
-    <div class="nav-item" data-page="lendosaficos" onclick="setPage('lendosaficos')"><span class="nav-emoji">📚</span>Lendo Sáficos</div>
-    <div class="nav-item" data-page="pessoal" onclick="setPage('pessoal')"><span class="nav-emoji">🌱</span>Pessoal</div>
-    <div class="nav-item" data-page="recursos" onclick="setPage('recursos')"><span class="nav-emoji">🗂️</span>Recursos &amp; Arquivo</div>
+    <div class="nav-item" data-page="hoje" onclick="setPage('hoje')"><span class="nav-emoji" data-emoji-page="hoje" onclick="event.stopPropagation();changePageEmoji('hoje')" title="Trocar emoji">🏠</span>Hoje</div>
+    <div class="nav-item" data-page="inbox" onclick="setPage('inbox')"><span class="nav-emoji" data-emoji-page="inbox" onclick="event.stopPropagation();changePageEmoji('inbox')" title="Trocar emoji">📥</span>Inbox</div>
+    <div class="nav-item" data-page="projetos" onclick="setPage('projetos')"><span class="nav-emoji" data-emoji-page="projetos" onclick="event.stopPropagation();changePageEmoji('projetos')" title="Trocar emoji">✦</span>Projetos</div>
+    <div class="nav-item" data-page="publique" onclick="setPage('publique')"><span class="nav-emoji" data-emoji-page="publique" onclick="event.stopPropagation();changePageEmoji('publique')" title="Trocar emoji">🏢</span>Publique</div>
+    <div class="nav-item" data-page="personnallite" onclick="setPage('personnallite')"><span class="nav-emoji" data-emoji-page="personnallite" onclick="event.stopPropagation();changePageEmoji('personnallite')" title="Trocar emoji">🏢</span>Marketing Personnallité</div>
+    <div class="nav-item" data-page="brivia" onclick="setPage('brivia')"><span class="nav-emoji" data-emoji-page="brivia" onclick="event.stopPropagation();changePageEmoji('brivia')" title="Trocar emoji">🏢</span>Brivia</div>
+    <div class="nav-item" data-page="lendosaficos" onclick="setPage('lendosaficos')"><span class="nav-emoji" data-emoji-page="lendosaficos" onclick="event.stopPropagation();changePageEmoji('lendosaficos')" title="Trocar emoji">📚</span>Lendo Sáficos</div>
+    <div class="nav-item" data-page="pessoal" onclick="setPage('pessoal')"><span class="nav-emoji" data-emoji-page="pessoal" onclick="event.stopPropagation();changePageEmoji('pessoal')" title="Trocar emoji">🌱</span>Pessoal</div>
+    <div class="nav-item" data-page="recursos" onclick="setPage('recursos')"><span class="nav-emoji" data-emoji-page="recursos" onclick="event.stopPropagation();changePageEmoji('recursos')" title="Trocar emoji">🗂️</span>Recursos &amp; Arquivo</div>
     <div class="sidebar-footer">
       <svg class="footer-flourish" width="100%" height="34" viewBox="0 0 160 34" xmlns="http://www.w3.org/2000/svg">
         <path d="M8 29 C 8 18, 13 9, 22 5" stroke-width="1.4" stroke-linecap="round"/>
@@ -361,9 +496,46 @@ const TIPOS = ['Tarefa única','Projeto','Recorrente com horário','Recorrente f
 const STATUSES = ['A fazer','Fazendo','Feito'];
 const STATUS_ENTREGA = ['A fazer','Fazendo','Entregue'];
 const PRIORIDADES = ['Urgente','Normal','Quando der'];
+const PROJECT_STATUSES = ['Ativo','Em andamento','Aguardando','Pausado','Concluído'];
+const PROJECT_PRIORITIES = ['Alta','Média','Baixa'];
+const ENERGY_LEVELS = ['Baixa','Média','Alta'];
 const VENDA_ITENS = ['Stories','Post feed','Vídeo-resenha','Reels','Combo'];
 const STORAGE_KEY = 'ana-state';
 const THEME_KEY = 'ana-theme-prefs';
+const DEFAULT_PAGE_EMOJIS = {
+  hoje:'🏠', inbox:'📥', projetos:'✦', publique:'🏢', personnallite:'🏢', brivia:'🏢',
+  lendosaficos:'📚', pessoal:'🌱', recursos:'🗂️'
+};
+const MAJOR_ARCANA = [
+  {num:'0', nome:'O Louco', icon:'🌬️', sub:'começo leve, presença e coragem'},
+  {num:'I', nome:'O Mago', icon:'✦', sub:'ação, foco e recursos à mão'},
+  {num:'II', nome:'A Sacerdotisa', icon:'🌙', sub:'intuição, pausa e escuta'},
+  {num:'III', nome:'A Imperatriz', icon:'🌿', sub:'criação, cuidado e fertilidade'},
+  {num:'IV', nome:'O Imperador', icon:'♜', sub:'estrutura, decisão e limite'},
+  {num:'V', nome:'O Hierofante', icon:'🕯️', sub:'ritual, estudo e direção'},
+  {num:'VI', nome:'Os Enamorados', icon:'♡', sub:'escolha, vínculo e alinhamento'},
+  {num:'VII', nome:'O Carro', icon:'☉', sub:'movimento, ritmo e avanço'},
+  {num:'VIII', nome:'A Força', icon:'∞', sub:'constância, gentileza e firmeza'},
+  {num:'IX', nome:'O Eremita', icon:'✧', sub:'silêncio, revisão e sabedoria'},
+  {num:'X', nome:'A Roda da Fortuna', icon:'◎', sub:'ciclo, ajuste e oportunidade'},
+  {num:'XI', nome:'A Justiça', icon:'⚖️', sub:'clareza, escolha e equilíbrio'},
+  {num:'XII', nome:'O Enforcado', icon:'◇', sub:'pausa, rendição e novo olhar'},
+  {num:'XIII', nome:'A Morte', icon:'✂', sub:'fim, limpeza e transformação'},
+  {num:'XIV', nome:'Temperança', icon:'🍷', sub:'ritmo, foco e presença'},
+  {num:'XV', nome:'O Diabo', icon:'⛓️', sub:'apego, desejo e consciência'},
+  {num:'XVI', nome:'A Torre', icon:'⚡', sub:'verdade, ruptura e reconstrução'},
+  {num:'XVII', nome:'A Estrela', icon:'✶', sub:'esperança, beleza e respiro'},
+  {num:'XVIII', nome:'A Lua', icon:'☾', sub:'sonho, mistério e percepção'},
+  {num:'XIX', nome:'O Sol', icon:'☀️', sub:'vitalidade, clareza e alegria'},
+  {num:'XX', nome:'O Julgamento', icon:'♪', sub:'chamado, despertar e retomada'},
+  {num:'XXI', nome:'O Mundo', icon:'◌', sub:'fechamento, integração e entrega'}
+];
+const MOON_PHASES = [
+  {name:'Lua Nova', icon:'●', at:0, rec:'plante uma intenção simples e escolha uma coisa para começar.'},
+  {name:'Lua Crescente', icon:'◐', at:7.3826, rec:'avance em pequenas etapas e tire uma tarefa do modo ideia.'},
+  {name:'Lua Cheia', icon:'○', at:14.7653, rec:'mostre, publique, conclua ou celebre o que ganhou forma.'},
+  {name:'Lua Minguante', icon:'◑', at:22.1479, rec:'revise, descarte pendências e alivie o que não precisa seguir.'}
+];
 const ACCENTS = [
   {key:'lavanda', label:'Lavanda', color:'#8b6fb8'},
   {key:'rosa', label:'Rosa', color:'#d9789f'},
@@ -373,7 +545,7 @@ const ACCENTS = [
 ];
 
 let state = null;
-let ui = { page:'hoje', openToggles:{}, lendoTab:'conteudo', vendasTab:'vendido', recursosTab:'recursos' };
+let ui = { page:'hoje', openToggles:{}, lendoTab:'conteudo', vendasTab:'vendido', recursosTab:'recursos', projetosTab:'ativos', hojeView:'dia' };
 let modalState = null;
 let themePrefs = { mode:'light', accent:'lavanda' };
 
@@ -383,6 +555,8 @@ function fmt(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0
 function todayStr(){ return fmt(new Date()); }
 function addDaysStr(n){ const d=new Date(); d.setDate(d.getDate()+n); return fmt(d); }
 function nextWeekday(target){ const d=new Date(); const diff=(target - d.getDay() + 7) % 7; d.setDate(d.getDate()+diff); return fmt(d); }
+function startOfWeek(d=new Date()){ const x=new Date(d); const diff=(x.getDay()+6)%7; x.setDate(x.getDate()-diff); x.setHours(0,0,0,0); return x; }
+function addDaysToDate(d,n){ const x=new Date(d); x.setDate(x.getDate()+n); return x; }
 function escapeHtml(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function escapeAttr(s){ return escapeHtml(s).replace(/"/g,'&quot;'); }
 function priorityClass(p){ return p==='Urgente'?'urgente':(p==='Quando der'?'quandoder':'normal'); }
@@ -394,9 +568,83 @@ function formatDate(d){
   if(isNaN(dt)) return '';
   return dt.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'});
 }
+function formatShortDate(d){ return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'}); }
 function byPriority(a,b){ const order={'Urgente':0,'Normal':1,'Quando der':2}; return (order[a.prioridade]??1)-(order[b.prioridade]??1); }
 function areaContextKey(area){
   return area==='Publique'?'publique': area==='Marketing Personnallité'?'personnallite': area==='Brivia'?'brivia': area==='Lendo Sáficos'?'lendosaficos':'pessoal';
+}
+function pageEmoji(page){ return (state && state.pageEmojis && state.pageEmojis[page]) || DEFAULT_PAGE_EMOJIS[page] || '✦'; }
+function ensurePageEmojis(){
+  if(!state.pageEmojis) state.pageEmojis = {};
+  Object.keys(DEFAULT_PAGE_EMOJIS).forEach(k=>{ if(!state.pageEmojis[k]) state.pageEmojis[k] = DEFAULT_PAGE_EMOJIS[k]; });
+}
+function projectStatusFromTaskStatus(status){
+  if(status==='Feito') return 'Concluído';
+  if(status==='Fazendo') return 'Em andamento';
+  return 'Ativo';
+}
+function priorityToProjectPriority(p){
+  if(p==='Urgente') return 'Alta';
+  if(p==='Quando der') return 'Baixa';
+  return 'Média';
+}
+function daysUntil(dateStr){
+  if(!dateStr) return null;
+  const d = new Date(dateStr+'T00:00:00');
+  if(isNaN(d)) return null;
+  const today = new Date(todayStr()+'T00:00:00');
+  return Math.ceil((d - today) / 86400000);
+}
+function isProject(t){ return t && t.tipo==='Projeto'; }
+function isActionTask(t){ return t && t.tipo!=='Projeto'; }
+function getProjects(){ return state.tasks.filter(t=>!t.parentId && isProject(t)); }
+function getProjectById(id){ return state.tasks.find(t=>t.id===id && isProject(t)); }
+function getProjectTasks(projectId){ return state.tasks.filter(t=>t.parentId===projectId); }
+function getTaskProject(t){ return t && t.parentId ? getProjectById(t.parentId) : null; }
+function projectOpenTasks(projectId){ return getProjectTasks(projectId).filter(t=>t.status!=='Feito'); }
+function projectProgress(projectId){
+  const tasks = getProjectTasks(projectId);
+  if(!tasks.length) return 0;
+  return Math.round(tasks.filter(t=>t.status==='Feito').length / tasks.length * 100);
+}
+function projectNextAction(p){
+  if(p.proximaAcao && p.proximaAcao.trim()) return p.proximaAcao.trim();
+  const next = projectOpenTasks(p.id).sort(byPriority)[0];
+  return next ? next.nome : '';
+}
+function visibleTasksForDate(dateStr){
+  return state.tasks.filter(t=>isActionTask(t) && t.data===dateStr && t.status!=='Feito').sort(byPriority);
+}
+function ensureProjectFields(){
+  if(!state.tasks) return;
+  state.tasks.forEach(t=>{
+    if(isProject(t)){
+      if(!t.projectStatus) t.projectStatus = projectStatusFromTaskStatus(t.status);
+      if(!t.projectPriority) t.projectPriority = priorityToProjectPriority(t.prioridade);
+      if(!t.energia) t.energia = 'Média';
+      if(!t.proximaAcao) t.proximaAcao = '';
+      if(!t.objetivo) t.objetivo = '';
+      if(!t.referencias) t.referencias = '';
+      t.parentId = null;
+    } else {
+      if(!t.energia) t.energia = 'Média';
+      if(!t.tempoEstimado) t.tempoEstimado = '';
+    }
+  });
+}
+function dateSeed(dateStr){ return String(dateStr).split('').reduce((sum,ch)=>sum+ch.charCodeAt(0),0); }
+function dailyTarot(dateStr=todayStr()){ return MAJOR_ARCANA[dateSeed(dateStr) % MAJOR_ARCANA.length]; }
+function moonInfo(date=new Date()){
+  const synodic = 29.530588853;
+  const knownNewMoon = Date.UTC(2000,0,6,18,14);
+  const now = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0);
+  const age = (((now - knownNewMoon) / 86400000) % synodic + synodic) % synodic;
+  const indexed = MOON_PHASES.map((p,i)=>({p,i,diff:Math.min(Math.abs(age-p.at), synodic-Math.abs(age-p.at))})).sort((a,b)=>a.diff-b.diff)[0];
+  const current = indexed.p;
+  const next = MOON_PHASES[(indexed.i + 1) % MOON_PHASES.length];
+  let daysToNext = next.at - age;
+  if(daysToNext <= 0) daysToNext += synodic;
+  return {current, next, nextDate:addDaysToDate(date, Math.round(daysToNext))};
 }
 
 /* ---------- dados de exemplo ---------- */
@@ -411,10 +659,17 @@ function seedState(){
   push({nome:'Responder comentários do Instagram', area:'Lendo Sáficos', tipo:'Recorrente flexível', status:'A fazer', data:today, notas:'Toque em "Concluir e repetir" a cada leva de respostas — nunca fica esperando aberta.'});
   push({nome:'Postar Stories - manhã', area:'Lendo Sáficos', tipo:'Recorrente com horário', status:'A fazer', data:today, recorrencia:{freq:'diaria'}});
 
-  const projId = push({nome:'Vídeo de resenha — livro exemplo', area:'Lendo Sáficos', tipo:'Projeto', status:'Fazendo', data:addDaysStr(3)});
+  const projId = push({nome:'Vídeo de resenha — livro exemplo', area:'Lendo Sáficos', tipo:'Projeto', status:'Fazendo', data:addDaysStr(3), projectStatus:'Em andamento', projectPriority:'Alta', energia:'Alta', proximaAcao:'Gravar o vídeo', objetivo:'Publicar uma resenha clara, bonita e útil sem virar um projeto infinito.', referencias:'Roteiro, briefing da editora, notas de leitura.'});
   push({nome:'Escrever roteiro', area:'Lendo Sáficos', tipo:'Tarefa única', status:'Feito', data:addDaysStr(-1), parentId:projId});
-  push({nome:'Gravar o vídeo', area:'Lendo Sáficos', tipo:'Tarefa única', status:'A fazer', data:addDaysStr(2), parentId:projId});
+  push({nome:'Gravar o vídeo', area:'Lendo Sáficos', tipo:'Tarefa única', status:'A fazer', data:today, parentId:projId});
   push({nome:'Editar e postar', area:'Lendo Sáficos', tipo:'Tarefa única', status:'A fazer', data:addDaysStr(3), parentId:projId});
+
+  const launchId = push({nome:'Semana de posts institucionais', area:'Publique', tipo:'Projeto', status:'A fazer', data:addDaysStr(6), prioridade:'Normal', projectStatus:'Ativo', projectPriority:'Média', energia:'Média', proximaAcao:'Separar referências visuais', objetivo:'Organizar e publicar uma sequência simples de conteúdos institucionais.', referencias:'Pasta de imagens do cliente, calendário editorial.'});
+  push({nome:'Separar referências visuais', area:'Publique', tipo:'Tarefa única', status:'A fazer', data:addDaysStr(1), parentId:launchId});
+  push({nome:'Escrever legendas dos posts', area:'Publique', tipo:'Tarefa única', status:'A fazer', data:addDaysStr(3), parentId:launchId});
+
+  const pausedId = push({nome:'Reorganizar recursos pessoais', area:'Pessoal', tipo:'Projeto', status:'A fazer', data:addDaysStr(18), prioridade:'Quando der', projectStatus:'Pausado', projectPriority:'Baixa', energia:'Baixa', proximaAcao:'Escolher o que fica no arquivo', objetivo:'Deixar referências úteis fáceis de encontrar.', referencias:'Links salvos, templates antigos.'});
+  push({nome:'Escolher o que fica no arquivo', area:'Pessoal', tipo:'Tarefa única', status:'A fazer', data:'', parentId:pausedId});
 
   push({nome:'Marcar consulta', area:'Pessoal', tipo:'Tarefa única', status:'A fazer', data:addDaysStr(2), prioridade:'Quando der'});
 
@@ -436,7 +691,14 @@ function seedState(){
     {id:genId(), titulo:'Modelo de contrato de parceria', link:''}
   ];
 
-  return { focus:'', tasks, vendas, recursos, covers:{} };
+  const habitos = [
+    {id:genId(), nome:'Beber 2L de água', icone:'💧'},
+    {id:genId(), nome:'Leitura (15 min)', icone:'📖'},
+    {id:genId(), nome:'Exercício físico', icone:'🏃\u200d♀️'}
+  ];
+  const habitosLog = {};
+
+  return { focus:'', tasks, vendas, recursos, covers:{}, habitos, habitosLog, pageEmojis:Object.assign({}, DEFAULT_PAGE_EMOJIS) };
 }
 
 /* ---------- armazenamento ---------- */
@@ -509,26 +771,59 @@ function setPage(p){
   if(sb) sb.classList.remove('open');
   render();
 }
+function changePageEmoji(page){
+  if(!state) return;
+  ensurePageEmojis();
+  const current = pageEmoji(page);
+  const root = document.getElementById('modal-root');
+  root.innerHTML = `<div class="modal-overlay" onclick="if(event.target===this) closeEmojiModal()">
+    <div class="modal" style="max-width:360px">
+      <div class="modal-header"><h2>Trocar emoji</h2><button class="icon-btn" onclick="closeEmojiModal()">✕</button></div>
+      <div class="field"><label>Emoji da página</label><input type="text" id="pageEmojiInput" value="${escapeAttr(current)}" maxlength="4" style="font-size:28px;text-align:center"></div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="savePageEmoji('${page}')">Salvar</button>
+        <button class="btn" onclick="closeEmojiModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>`;
+  setTimeout(()=>document.getElementById('pageEmojiInput')?.focus(),0);
+}
+function closeEmojiModal(){ document.getElementById('modal-root').innerHTML=''; }
+function savePageEmoji(page){
+  const input = document.getElementById('pageEmojiInput');
+  const next = input ? input.value.trim() : '';
+  if(next){
+    ensurePageEmojis();
+    state.pageEmojis[page] = next.slice(0,4);
+    saveState();
+  }
+  closeEmojiModal();
+  render();
+}
 function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('open'); }
 function toggleSection(key){ ui.openToggles[key] = !ui.openToggles[key]; render(); }
 function setLendoTab(t){ ui.lendoTab = t; render(); }
 function setVendasTab(t){ ui.vendasTab = t; render(); }
 function setRecursosTab(t){ ui.recursosTab = t; render(); }
+function setProjetosTab(t){ ui.projetosTab = t; render(); }
+function setHojeView(t){ ui.hojeView = t; render(); }
 
 /* ---------- render raiz ---------- */
 function render(){
   document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.page===ui.page));
+  document.querySelectorAll('[data-emoji-page]').forEach(el => { el.innerText = pageEmoji(el.dataset.emojiPage); });
   document.getElementById('content').innerHTML = renderPage(ui.page);
 }
 function renderPage(page){
   let content = '';
   if(page==='hoje') content = renderHoje();
   else if(page==='inbox') content = renderInbox();
-  else if(page==='publique') content = renderArea('Publique','🏢');
-  else if(page==='personnallite') content = renderArea('Marketing Personnallité','🏢');
-  else if(page==='brivia') content = renderArea('Brivia','🏢');
+  else if(page==='projetos') content = renderProjetos();
+  else if(page==='publique') content = renderArea('Publique');
+  else if(page==='personnallite') content = renderArea('Marketing Personnallité');
+  else if(page==='brivia') content = renderArea('Brivia');
   else if(page==='lendosaficos') content = renderLendoSaficos();
-  else if(page==='pessoal') content = renderArea('Pessoal','🌱');
+  else if(page==='pessoal') content = renderArea('Pessoal');
   else if(page==='recursos') content = renderRecursos();
 
   const coverUrl = state.covers && state.covers[page];
@@ -540,7 +835,7 @@ function renderPage(page){
       </div>
     </div>
   ` : '';
-  const addCoverHTML = !coverUrl ? `<div style="margin-bottom:8px;margin-left:-8px"><button class="add-cover-btn" onclick="promptCover('${page}')">🖼️ Adicionar capa</button></div>` : '';
+  const addCoverHTML = (!coverUrl && !['hoje','projetos'].includes(page)) ? `<div style="margin-bottom:8px;margin-left:-8px"><button class="add-cover-btn" onclick="promptCover('${page}')">🖼️ Adicionar capa</button></div>` : '';
 
   return coverHTML + addCoverHTML + content;
 }
@@ -571,25 +866,140 @@ function promptTaskCover(){
 /* ---------- Hoje ---------- */
 function renderHoje(){
   const today = todayStr();
-  const listaHoje = state.tasks.filter(t=>!t.parentId && t.data===today && t.status!=='Feito').sort(byPriority);
-  const atrasadas = state.tasks.filter(t=>!t.parentId && t.data && t.data<today && t.status!=='Feito');
-  return `
-    <div class="page-header"><span class="page-emoji">🏠</span><h1 class="page-title">Hoje</h1></div>
-    <div class="callout">
-      <div class="callout-icon">🎯</div>
-      <div style="flex:1">
-        <div class="callout-label">Resultado mais importante de hoje</div>
-        <div class="callout-text" contenteditable="true" data-placeholder="Escreva aqui a única coisa que mais importa hoje..." oninput="updateFocus(this.innerText)">${escapeHtml(state.focus||'')}</div>
+  const listaHoje = visibleTasksForDate(today);
+  const atrasadas = state.tasks.filter(t=>isActionTask(t) && t.data && t.data<today && t.status!=='Feito').sort(byPriority);
+
+  const habitos = state.habitos || [];
+  const log = (state.habitosLog && state.habitosLog[today]) || [];
+  const habitosHTML = habitos.length ? `
+    <div class="widget">
+      <div class="widget-title">H\u00e1bitos de hoje <span style="font-size:16px;letter-spacing:0;">✴️</span></div>
+      <div class="habitos-list">
+        ${habitos.map(h => {
+          const done = log.includes(h.id);
+          return `<div class="habito-row" onclick="toggleHabit('${h.id}','${today}')">
+            <div class="habito-chk ${done?'done':''}">${done?'✓':''}</div>
+            <span style="font-size:16px;line-height:1;">${h.icone}</span>
+            <span class="habito-nome">${escapeHtml(h.nome)}</span>
+          </div>`;
+        }).join('')}
+      </div>
+      <button class="btn" style="margin-top:14px;width:100%;font-size:12.5px;" onclick="promptNewHabit()">+ Novo h\u00e1bito</button>
+    </div>
+  ` : `<div class="widget"><div class="widget-title">H\u00e1bitos de hoje</div><div class="empty" style="padding:4px 0 8px;">Nenhum h\u00e1bito ainda.</div><button class="btn" style="width:100%;font-size:12.5px;" onclick="promptNewHabit()">+ Adicionar h\u00e1bito</button></div>`;
+
+  const tarot = dailyTarot(today);
+  const moon = moonInfo();
+  const cartaHTML = `
+    <div class="widget">
+      <div class="widget-title" style="font-family:var(--font-display);text-transform:none;font-size:15px;letter-spacing:0;font-weight:500;">✨ Carta do dia</div>
+      <div style="height:1px;background:var(--border);margin-bottom:16px;"></div>
+      <div class="carta-inner">
+        <div class="tarot-card-art"><div class="tarot-symbol">${tarot.icon}</div><div class="tarot-num">${tarot.num}</div></div>
+        <div>
+          <div class="carta-info-title">${escapeHtml(tarot.nome)}</div>
+          <div class="carta-info-sub">${escapeHtml(tarot.sub)}</div>
+        </div>
+      </div>
+      <div class="moon-box">
+        <div class="moon-icon">${moon.current.icon}</div>
+        <div>
+          <div class="moon-title">${escapeHtml(moon.current.name)}</div>
+          <div class="moon-sub">${escapeHtml(moon.current.rec)} Próxima: ${escapeHtml(moon.next.name)} em ${formatShortDate(moon.nextDate)}.</div>
+        </div>
       </div>
     </div>
-    <div class="section-label">Lista de hoje <span class="count">${listaHoje.length}</span></div>
-    ${renderTaskList(listaHoje)}
-    <button class="btn" style="margin-top:12px" onclick="openQuickAdd('hoje')">+ Nova tarefa rápida</button>
-    <div class="toggle ${ui.openToggles.atrasadas?'open':''}">
-      <div class="toggle-head" onclick="toggleSection('atrasadas')"><span class="toggle-arrow">▸</span> Atrasadas <span class="count">${atrasadas.length}</span></div>
-      <div class="toggle-body">${atrasadas.length ? renderTaskList(atrasadas) : '<div class="empty">Nada atrasado.</div>'}</div>
+  `;
+
+  return `
+    <div class="hoje-title-row">
+      <span class="hoje-star">${pageEmoji('hoje')}</span>
+      <h1 class="page-title" style="font-family:var(--font-display);font-size:34px;font-weight:600;">Hoje</h1>
+    </div>
+    <div class="hoje-subtitle">Um dia de cada vez, com inten\u00e7\u00e3o e leveza.</div>
+
+    <div class="hoje-layout">
+      <div class="hoje-main">
+        <div class="callout-resultado">
+          <div class="callout-resultado-label"><span>🎯</span> Resultado mais importante de hoje</div>
+          <div class="callout-resultado-text" contenteditable="true" data-placeholder="Escreva aqui a \u00fanica coisa que mais importa hoje..." oninput="updateFocus(this.innerText)">${escapeHtml(state.focus||'')}</div>
+        </div>
+
+        <div class="today-list-head">
+          <div class="section-label-hoje" style="margin-bottom:0">Lista de hoje <span class="count">${listaHoje.length}</span></div>
+          ${renderHojeViewSwitch()}
+        </div>
+        ${renderHojeView(listaHoje, atrasadas)}
+      </div>
+
+      <div class="hoje-sidebar">
+        ${habitosHTML}
+        ${cartaHTML}
+      </div>
     </div>
   `;
+}
+function renderHojeViewSwitch(){
+  const view = ui.hojeView || 'dia';
+  return `<div class="view-switch">
+    <button class="${view==='dia'?'active':''}" onclick="setHojeView('dia')">Dia</button>
+    <button class="${view==='semana'?'active':''}" onclick="setHojeView('semana')">Semana</button>
+    <button class="${view==='mes'?'active':''}" onclick="setHojeView('mes')">Mês</button>
+  </div>`;
+}
+function renderHojeView(listaHoje, atrasadas){
+  const view = ui.hojeView || 'dia';
+  if(view==='semana') return renderSemanaKanban();
+  if(view==='mes') return renderMesCalendario();
+  return `
+    <div class="task-list-card">${listaHoje.length ? listaHoje.map(renderTaskRow).join('') : '<div class="empty" style="padding:16px 8px;">Nada para hoje.</div>'}</div>
+    <button class="btn-nova-tarefa" onclick="openQuickAdd('hoje')">+ Nova tarefa rápida</button>
+    <div class="toggle ${ui.openToggles.atrasadas?'open':''}" style="margin-top:28px;">
+      <div class="toggle-head" onclick="toggleSection('atrasadas')"><span class="toggle-arrow">▸</span> <span style="text-transform:uppercase;font-size:11px;letter-spacing:1px;font-weight:700;">Atrasadas</span> <span class="count">${atrasadas.length}</span></div>
+      <div class="toggle-body">${atrasadas.length ? '<div class="task-list-card">' + atrasadas.map(renderTaskRow).join('') + '</div>' : '<div class="empty">Nada atrasado.</div>'}</div>
+    </div>
+  `;
+}
+function renderSemanaKanban(){
+  const start = startOfWeek();
+  const dayNames = ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
+  const today = todayStr();
+  const cols = dayNames.map((name,i)=>{
+    const d = addDaysToDate(start,i);
+    const ds = fmt(d);
+    const tasks = visibleTasksForDate(ds);
+    return `<section class="week-col ${ds===today?'today':''}">
+      <div class="week-col-head"><span>${name} · ${formatShortDate(d)} <span class="count">${tasks.length}</span></span><button class="day-add-btn" onclick="openNewTaskForDate('${ds}')" title="Nova tarefa neste dia">+</button></div>
+      ${tasks.map(renderWeekTask).join('') || '<div class="empty">Livre</div>'}
+    </section>`;
+  }).join('');
+  return `<div class="week-board">${cols}</div>`;
+}
+function renderWeekTask(t){
+  const project = getTaskProject(t);
+  return `<div class="week-task" onclick="openTaskModal('${t.id}')">
+    <div class="week-task-title">${escapeHtml(t.nome)}</div>
+    <div class="week-task-meta">${escapeHtml(project ? project.nome : (t.area||'Sem área'))}</div>
+  </div>`;
+}
+function renderMesCalendario(){
+  const now = new Date();
+  const first = new Date(now.getFullYear(), now.getMonth(), 1);
+  const gridStart = startOfWeek(first);
+  const heads = ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'].map(d=>`<div class="month-head">${d}</div>`).join('');
+  const today = todayStr();
+  let cells = '';
+  for(let i=0;i<42;i++){
+    const d = addDaysToDate(gridStart,i);
+    const ds = fmt(d);
+    const tasks = visibleTasksForDate(ds);
+    const muted = d.getMonth()!==now.getMonth();
+    cells += `<div class="month-day ${muted?'muted':''} ${ds===today?'today':''}">
+      <div class="month-date"><span>${d.getDate()}</span><button class="day-add-btn" onclick="openNewTaskForDate('${ds}')" title="Nova tarefa neste dia">+</button></div>
+      ${tasks.map(t=>`<div class="month-dot-task" onclick="openTaskModal('${t.id}')">${escapeHtml(t.nome)}</div>`).join('')}
+    </div>`;
+  }
+  return `<div class="section-label-hoje" style="margin-bottom:10px">${now.toLocaleDateString('pt-BR',{month:'long',year:'numeric'})}</div><div class="month-calendar">${heads}${cells}</div>`;
 }
 
 /* ---------- lista de tarefas (compartilhada) ---------- */
@@ -601,10 +1011,13 @@ function renderTaskRow(t){
   const children = state.tasks.filter(c=>c.parentId===t.id);
   const sub = children.length ? `<span class="task-date">${children.filter(c=>c.status==='Feito').length}/${children.length} sub.</span>` : '';
   const areaTag = t.area ? `<span class="tag tag-${AREA_COLOR[t.area]||'gray'}">${escapeHtml(t.area)}</span>` : '';
+  const project = getTaskProject(t);
+  const projectTag = project ? `<span class="tag tag-purple" title="Projeto relacionado">${escapeHtml(project.nome)}</span>` : (isProject(t) ? '<span class="tag tag-purple">Projeto</span>' : '');
   return `<div class="task-row ${t.status==='Feito'?'done':''}" onclick="openTaskModal('${t.id}')">
     <span class="chk ${t.status==='Feito'?'checked':''}" onclick="event.stopPropagation();toggleTaskDone('${t.id}')">${t.status==='Feito'?'✓':''}</span>
     <span class="dot ${priorityClass(t.prioridade)}"></span>
     <span class="task-name">${escapeHtml(t.nome)}</span>
+    ${projectTag}
     ${areaTag}
     ${sub}
     <span class="task-date">${formatDate(t.data)}</span>
@@ -621,20 +1034,137 @@ function toggleTaskDone(id){
   renderModal();
 }
 
+/* ---------- Projetos ---------- */
+function renderProjetos(){
+  ensureProjectFields();
+  const projects = getProjects();
+  const active = projects.filter(p=>!['Pausado','Concluído'].includes(p.projectStatus));
+  const paused = projects.filter(p=>p.projectStatus==='Pausado');
+  const done = projects.filter(p=>p.projectStatus==='Concluído');
+  const soon = projects.filter(p=>{
+    const days = daysUntil(p.data);
+    return p.projectStatus!=='Concluído' && days!==null && days>=0 && days<=7;
+  });
+  const pendingTasks = projects.reduce((sum,p)=>sum+projectOpenTasks(p.id).length,0);
+  const noNext = projects.filter(p=>p.projectStatus!=='Concluído' && !projectNextAction(p));
+  const nextProject = active.slice().sort((a,b)=>{
+    const ad = daysUntil(a.data); const bd = daysUntil(b.data);
+    return (ad??9999)-(bd??9999);
+  })[0];
+  const tab = ui.projetosTab || 'ativos';
+  let visible = active;
+  if(tab==='area') visible = projects;
+  if(tab==='prazo') visible = soon;
+  if(tab==='pausados') visible = paused;
+  if(tab==='concluidos') visible = done;
+  if(tab==='semacao') visible = noNext;
+
+  return `
+    <section class="projects-page">
+      <header class="projects-header">
+        <div>
+          <div class="projects-kicker">✦ Painel ritual</div>
+          <h1 class="projects-title"><span class="page-emoji">${pageEmoji('projetos')}</span> Projetos</h1>
+          <p class="projects-subtitle">Tudo que está em movimento, sem virar bagunça.</p>
+          <button class="btn" style="margin-top:16px" onclick="openNewProjectModal()">+ Novo projeto</button>
+        </div>
+        <div class="projects-overview">
+          ${renderProjectStat(active.length,'Projetos ativos')}
+          ${renderProjectStat(paused.length,'Projetos pausados')}
+          ${renderProjectStat(soon.length,'Prazo próximo')}
+          ${renderProjectStat(pendingTasks,'Tarefas pendentes')}
+        </div>
+      </header>
+
+      <div class="project-focus-strip">
+        <div class="project-focus-box">
+          <div class="project-focus-label">O que pede ação agora</div>
+          <div class="project-focus-text">${nextProject ? `${escapeHtml(nextProject.nome)}: ${escapeHtml(projectNextAction(nextProject)||'definir próxima ação')}` : 'Nenhum projeto ativo pedindo ação.'}</div>
+        </div>
+        <div class="project-focus-box">
+          <div class="project-focus-label">Para não esquecer</div>
+          <div class="project-focus-text">${paused.length ? `${paused.length} projeto${paused.length>1?'s':''} pausado${paused.length>1?'s':''} esperando revisão.` : 'Nenhum projeto pausado agora.'}</div>
+        </div>
+      </div>
+
+      <div class="project-tabs">
+        ${renderProjectTab('ativos','Ativos',tab)}
+        ${renderProjectTab('area','Por área',tab)}
+        ${renderProjectTab('prazo','Prazo próximo',tab)}
+        ${renderProjectTab('pausados','Pausados',tab)}
+        ${renderProjectTab('concluidos','Concluídos',tab)}
+        ${renderProjectTab('semacao','Sem próxima ação',tab)}
+      </div>
+
+      ${tab==='area' ? renderProjectsByArea(visible) : renderProjectGallery(visible)}
+    </section>
+  `;
+}
+function renderProjectStat(num,label){
+  return `<div class="project-stat"><div class="project-stat-num">${num}</div><div class="project-stat-label">${label}</div></div>`;
+}
+function renderProjectTab(key,label,tab){
+  return `<button class="project-tab ${tab===key?'active':''}" onclick="setProjetosTab('${key}')">${label}</button>`;
+}
+function renderProjectGallery(projects){
+  if(!projects.length) return '<div class="project-empty">Nada nesta visão. Respira: aqui não tem pendência gritando.</div>';
+  return `<div class="project-gallery">${projects.map(renderProjectCard).join('')}</div>`;
+}
+function renderProjectsByArea(projects){
+  const groups = AREAS.map(area=>({area, items:projects.filter(p=>p.area===area)})).filter(g=>g.items.length);
+  if(!groups.length) return '<div class="project-empty">Nenhum projeto por área ainda.</div>';
+  return groups.map(g=>`
+    <div style="margin-bottom:26px">
+      <div class="section-label-hoje">${escapeHtml(g.area)} <span class="count">${g.items.length}</span></div>
+      ${renderProjectGallery(g.items)}
+    </div>
+  `).join('');
+}
+function renderProjectCard(p){
+  const open = projectOpenTasks(p.id);
+  const progress = projectProgress(p.id);
+  const days = daysUntil(p.data);
+  const dueText = p.data ? (days===0 ? 'Hoje' : (days>0 ? `em ${days} dia${days===1?'':'s'}` : `${Math.abs(days)} dia${Math.abs(days)===1?'':'s'} atrás`)) : 'sem prazo';
+  const next = projectNextAction(p) || 'Definir próxima ação';
+  return `<article class="project-card" onclick="openTaskModal('${p.id}')">
+    <div class="project-card-top">
+      <div>
+        <h2 class="project-card-title">${escapeHtml(p.nome)}</h2>
+        <div class="project-card-area">${escapeHtml(p.area||'Sem área')}</div>
+      </div>
+      <span class="project-badge">${escapeHtml(p.projectStatus||projectStatusFromTaskStatus(p.status))}</span>
+    </div>
+    <div class="project-badges">
+      <span class="project-badge soft">Prioridade ${escapeHtml(p.projectPriority||'Média')}</span>
+      <span class="project-badge soft">Energia ${escapeHtml(p.energia||'Média')}</span>
+    </div>
+    <div class="project-next">
+      <div class="project-next-label">Próxima ação</div>
+      <div class="project-next-text">${escapeHtml(next)}</div>
+    </div>
+    <div class="project-card-meta">
+      <span>Prazo: ${escapeHtml(dueText)}</span>
+      <span>${open.length} tarefa${open.length===1?'':'s'} aberta${open.length===1?'':'s'}</span>
+    </div>
+    <div class="project-progress"><div class="project-progress-bar" style="width:${progress}%"></div></div>
+    <div class="project-card-meta"><span>Progresso</span><span>${progress}%</span></div>
+  </article>`;
+}
+
 /* ---------- Inbox ---------- */
 function renderInbox(){
   const items = state.tasks.filter(t=>!t.area && !t.parentId);
-  return `<div class="page-header"><span class="page-emoji">📥</span><h1 class="page-title">Inbox</h1></div>
+  return `<div class="page-header"><span class="page-emoji">${pageEmoji('inbox')}</span><h1 class="page-title">Inbox</h1></div>
   <p style="color:var(--text-secondary);font-size:14px;margin-top:-12px">Aqui só entra o nome da coisa. Área, data e prioridade você decide depois, na revisão.</p>
   ${renderTaskList(items)}
   <button class="btn" style="margin-top:14px" onclick="openQuickAdd('inbox')">+ Anotar algo</button>`;
 }
 
 /* ---------- páginas de área (kanban) ---------- */
-function renderArea(area, emoji){
+function renderArea(area){
   const tasks = state.tasks.filter(t=>t.area===area && !t.parentId);
   const cols = STATUSES.map(s=>({status:s, items:tasks.filter(t=>t.status===s)}));
-  return `<div class="page-header"><span class="page-emoji">${emoji}</span><h1 class="page-title">${escapeHtml(area)}</h1></div>
+  return `<div class="page-header"><span class="page-emoji">${pageEmoji(areaContextKey(area))}</span><h1 class="page-title">${escapeHtml(area)}</h1></div>
   <button class="btn" onclick="openQuickAdd('${areaContextKey(area)}')">+ Nova tarefa</button>
   <div class="board" style="margin-top:18px">${cols.map(c=>renderBoardCol(c.status,c.items)).join('')}</div>`;
 }
@@ -662,7 +1192,7 @@ function renderCard(t){
 /* ---------- Lendo Sáficos ---------- */
 function renderLendoSaficos(){
   const tab = ui.lendoTab;
-  return `<div class="page-header"><span class="page-emoji">📚</span><h1 class="page-title">Lendo Sáficos</h1></div>
+  return `<div class="page-header"><span class="page-emoji">${pageEmoji('lendosaficos')}</span><h1 class="page-title">Lendo Sáficos</h1></div>
   <div class="pill-tabs">
     <div class="pill-tab ${tab==='conteudo'?'active':''}" onclick="setLendoTab('conteudo')">Conteúdo</div>
     <div class="pill-tab ${tab==='vendas'?'active':''}" onclick="setLendoTab('vendas')">Vendas &amp; Financeiro</div>
@@ -734,7 +1264,7 @@ function renderLendoRevisao(){
 
 /* ---------- Recursos & Arquivo ---------- */
 function renderRecursos(){
-  return `<div class="page-header"><span class="page-emoji">🗂️</span><h1 class="page-title">Recursos &amp; Arquivo</h1></div>
+  return `<div class="page-header"><span class="page-emoji">${pageEmoji('recursos')}</span><h1 class="page-title">Recursos &amp; Arquivo</h1></div>
   <div class="pill-tabs">
     <div class="pill-tab ${ui.recursosTab!=='arquivo'?'active':''}" onclick="setRecursosTab('recursos')">Recursos</div>
     <div class="pill-tab ${ui.recursosTab==='arquivo'?'active':''}" onclick="setRecursosTab('arquivo')">Arquivo</div>
@@ -778,6 +1308,9 @@ function openQuickAdd(context){
   const prefillData = (context==='hoje') ? todayStr() : '';
   openNewTaskModal(prefillArea, prefillData);
 }
+function openNewTaskForDate(dateStr){
+  openNewTaskModal('', dateStr);
+}
 
 /* ---------- modal de tarefa ---------- */
 function openTaskModal(id){
@@ -787,7 +1320,11 @@ function openTaskModal(id){
   renderModal();
 }
 function openNewTaskModal(prefillArea, prefillData){
-  modalState = { type:'task', id:null, draft:{ nome:'', area:prefillArea||'', tipo:'Tarefa única', status:'A fazer', data:prefillData||'', prioridade:'Normal', notas:'', link:'', parentId:null, recorrencia:null } };
+  modalState = { type:'task', id:null, draft:{ nome:'', area:prefillArea||'', tipo:'Tarefa única', status:'A fazer', data:prefillData||'', prioridade:'Normal', notas:'', link:'', parentId:null, recorrencia:null, energia:'Média', tempoEstimado:'' } };
+  renderModal();
+}
+function openNewProjectModal(){
+  modalState = { type:'task', id:null, draft:{ nome:'', area:'', tipo:'Projeto', status:'A fazer', data:'', prioridade:'Normal', notas:'', link:'', parentId:null, recorrencia:null, energia:'Média', tempoEstimado:'', projectStatus:'Ativo', projectPriority:'Média', proximaAcao:'', objetivo:'', referencias:'' } };
   renderModal();
 }
 function closeModal(){ modalState=null; document.getElementById('modal-root').innerHTML=''; }
@@ -796,10 +1333,33 @@ function renderModal(){
   if(!modalState){ root.innerHTML=''; return; }
   root.innerHTML = modalState.type==='task' ? renderTaskModal() : renderVendaModal();
 }
+function openExpandedNotes(){
+  if(!modalState || modalState.type!=='task') return;
+  const currentTextarea = document.getElementById('taskNotesTextarea');
+  if(currentTextarea) modalState.draft.notas = currentTextarea.value;
+  const title = modalState.draft.nome ? `Notas · ${modalState.draft.nome}` : 'Notas da tarefa';
+  document.getElementById('modal-root').innerHTML = `<div class="modal-overlay">
+    <div class="modal wide-note">
+      <div class="modal-header"><h2>${escapeHtml(title)}</h2><button class="icon-btn" onclick="saveExpandedNotes()">✕</button></div>
+      <textarea id="expandedNotesTextarea" class="note-expanded-textarea" placeholder="Escreva tudo aqui, sem espremer a ideia...">${escapeHtml(modalState.draft.notas||'')}</textarea>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="saveExpandedNotes()">Voltar para tarefa</button>
+      </div>
+    </div>
+  </div>`;
+  setTimeout(()=>document.getElementById('expandedNotesTextarea')?.focus(),0);
+}
+function saveExpandedNotes(){
+  const expanded = document.getElementById('expandedNotesTextarea');
+  if(expanded && modalState) modalState.draft.notas = expanded.value;
+  renderModal();
+}
 function renderTaskModal(){
   const d = modalState.draft;
   const isNew = !modalState.id;
   const children = modalState.id ? state.tasks.filter(c=>c.parentId===modalState.id) : [];
+  const projects = getProjects().filter(p=>p.id!==modalState.id);
+  const isProjectDraft = d.tipo==='Projeto';
   const coverHTML = d.cover ? `
     <div class="modal-cover" style="background-image: url('${escapeAttr(d.cover)}')">
       <div class="cover-actions">
@@ -814,14 +1374,14 @@ function renderTaskModal(){
     <div class="modal">
       ${coverHTML}
       ${addCoverHTML}
-      <div class="modal-header"><h2>${isNew?'Nova tarefa':'Editar tarefa'}</h2><button class="icon-btn" onclick="closeModal()">✕</button></div>
+      <div class="modal-header"><h2>${isProjectDraft ? (isNew?'Novo projeto':'Editar projeto') : (isNew?'Nova tarefa':'Editar tarefa')}</h2><button class="icon-btn" onclick="closeModal()">✕</button></div>
       <div class="field"><label>Nome</label><input type="text" value="${escapeAttr(d.nome)}" oninput="modalState.draft.nome=this.value" placeholder="Nome da tarefa"></div>
       <div class="field-row">
         <div class="field"><label>Área</label><select onchange="modalState.draft.area=this.value">
           <option value="" ${d.area===''?'selected':''}>Sem área (Inbox)</option>
           ${AREAS.map(a=>`<option value="${a}" ${d.area===a?'selected':''}>${a}</option>`).join('')}
         </select></div>
-        <div class="field"><label>Tipo</label><select onchange="modalState.draft.tipo=this.value">
+        <div class="field"><label>Tipo</label><select onchange="modalState.draft.tipo=this.value; if(this.value==='Projeto'){ modalState.draft.parentId=null; } renderModal();">
           ${TIPOS.map(x=>`<option value="${x}" ${d.tipo===x?'selected':''}>${x}</option>`).join('')}
         </select></div>
       </div>
@@ -834,9 +1394,26 @@ function renderTaskModal(){
           ${PRIORIDADES.map(p=>`<option value="${p}" ${d.prioridade===p?'selected':''}>${p}</option>`).join('')}
         </select></div>
       </div>
-      <div class="field"><label>Notas</label><textarea oninput="modalState.draft.notas=this.value">${escapeHtml(d.notas||'')}</textarea></div>
+      <div class="field-row">
+        <div class="field"><label>Projeto relacionado</label><select onchange="modalState.draft.parentId=this.value||null" ${isProjectDraft?'disabled':''}>
+          <option value="" ${!d.parentId?'selected':''}>Sem projeto</option>
+          ${projects.map(p=>`<option value="${p.id}" ${d.parentId===p.id?'selected':''}>${escapeHtml(p.nome)}</option>`).join('')}
+        </select></div>
+        <div class="field"><label>Energia necessária</label><select onchange="modalState.draft.energia=this.value">
+          ${ENERGY_LEVELS.map(e=>`<option value="${e}" ${(d.energia||'Média')===e?'selected':''}>${e}</option>`).join('')}
+        </select></div>
+        <div class="field"><label>Tempo estimado</label><input type="text" value="${escapeAttr(d.tempoEstimado||'')}" oninput="modalState.draft.tempoEstimado=this.value" placeholder="ex: 25 min"></div>
+      </div>
+      ${isProjectDraft ? renderProjectFields(d) : ''}
+      <div class="field">
+        <div class="field-label-row">
+          <label>Notas</label>
+          <button class="field-link-btn" onclick="openExpandedNotes()">Ver maior</button>
+        </div>
+        <textarea id="taskNotesTextarea" oninput="modalState.draft.notas=this.value">${escapeHtml(d.notas||'')}</textarea>
+      </div>
       <div class="field"><label>Link</label><input type="text" value="${escapeAttr(d.link||'')}" oninput="modalState.draft.link=this.value" placeholder="https://..."></div>
-      ${!isNew ? renderSubtasksBlock(modalState.id, children) : ''}
+      ${(!isNew && isProjectDraft) ? renderProjectPortal(modalState.id, d, children) : (!isNew ? renderSubtasksBlock(modalState.id, children) : '')}
       ${(!isNew && d.tipo==='Recorrente flexível') ? `<button class="btn recur-btn" onclick="completeAndRepeat('${modalState.id}')">✓ Concluir e repetir</button>` : ''}
       <div class="btn-row">
         <button class="btn btn-primary" onclick="saveModalTask()">Salvar</button>
@@ -860,13 +1437,52 @@ function renderSubtasksBlock(parentId, children){
     </div>
   </div>`;
 }
+function renderProjectFields(d){
+  return `<div class="project-detail-hero">
+    <div class="field-row">
+      <div class="field"><label>Status do projeto</label><select onchange="modalState.draft.projectStatus=this.value">
+        ${PROJECT_STATUSES.map(s=>`<option value="${s}" ${(d.projectStatus||projectStatusFromTaskStatus(d.status))===s?'selected':''}>${s}</option>`).join('')}
+      </select></div>
+      <div class="field"><label>Prioridade do projeto</label><select onchange="modalState.draft.projectPriority=this.value">
+        ${PROJECT_PRIORITIES.map(p=>`<option value="${p}" ${(d.projectPriority||priorityToProjectPriority(d.prioridade))===p?'selected':''}>${p}</option>`).join('')}
+      </select></div>
+    </div>
+    <div class="field"><label>Objetivo</label><textarea oninput="modalState.draft.objetivo=this.value" placeholder="O que este projeto precisa entregar?">${escapeHtml(d.objetivo||'')}</textarea></div>
+    <div class="field"><label>Próxima ação</label><input type="text" value="${escapeAttr(d.proximaAcao||'')}" oninput="modalState.draft.proximaAcao=this.value" placeholder="A menor próxima ação visível"></div>
+    <div class="field"><label>Links e referências</label><textarea oninput="modalState.draft.referencias=this.value" placeholder="Links, pastas, briefing, arquivos importantes">${escapeHtml(d.referencias||'')}</textarea></div>
+  </div>`;
+}
+function renderProjectPortal(parentId, d, children){
+  const progress = projectProgress(parentId);
+  const open = children.filter(c=>c.status!=='Feito');
+  return `<div class="project-detail">
+    <div class="project-detail-hero">
+      <h3 class="project-detail-title">Portal do projeto</h3>
+      <div class="project-detail-grid">
+        <div class="project-mini-box"><div class="project-mini-label">Resumo</div><div class="project-mini-text">${escapeHtml(d.notas||'Sem resumo ainda.')}</div></div>
+        <div class="project-mini-box"><div class="project-mini-label">Objetivo</div><div class="project-mini-text">${escapeHtml(d.objetivo||'Definir objetivo.')}</div></div>
+        <div class="project-mini-box"><div class="project-mini-label">Prazo</div><div class="project-mini-text">${escapeHtml(formatDate(d.data)||'Sem prazo')}</div></div>
+        <div class="project-mini-box"><div class="project-mini-label">Próxima ação</div><div class="project-mini-text">${escapeHtml(projectNextAction(Object.assign({}, d, {id:parentId}))||'Definir próxima ação.')}</div></div>
+      </div>
+      <div class="project-progress"><div class="project-progress-bar" style="width:${progress}%"></div></div>
+      <div class="project-card-meta"><span>${open.length} tarefa${open.length===1?'':'s'} pendente${open.length===1?'':'s'}</span><span>${progress}% concluído</span></div>
+    </div>
+    <div class="field"><label>Checklist rápido</label>
+      ${renderSubtasksBlock(parentId, children)}
+    </div>
+    <div class="field"><label>Tarefas vinculadas</label>
+      ${children.length ? renderTaskList(children) : '<div class="empty">Sem tarefas vinculadas ainda.</div>'}
+    </div>
+    <div class="project-mini-box"><div class="project-mini-label">Referências</div><div class="project-mini-text">${escapeHtml(d.referencias||'Sem referências ainda.')}</div></div>
+  </div>`;
+}
 function addSubtask(parentId){
   const nameEl = document.getElementById('newSubName');
   const dateEl = document.getElementById('newSubDate');
   const nome = nameEl.value.trim();
   if(!nome) return;
   const parent = state.tasks.find(t=>t.id===parentId);
-  state.tasks.push({id:genId(), nome, area:parent.area, tipo:'Tarefa única', status:'A fazer', data:dateEl.value||'', prioridade:'Normal', notas:'', link:'', parentId, recorrencia:null, completedAt:null});
+  state.tasks.push({id:genId(), nome, area:parent.area, tipo:'Tarefa única', status:'A fazer', data:dateEl.value||'', prioridade:'Normal', notas:'', link:'', parentId, recorrencia:null, completedAt:null, energia:'Média', tempoEstimado:''});
   saveState();
   renderModal();
   render();
@@ -874,6 +1490,12 @@ function addSubtask(parentId){
 function saveModalTask(){
   const d = modalState.draft;
   if(!d.nome || !d.nome.trim()){ alert('Dá um nome pra essa tarefa antes de salvar.'); return; }
+  if(d.tipo==='Projeto'){
+    d.parentId = null;
+    d.projectStatus = d.projectStatus || projectStatusFromTaskStatus(d.status);
+    d.projectPriority = d.projectPriority || priorityToProjectPriority(d.prioridade);
+    d.energia = d.energia || 'Média';
+  }
   if(modalState.id){
     const idx = state.tasks.findIndex(t=>t.id===modalState.id);
     state.tasks[idx] = Object.assign({}, state.tasks[idx], d);
@@ -903,6 +1525,26 @@ function completeAndRepeat(id){
   render();
 }
 function updateFocus(txt){ state.focus = txt; saveState(); }
+
+/* ---------- H\u00e1bitos ---------- */
+function toggleHabit(id, dateStr){
+  if(!state.habitosLog) state.habitosLog = {};
+  if(!state.habitosLog[dateStr]) state.habitosLog[dateStr] = [];
+  const log = state.habitosLog[dateStr];
+  const idx = log.indexOf(id);
+  if(idx >= 0) log.splice(idx, 1); else log.push(id);
+  saveState();
+  render();
+}
+function promptNewHabit(){
+  const nome = prompt('Nome do novo h\u00e1bito (ex: Meditar 10 min):');
+  if(!nome || !nome.trim()) return;
+  const icone = prompt('Emoji do h\u00e1bito:', '\u2728') || '\u2728';
+  if(!state.habitos) state.habitos = [];
+  state.habitos.push({ id: genId(), nome: nome.trim(), icone });
+  saveState();
+  render();
+}
 
 /* ---------- modal de venda ---------- */
 function openVendaModal(id){
@@ -998,9 +1640,16 @@ async function init(){
   if(saved){
     state = saved;
     if(!state.covers) state.covers = {};
+    if(!state.habitos) state.habitos = [];
+    if(!state.habitosLog) state.habitosLog = {};
+    ensurePageEmojis();
+    ensureProjectFields();
     rolloverRecurring();
+    saveState();
   } else {
     state = seedState();
+    ensurePageEmojis();
+    ensureProjectFields();
   }
   
   const sn = document.getElementById('storage-note');
