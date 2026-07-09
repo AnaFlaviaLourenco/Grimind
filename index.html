@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light" data-accent="lavanda">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema da Ana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-display:'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body:'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  --radius:14px;
+  --radius-sm:9px;
+  --radius-pill:999px;
+
+  --accent:#8b6fb8;
+  --accent-strong:#6b4f96;
+
+  --bg-page:#fdfaf7;
+  --bg-sidebar:#ffffff;
+  --bg-card:#ffffff;
+  --bg-subtle:#faf6fb;
+  --bg-input:#ffffff;
+  --hover:#f5eff9;
+  --border:#eee6f4;
+  --border-strong:#e2d6ee;
+  --text:#3d3646;
+  --text-secondary:#8a8394;
+  --text-tertiary:#b7b0c2;
+  --shadow:0 3px 14px rgba(120,90,150,0.10), 0 1px 3px rgba(120,90,150,0.06);
+  --overlay:rgba(45,35,55,.45);
+
+  --success:#5fa583;
+  --danger:#c96b7c;
+
+  --accent-soft:#f1eaf8;
+  --accent-soft-text:#6b4f96;
+  --grad-a:#f3e6fb;
+  --grad-b:#fbe3ec;
+
+  --blue-bg:#e9f2fa; --blue-text:#3f7aa8;
+  --purple-bg:#f2eafb; --purple-text:#7c5aa8;
+  --orange-bg:#fcedde; --orange-text:#c17a3d;
+  --pink-bg:#fceef4; --pink-text:#c15c8c;
+  --green-bg:#e9f5ee; --green-text:#4c9270;
+  --gray-bg:#f2eff5; --gray-text:#948d9e;
+  --red-bg:#fbe9ec; --red-text:#c85f6f;
+  --yellow-bg:#fdf6dd; --yellow-text:#ab8a2b;
+}
+
+html[data-theme="dark"]{
+  --bg-page:#211d29;
+  --bg-sidebar:#1a1720;
+  --bg-card:#2a2532;
+  --bg-subtle:#272230;
+  --bg-input:#2a2532;
+  --hover:#342d3e;
+  --border:#3a3344;
+  --border-strong:#463e51;
+  --text:#f1ecf7;
+  --text-secondary:#b6adc4;
+  --text-tertiary:#867d95;
+  --shadow:0 4px 18px rgba(0,0,0,0.35);
+  --overlay:rgba(10,8,14,.6);
+
+  --success:#5fb389;
+  --danger:#e0879a;
+
+  --blue-bg:#243040; --blue-text:#8ec3ea;
+  --purple-bg:#332a42; --purple-text:#cbaee8;
+  --orange-bg:#3c3025; --orange-text:#e8b57e;
+  --pink-bg:#3a2732; --pink-text:#eba9c6;
+  --green-bg:#233229; --green-text:#93d3ae;
+  --gray-bg:#332e3b; --gray-text:#b0a8bd;
+  --red-bg:#3a2429; --red-text:#eb98a6;
+  --yellow-bg:#39311c; --yellow-text:#e0c063;
+}
+
+html[data-theme="light"][data-accent="lavanda"]{ --accent:#8b6fb8; --accent-strong:#6b4f96; --accent-soft:#f1eaf8; --accent-soft-text:#6b4f96; --grad-a:#f3e6fb; --grad-b:#fbe3ec; }
+html[data-theme="light"][data-accent="rosa"]{ --accent:#d9789f; --accent-strong:#b1547c; --accent-soft:#fbe9ef; --accent-soft-text:#a44870; --grad-a:#fbd9e3; --grad-b:#ffe8d9; }
+html[data-theme="light"][data-accent="menta"]{ --accent:#4f9e88; --accent-strong:#357a63; --accent-soft:#e4f3ee; --accent-soft-text:#2f7a64; --grad-a:#d9f0e6; --grad-b:#eaf5ee; }
+html[data-theme="light"][data-accent="pessego"]{ --accent:#d98c4a; --accent-strong:#b3691f; --accent-soft:#faedde; --accent-soft-text:#a3601c; --grad-a:#fbe4cd; --grad-b:#fbd9d0; }
+html[data-theme="light"][data-accent="ceu"]{ --accent:#5c8fc4; --accent-strong:#3d6690; --accent-soft:#e7f0fa; --accent-soft-text:#34618f; --grad-a:#dce9f8; --grad-b:#e6eefb; }
+
+html[data-theme="dark"][data-accent="lavanda"]{ --accent:#a58bd0; --accent-strong:#8b6fb8; --accent-soft:#3a2f4d; --accent-soft-text:#cbb3ea; --grad-a:#332a42; --grad-b:#3d2b39; }
+html[data-theme="dark"][data-accent="rosa"]{ --accent:#e298b4; --accent-strong:#d9789f; --accent-soft:#4a2c38; --accent-soft-text:#f0b9cf; --grad-a:#412a34; --grad-b:#3c2d27; }
+html[data-theme="dark"][data-accent="menta"]{ --accent:#6bbaa4; --accent-strong:#4f9e88; --accent-soft:#223f38; --accent-soft-text:#9fe0cb; --grad-a:#1f342e; --grad-b:#243a34; }
+html[data-theme="dark"][data-accent="pessego"]{ --accent:#e2a367; --accent-strong:#d98c4a; --accent-soft:#453322; --accent-soft-text:#f0c090; --grad-a:#3b2d20; --grad-b:#392923; }
+html[data-theme="dark"][data-accent="ceu"]{ --accent:#7ea8d6; --accent-strong:#5c8fc4; --accent-soft:#253a4d; --accent-soft-text:#a9cdf0; --grad-a:#20303f; --grad-b:#242f3c; }
+
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{margin:0;font-family:var(--font-body);color:var(--text);background:var(--bg-page);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;transition:background .25s ease,color .25s ease;}
+button, select, input, textarea{font-family:inherit;}
+a{color:inherit;}
+
+.mobile-bar{display:none;}
+
+#app{display:flex;height:100vh;overflow:hidden;}
+#sidebar{width:250px;flex-shrink:0;background:var(--bg-sidebar);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:16px 10px;overflow-y:auto;transition:background .25s ease,border-color .25s ease;}
+.sidebar-title{font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--text);padding:6px 10px 14px;letter-spacing:.01em;}
+.nav-item{display:flex;align-items:center;gap:9px;padding:8px 12px;border-radius:10px;cursor:pointer;color:var(--text);font-size:14px;font-weight:600;user-select:none;transition:background .15s ease,color .15s ease;}
+.nav-item:hover{background:var(--hover);}
+.nav-item.active{background:var(--accent-soft);color:var(--accent-soft-text);font-weight:800;}
+.nav-emoji{font-size:15px;width:18px;text-align:center;flex-shrink:0;}
+.sidebar-footer{margin-top:auto;padding:14px 10px 4px;font-size:11px;color:var(--text-tertiary);border-top:1px solid var(--border);}
+.footer-flourish{display:block;opacity:.55;margin-bottom:6px;}
+.footer-flourish path{stroke:var(--accent);fill:none;}
+.footer-flourish circle{fill:var(--accent);}
+.theme-switcher{margin-bottom:10px;}
+.theme-toggle-row{display:flex;align-items:center;gap:6px;margin-bottom:9px;}
+.theme-mode-btn{flex:1;display:flex;align-items:center;justify-content:center;padding:6px 4px;border-radius:var(--radius-sm);border:1.5px solid var(--border-strong);background:var(--bg-card);cursor:pointer;font-size:13px;color:var(--text-secondary);transition:all .15s ease;}
+.theme-mode-btn.active{background:var(--accent-soft);color:var(--accent-soft-text);border-color:var(--accent);}
+.swatch-row{display:flex;gap:7px;padding:0 2px;}
+.swatch{width:19px;height:19px;border-radius:50%;cursor:pointer;border:2px solid transparent;box-shadow:0 0 0 1px var(--border-strong) inset;transition:transform .15s ease;}
+.swatch:hover{transform:scale(1.12);}
+.swatch.sel{border-color:var(--bg-card);box-shadow:0 0 0 2px var(--bg-card),0 0 0 3.5px var(--accent);}
+
+#content{flex:1;overflow-y:auto;padding:52px 68px;max-width:900px;}
+@media (max-width:880px){#content{padding:32px;max-width:100%;}}
+
+.page-header{display:flex;align-items:center;gap:12px;margin-bottom:26px;}
+.page-emoji{font-size:32px;}
+.page-title{font-family:var(--font-display);font-size:28px;font-weight:600;margin:0;letter-spacing:-.01em;}
+
+.callout{display:flex;gap:12px;background:linear-gradient(135deg,var(--grad-a),var(--grad-b));border-radius:18px;padding:18px 20px;margin-bottom:30px;box-shadow:var(--shadow);}
+.callout-icon{font-size:19px;}
+.callout-label{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--accent-strong);font-weight:800;margin-bottom:6px;font-family:var(--font-body);}
+.callout-text{outline:none;font-size:17px;font-weight:500;min-height:24px;font-family:var(--font-display);font-style:italic;color:var(--text);}
+.callout-text:empty:before{content:attr(data-placeholder);color:var(--text-tertiary);font-weight:400;}
+
+.section-label{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.03em;margin:30px 0 8px;}
+.section-label .count{background:var(--accent-soft);color:var(--accent-soft-text);border-radius:10px;padding:1px 7px;font-size:11px;font-weight:700;}
+
+.task-list{display:flex;flex-direction:column;border-top:1px solid var(--border);}
+.task-row{display:flex;align-items:center;gap:10px;padding:10px 8px;border-bottom:1px solid var(--border);cursor:pointer;border-radius:8px;}
+.task-row:hover{background:var(--hover);}
+.task-row.done .task-name{color:var(--text-tertiary);text-decoration:line-through;}
+.chk{width:17px;height:17px;border-radius:6px;border:1.5px solid var(--border-strong);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--bg-input);font-size:11px;color:#fff;}
+.chk.checked{background:var(--success);border-color:var(--success);}
+.task-name{flex:1;font-size:14px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.dot.urgente{background:var(--danger);}
+.dot.normal{background:var(--text-tertiary);}
+.dot.quandoder{background:var(--border-strong);}
+.task-date{font-size:12px;color:var(--text-tertiary);white-space:nowrap;flex-shrink:0;font-weight:600;}
+.tag{font-size:11.5px;padding:3px 10px;border-radius:var(--radius-pill);font-weight:700;white-space:nowrap;flex-shrink:0;}
+.tag-blue{background:var(--blue-bg);color:var(--blue-text);}
+.tag-purple{background:var(--purple-bg);color:var(--purple-text);}
+.tag-orange{background:var(--orange-bg);color:var(--orange-text);}
+.tag-pink{background:var(--pink-bg);color:var(--pink-text);}
+.tag-green{background:var(--green-bg);color:var(--green-text);}
+.tag-gray{background:var(--gray-bg);color:var(--gray-text);}
+.tag-red{background:var(--red-bg);color:var(--red-text);}
+.tag-yellow{background:var(--yellow-bg);color:var(--yellow-text);}
+
+.toggle{margin-top:10px;}
+.toggle-head{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12.5px;font-weight:800;color:var(--text-secondary);padding:6px;text-transform:uppercase;letter-spacing:.03em;}
+.toggle-arrow{transition:transform .15s;font-size:10px;display:inline-block;color:var(--accent);}
+.toggle.open .toggle-arrow{transform:rotate(90deg);}
+.toggle-body{display:none;padding-left:2px;}
+.toggle.open .toggle-body{display:block;}
+
+.btn{display:inline-flex;align-items:center;gap:6px;background:var(--bg-card);border:1.5px solid var(--border-strong);border-radius:var(--radius-sm);padding:8px 14px;font-size:13px;font-weight:700;color:var(--text);cursor:pointer;transition:all .15s ease;}
+.btn:hover{background:var(--hover);border-color:var(--accent);}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-strong));color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(120,90,150,.25);}
+.btn-primary:hover{filter:brightness(1.06);}
+.btn-danger{color:var(--danger);}
+.btn-row{margin-top:16px;display:flex;gap:8px;}
+
+.board{display:flex;gap:16px;align-items:flex-start;overflow-x:auto;padding-bottom:14px;}
+.board-col{width:252px;flex-shrink:0;background:var(--bg-subtle);border-radius:16px;padding:12px;}
+.board-col-head{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;font-weight:800;color:var(--text-secondary);padding:4px 6px 10px;text-transform:uppercase;letter-spacing:.02em;}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;margin-bottom:9px;cursor:pointer;box-shadow:var(--shadow);transition:border-color .15s ease,transform .15s ease;}
+.card:hover{border-color:var(--accent);transform:translateY(-1px);}
+.card-title{font-size:13.5px;font-weight:700;margin-bottom:8px;}
+.card-meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+.card-sub{font-size:11px;color:var(--text-tertiary);margin-top:8px;font-weight:600;}
+
+.pill-tabs{display:flex;gap:0;margin-bottom:22px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.pill-tab{padding:8px 2px;font-size:14px;font-weight:600;color:var(--text-secondary);cursor:pointer;border-bottom:2.5px solid transparent;margin-right:22px;}
+.pill-tab.active{color:var(--accent-strong);font-weight:800;border-color:var(--accent);}
+
+table.dtable{width:100%;border-collapse:collapse;font-size:13.5px;}
+table.dtable th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--text-tertiary);border-bottom:1px solid var(--border);padding:8px;font-weight:800;}
+table.dtable td{padding:11px 8px;border-bottom:1px solid var(--border);}
+table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
+
+.stat-row{display:flex;gap:16px;margin-bottom:24px;flex-wrap:wrap;}
+.stat-box{background:var(--bg-subtle);border:1px solid var(--border);border-radius:16px;padding:16px 20px;flex:1;min-width:140px;}
+.stat-num{font-size:24px;font-weight:600;font-family:var(--font-display);color:var(--accent-strong);}
+.stat-label{font-size:12px;color:var(--text-secondary);margin-top:3px;font-weight:600;}
+
+.empty{color:var(--text-tertiary);font-size:13px;padding:14px 6px;font-style:italic;}
+.empty::before{content:'\2726  ';opacity:.6;}
+
+.quick-add{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.quick-add input{flex:1;min-width:140px;padding:8px 11px;border:1.5px solid var(--border-strong);border-radius:var(--radius-sm);font-size:13.5px;background:var(--bg-input);color:var(--text);}
+
+.modal-overlay{position:fixed;inset:0;background:var(--overlay);display:flex;align-items:flex-start;justify-content:center;padding:6vh 20px;overflow-y:auto;z-index:100;}
+.modal{background:var(--bg-card);border-radius:20px;width:100%;max-width:540px;padding:28px 32px;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+.modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;}
+.modal-header h2{margin:0;font-size:20px;font-family:var(--font-display);font-weight:600;}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:11.5px;font-weight:800;color:var(--text-secondary);margin-bottom:5px;text-transform:uppercase;letter-spacing:.02em;}
+.field input[type=text],.field input[type=date],.field input[type=number],.field select,.field textarea{width:100%;padding:9px 11px;border:1.5px solid var(--border-strong);border-radius:var(--radius-sm);font-size:14px;font-family:inherit;background:var(--bg-input);color:var(--text);}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);}
+.field textarea{min-height:66px;resize:vertical;}
+.field-row{display:flex;gap:10px;flex-wrap:wrap;}
+.field-row .field{flex:1;min-width:120px;}
+.icon-btn{background:none;border:none;font-size:17px;cursor:pointer;color:var(--text-tertiary);padding:2px 4px;}
+.icon-btn:hover{color:var(--text);}
+.subtask{display:flex;align-items:center;gap:9px;padding:7px 2px;border-bottom:1px solid var(--border);font-size:13.5px;}
+.subtask .task-date{margin-left:auto;}
+.multiselect{display:flex;flex-wrap:wrap;gap:6px;}
+.multiselect .chip{padding:6px 12px;border-radius:var(--radius-pill);border:1.5px solid var(--border-strong);font-size:12.5px;cursor:pointer;font-weight:600;color:var(--text);}
+.multiselect .chip.sel{background:var(--accent);color:#fff;border-color:var(--accent);}
+.recur-btn{margin:4px 0 18px;}
+
+.page-cover {
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  margin: -52px -68px 24px -68px;
+}
+.page-cover .cover-actions {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.page-cover:hover .cover-actions, .modal-cover:hover .cover-actions { opacity: 1; }
+.page-cover-btn {
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 0.15s;
+}
+.page-cover-btn:hover { background: rgba(0,0,0,0.7); }
+@media (max-width:880px){
+  .page-cover { margin: -32px -32px 24px -32px; height: 160px; }
+}
+@media (max-width:720px){
+  .page-cover { margin: -22px -18px 20px -18px; }
+}
+.add-cover-btn {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+  opacity: 0.6;
+}
+.add-cover-btn:hover {
+  background: var(--hover);
+  color: var(--text-secondary);
+  opacity: 1;
+}
+.modal-cover {
+  height: 140px;
+  background-size: cover;
+  background-position: center;
+  margin: -28px -32px 16px -32px;
+  border-radius: 20px 20px 0 0;
+  position: relative;
+}
+.modal-cover .cover-actions {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+@media (max-width:720px){
+  .modal-cover { margin: -22px -20px 16px -20px; }
+}
+@media (hover: none) {
+  .page-cover .cover-actions, .modal-cover .cover-actions { opacity: 1; }
+  .add-cover-btn { opacity: 1; }
+}
+
+@media (max-width:720px){
+  .mobile-bar{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg-sidebar);z-index:5;color:var(--text);}
+  .mobile-bar strong{font-size:14px;font-family:var(--font-display);}
+  #app{display:block;height:auto;}
+  #sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-100%);transition:transform .2s ease;z-index:20;width:78vw;max-width:280px;}
+  #sidebar.open{transform:translateX(0);box-shadow:2px 0 24px rgba(0,0,0,.2);}
+  #content{padding:22px 18px;height:calc(100vh - 49px);}
+  .modal{max-width:100%;padding:22px 20px;}
+}
+</style>
+</head>
+<body>
+
+<div class="mobile-bar">
+  <button class="icon-btn" onclick="toggleSidebar()">☰</button>
+  <strong>Sistema da Ana</strong>
+</div>
+
+<div id="app">
+  <nav id="sidebar">
+    <div class="sidebar-title">Sistema da Ana</div>
+    <div class="nav-item" data-page="hoje" onclick="setPage('hoje')"><span class="nav-emoji">🏠</span>Hoje</div>
+    <div class="nav-item" data-page="inbox" onclick="setPage('inbox')"><span class="nav-emoji">📥</span>Inbox</div>
+    <div class="nav-item" data-page="publique" onclick="setPage('publique')"><span class="nav-emoji">🏢</span>Publique</div>
+    <div class="nav-item" data-page="personnallite" onclick="setPage('personnallite')"><span class="nav-emoji">🏢</span>Marketing Personnallité</div>
+    <div class="nav-item" data-page="brivia" onclick="setPage('brivia')"><span class="nav-emoji">🏢</span>Brivia</div>
+    <div class="nav-item" data-page="lendosaficos" onclick="setPage('lendosaficos')"><span class="nav-emoji">📚</span>Lendo Sáficos</div>
+    <div class="nav-item" data-page="pessoal" onclick="setPage('pessoal')"><span class="nav-emoji">🌱</span>Pessoal</div>
+    <div class="nav-item" data-page="recursos" onclick="setPage('recursos')"><span class="nav-emoji">🗂️</span>Recursos &amp; Arquivo</div>
+    <div class="sidebar-footer">
+      <svg class="footer-flourish" width="100%" height="34" viewBox="0 0 160 34" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 29 C 8 18, 13 9, 22 5" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M22 5 C 18 9, 18 13, 22 15" stroke-width="1.1" stroke-linecap="round"/>
+        <path d="M22 5 C 26 9, 26 13, 22 15" stroke-width="1.1" stroke-linecap="round"/>
+        <circle cx="138" cy="9" r="1.6"/>
+        <circle cx="148" cy="17" r="1.1"/>
+        <circle cx="130" cy="19" r="1.3"/>
+      </svg>
+      <div class="theme-switcher">
+        <div class="theme-toggle-row">
+          <button class="theme-mode-btn" id="themeLightBtn" onclick="setTheme('light')" title="Tema claro">☀️</button>
+          <button class="theme-mode-btn" id="themeDarkBtn" onclick="setTheme('dark')" title="Tema escuro">🌙</button>
+        </div>
+        <div class="swatch-row" id="swatchRow"></div>
+      </div>
+      <span id="storage-note">Carregando…</span>
+    </div>
+  </nav>
+  <main id="content"></main>
+</div>
+<div id="modal-root"></div>
+
+<script>
+/* ---------- constantes ---------- */
+const AREAS = ['Publique','Marketing Personnallité','Brivia','Lendo Sáficos','Pessoal'];
+const AREA_COLOR = {'Publique':'blue','Marketing Personnallité':'purple','Brivia':'orange','Lendo Sáficos':'pink','Pessoal':'green','':'gray'};
+const TIPOS = ['Tarefa única','Projeto','Recorrente com horário','Recorrente flexível'];
+const STATUSES = ['A fazer','Fazendo','Feito'];
+const STATUS_ENTREGA = ['A fazer','Fazendo','Entregue'];
+const PRIORIDADES = ['Urgente','Normal','Quando der'];
+const VENDA_ITENS = ['Stories','Post feed','Vídeo-resenha','Reels','Combo'];
+const STORAGE_KEY = 'ana-state';
+const THEME_KEY = 'ana-theme-prefs';
+const ACCENTS = [
+  {key:'lavanda', label:'Lavanda', color:'#8b6fb8'},
+  {key:'rosa', label:'Rosa', color:'#d9789f'},
+  {key:'menta', label:'Menta', color:'#4f9e88'},
+  {key:'pessego', label:'Pêssego', color:'#d98c4a'},
+  {key:'ceu', label:'Céu', color:'#5c8fc4'}
+];
+
+let state = null;
+let ui = { page:'hoje', openToggles:{}, lendoTab:'conteudo', vendasTab:'vendido', recursosTab:'recursos' };
+let modalState = null;
+let themePrefs = { mode:'light', accent:'lavanda' };
+
+/* ---------- utilidades ---------- */
+function genId(){ return 't'+Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+function fmt(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function todayStr(){ return fmt(new Date()); }
+function addDaysStr(n){ const d=new Date(); d.setDate(d.getDate()+n); return fmt(d); }
+function nextWeekday(target){ const d=new Date(); const diff=(target - d.getDay() + 7) % 7; d.setDate(d.getDate()+diff); return fmt(d); }
+function escapeHtml(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function escapeAttr(s){ return escapeHtml(s).replace(/"/g,'&quot;'); }
+function priorityClass(p){ return p==='Urgente'?'urgente':(p==='Quando der'?'quandoder':'normal'); }
+function formatDate(d){
+  if(!d) return '';
+  const t = todayStr();
+  if(d===t) return 'Hoje';
+  const dt = new Date(d+'T00:00:00');
+  if(isNaN(dt)) return '';
+  return dt.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'});
+}
+function byPriority(a,b){ const order={'Urgente':0,'Normal':1,'Quando der':2}; return (order[a.prioridade]??1)-(order[b.prioridade]??1); }
+function areaContextKey(area){
+  return area==='Publique'?'publique': area==='Marketing Personnallité'?'personnallite': area==='Brivia'?'brivia': area==='Lendo Sáficos'?'lendosaficos':'pessoal';
+}
+
+/* ---------- dados de exemplo ---------- */
+function seedState(){
+  const today = todayStr();
+  const tasks = [];
+  const push = (t) => { tasks.push(Object.assign({id:genId(),notas:'',link:'',parentId:null,recorrencia:null,prioridade:'Normal',completedAt:null}, t)); return tasks[tasks.length-1].id; };
+
+  push({nome:'Legendar vídeo institucional', area:'Publique', tipo:'Tarefa única', status:'A fazer', data:today, notas:'Vídeo enviado pelo cliente na sexta.'});
+  push({nome:'Preparar posts da semana', area:'Marketing Personnallité', tipo:'Tarefa única', status:'A fazer', data:addDaysStr(1)});
+  push({nome:'Editar vídeo institucional', area:'Brivia', tipo:'Tarefa única', status:'Fazendo', data:today, prioridade:'Urgente'});
+  push({nome:'Responder comentários do Instagram', area:'Lendo Sáficos', tipo:'Recorrente flexível', status:'A fazer', data:today, notas:'Toque em "Concluir e repetir" a cada leva de respostas — nunca fica esperando aberta.'});
+  push({nome:'Postar Stories - manhã', area:'Lendo Sáficos', tipo:'Recorrente com horário', status:'A fazer', data:today, recorrencia:{freq:'diaria'}});
+
+  const projId = push({nome:'Vídeo de resenha — livro exemplo', area:'Lendo Sáficos', tipo:'Projeto', status:'Fazendo', data:addDaysStr(3)});
+  push({nome:'Escrever roteiro', area:'Lendo Sáficos', tipo:'Tarefa única', status:'Feito', data:addDaysStr(-1), parentId:projId});
+  push({nome:'Gravar o vídeo', area:'Lendo Sáficos', tipo:'Tarefa única', status:'A fazer', data:addDaysStr(2), parentId:projId});
+  push({nome:'Editar e postar', area:'Lendo Sáficos', tipo:'Tarefa única', status:'A fazer', data:addDaysStr(3), parentId:projId});
+
+  push({nome:'Marcar consulta', area:'Pessoal', tipo:'Tarefa única', status:'A fazer', data:addDaysStr(2), prioridade:'Quando der'});
+
+  push({nome:'Revisão de segunda', area:'Lendo Sáficos', tipo:'Recorrente com horário', status:'A fazer', data:nextWeekday(1), notas:'O que preciso vender essa semana / postar / resolver com autoras e editoras.', recorrencia:{freq:'semanal', weekday:1}});
+  push({nome:'Revisão de quinta', area:'Lendo Sáficos', tipo:'Recorrente com horário', status:'A fazer', data:nextWeekday(4), notas:'O que ficou faltando essa semana / o que remanejar para a próxima.', recorrencia:{freq:'semanal', weekday:4}});
+
+  push({nome:'Ideia: colab com editora nova', area:'', tipo:'Tarefa única', status:'A fazer', data:''});
+  push({nome:'Anotação rápida sobre parceria', area:'', tipo:'Tarefa única', status:'A fazer', data:''});
+
+  const vendas = [
+    {id:genId(), autora:'Editora Exemplo', tipoParceria:'Parceria com editora', itens:['Combo'], valor:350, statusPagamento:'A receber', statusEntrega:'A fazer', data:addDaysStr(7), notas:'Linha de exemplo, edite ou apague.'},
+    {id:genId(), autora:'Autora Exemplo', tipoParceria:'Divulgação avulsa', itens:['Stories'], valor:120, statusPagamento:'Recebido', statusEntrega:'Entregue', data:addDaysStr(-8), notas:'Linha de exemplo, edite ou apague.'},
+    {id:genId(), autora:'Autora Exemplo 2', tipoParceria:'Pacote mídia kit', itens:['Post feed','Reels'], valor:180, statusPagamento:'A receber', statusEntrega:'Fazendo', data:addDaysStr(4), notas:'Linha de exemplo, edite ou apague.'}
+  ];
+
+  const recursos = [
+    {id:genId(), titulo:'Mídia kit — Lendo Sáficos', link:''},
+    {id:genId(), titulo:'Brand guide', link:''},
+    {id:genId(), titulo:'Modelo de contrato de parceria', link:''}
+  ];
+
+  return { focus:'', tasks, vendas, recursos, covers:{} };
+}
+
+/* ---------- armazenamento ---------- */
+async function loadState(){
+  try{
+    if(window.storage){
+      const res = await window.storage.get(STORAGE_KEY, false);
+      if(res && res.value) return JSON.parse(res.value);
+    }
+  }catch(e){ /* ainda não existe - primeira vez */ }
+  return null;
+}
+async function saveState(){
+  try{
+    if(window.storage){ await window.storage.set(STORAGE_KEY, JSON.stringify(state), false); }
+  }catch(e){ console.error('Erro ao salvar', e); }
+}
+
+/* ---------- tema ---------- */
+async function loadThemePrefs(){
+  try{
+    if(window.storage){
+      const res = await window.storage.get(THEME_KEY, false);
+      if(res && res.value) return JSON.parse(res.value);
+    }
+  }catch(e){ /* ainda não existe - primeira vez */ }
+  return null;
+}
+async function saveThemePrefs(){
+  try{
+    if(window.storage){ await window.storage.set(THEME_KEY, JSON.stringify(themePrefs), false); }
+  }catch(e){ console.error('Erro ao salvar tema', e); }
+}
+function applyTheme(){
+  document.documentElement.setAttribute('data-theme', themePrefs.mode);
+  document.documentElement.setAttribute('data-accent', themePrefs.accent);
+  renderThemeSwitcher();
+}
+function setTheme(mode){ themePrefs.mode = mode; applyTheme(); saveThemePrefs(); }
+function setAccent(accent){ themePrefs.accent = accent; applyTheme(); saveThemePrefs(); }
+function renderThemeSwitcher(){
+  const lb = document.getElementById('themeLightBtn');
+  const db = document.getElementById('themeDarkBtn');
+  if(lb) lb.classList.toggle('active', themePrefs.mode==='light');
+  if(db) db.classList.toggle('active', themePrefs.mode==='dark');
+  const row = document.getElementById('swatchRow');
+  if(row){
+    row.innerHTML = ACCENTS.map(a=>`<span class="swatch ${themePrefs.accent===a.key?'sel':''}" style="background:${a.color}" title="${a.label}" onclick="setAccent('${a.key}')"></span>`).join('');
+  }
+}
+
+/* ---------- recorrência ---------- */
+function rolloverRecurring(){
+  const today = todayStr();
+  state.tasks.forEach(t=>{
+    if(t.recorrencia && t.status==='Feito' && t.data!==today){
+      if(t.recorrencia.freq==='diaria'){
+        t.data = today; t.status = 'A fazer'; t.completedAt = null;
+      } else if(t.recorrencia.freq==='semanal'){
+        t.data = nextWeekday(t.recorrencia.weekday); t.status = 'A fazer'; t.completedAt = null;
+      }
+    }
+  });
+}
+
+/* ---------- navegação ---------- */
+function setPage(p){
+  ui.page = p;
+  const sb = document.getElementById('sidebar');
+  if(sb) sb.classList.remove('open');
+  render();
+}
+function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('open'); }
+function toggleSection(key){ ui.openToggles[key] = !ui.openToggles[key]; render(); }
+function setLendoTab(t){ ui.lendoTab = t; render(); }
+function setVendasTab(t){ ui.vendasTab = t; render(); }
+function setRecursosTab(t){ ui.recursosTab = t; render(); }
+
+/* ---------- render raiz ---------- */
+function render(){
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.page===ui.page));
+  document.getElementById('content').innerHTML = renderPage(ui.page);
+}
+function renderPage(page){
+  let content = '';
+  if(page==='hoje') content = renderHoje();
+  else if(page==='inbox') content = renderInbox();
+  else if(page==='publique') content = renderArea('Publique','🏢');
+  else if(page==='personnallite') content = renderArea('Marketing Personnallité','🏢');
+  else if(page==='brivia') content = renderArea('Brivia','🏢');
+  else if(page==='lendosaficos') content = renderLendoSaficos();
+  else if(page==='pessoal') content = renderArea('Pessoal','🌱');
+  else if(page==='recursos') content = renderRecursos();
+
+  const coverUrl = state.covers && state.covers[page];
+  const coverHTML = coverUrl ? `
+    <div class="page-cover" style="background-image: url('${escapeAttr(coverUrl)}')">
+      <div class="cover-actions">
+        <button class="page-cover-btn" onclick="promptCover('${page}')">Mudar capa</button>
+        <button class="page-cover-btn" onclick="removeCover('${page}')">Remover</button>
+      </div>
+    </div>
+  ` : '';
+  const addCoverHTML = !coverUrl ? `<div style="margin-bottom:8px;margin-left:-8px"><button class="add-cover-btn" onclick="promptCover('${page}')">🖼️ Adicionar capa</button></div>` : '';
+
+  return coverHTML + addCoverHTML + content;
+}
+function promptCover(page){
+  const url = prompt("URL da imagem de capa:");
+  if(url){
+    if(!state.covers) state.covers = {};
+    state.covers[page] = url;
+    saveState();
+    render();
+  }
+}
+function removeCover(page){
+  if(state.covers && state.covers[page]){
+    delete state.covers[page];
+    saveState();
+    render();
+  }
+}
+function promptTaskCover(){
+  const url = prompt("URL da imagem de capa:");
+  if(url){
+    modalState.draft.cover = url;
+    renderModal();
+  }
+}
+
+/* ---------- Hoje ---------- */
+function renderHoje(){
+  const today = todayStr();
+  const listaHoje = state.tasks.filter(t=>!t.parentId && t.data===today && t.status!=='Feito').sort(byPriority);
+  const atrasadas = state.tasks.filter(t=>!t.parentId && t.data && t.data<today && t.status!=='Feito');
+  return `
+    <div class="page-header"><span class="page-emoji">🏠</span><h1 class="page-title">Hoje</h1></div>
+    <div class="callout">
+      <div class="callout-icon">🎯</div>
+      <div style="flex:1">
+        <div class="callout-label">Resultado mais importante de hoje</div>
+        <div class="callout-text" contenteditable="true" data-placeholder="Escreva aqui a única coisa que mais importa hoje..." oninput="updateFocus(this.innerText)">${escapeHtml(state.focus||'')}</div>
+      </div>
+    </div>
+    <div class="section-label">Lista de hoje <span class="count">${listaHoje.length}</span></div>
+    ${renderTaskList(listaHoje)}
+    <button class="btn" style="margin-top:12px" onclick="openQuickAdd('hoje')">+ Nova tarefa rápida</button>
+    <div class="toggle ${ui.openToggles.atrasadas?'open':''}">
+      <div class="toggle-head" onclick="toggleSection('atrasadas')"><span class="toggle-arrow">▸</span> Atrasadas <span class="count">${atrasadas.length}</span></div>
+      <div class="toggle-body">${atrasadas.length ? renderTaskList(atrasadas) : '<div class="empty">Nada atrasado.</div>'}</div>
+    </div>
+  `;
+}
+
+/* ---------- lista de tarefas (compartilhada) ---------- */
+function renderTaskList(tasks){
+  if(!tasks.length) return '<div class="empty">Nada por aqui.</div>';
+  return '<div class="task-list">' + tasks.map(renderTaskRow).join('') + '</div>';
+}
+function renderTaskRow(t){
+  const children = state.tasks.filter(c=>c.parentId===t.id);
+  const sub = children.length ? `<span class="task-date">${children.filter(c=>c.status==='Feito').length}/${children.length} sub.</span>` : '';
+  const areaTag = t.area ? `<span class="tag tag-${AREA_COLOR[t.area]||'gray'}">${escapeHtml(t.area)}</span>` : '';
+  return `<div class="task-row ${t.status==='Feito'?'done':''}" onclick="openTaskModal('${t.id}')">
+    <span class="chk ${t.status==='Feito'?'checked':''}" onclick="event.stopPropagation();toggleTaskDone('${t.id}')">${t.status==='Feito'?'✓':''}</span>
+    <span class="dot ${priorityClass(t.prioridade)}"></span>
+    <span class="task-name">${escapeHtml(t.nome)}</span>
+    ${areaTag}
+    ${sub}
+    <span class="task-date">${formatDate(t.data)}</span>
+  </div>`;
+}
+function toggleTaskDone(id){
+  const t = state.tasks.find(x=>x.id===id);
+  if(!t) return;
+  if(t.status==='Feito'){ t.status='A fazer'; }
+  else { t.status='Feito'; t.completedAt=Date.now(); }
+  saveState();
+  render();
+  if(modalState && modalState.id===id){ modalState.draft.status=t.status; }
+  renderModal();
+}
+
+/* ---------- Inbox ---------- */
+function renderInbox(){
+  const items = state.tasks.filter(t=>!t.area && !t.parentId);
+  return `<div class="page-header"><span class="page-emoji">📥</span><h1 class="page-title">Inbox</h1></div>
+  <p style="color:var(--text-secondary);font-size:14px;margin-top:-12px">Aqui só entra o nome da coisa. Área, data e prioridade você decide depois, na revisão.</p>
+  ${renderTaskList(items)}
+  <button class="btn" style="margin-top:14px" onclick="openQuickAdd('inbox')">+ Anotar algo</button>`;
+}
+
+/* ---------- páginas de área (kanban) ---------- */
+function renderArea(area, emoji){
+  const tasks = state.tasks.filter(t=>t.area===area && !t.parentId);
+  const cols = STATUSES.map(s=>({status:s, items:tasks.filter(t=>t.status===s)}));
+  return `<div class="page-header"><span class="page-emoji">${emoji}</span><h1 class="page-title">${escapeHtml(area)}</h1></div>
+  <button class="btn" onclick="openQuickAdd('${areaContextKey(area)}')">+ Nova tarefa</button>
+  <div class="board" style="margin-top:18px">${cols.map(c=>renderBoardCol(c.status,c.items)).join('')}</div>`;
+}
+function renderBoardCol(status, items){
+  return `<div class="board-col">
+    <div class="board-col-head">${status} <span class="count">${items.length}</span></div>
+    ${items.map(renderCard).join('') || '<div class="empty">Vazio</div>'}
+  </div>`;
+}
+function renderCard(t){
+  const children = state.tasks.filter(c=>c.parentId===t.id);
+  const sub = children.length ? `<div class="card-sub">${children.filter(c=>c.status==='Feito').length}/${children.length} subtarefas</div>` : '';
+  const recurTag = (t.tipo==='Recorrente com horário') ? '<span class="tag tag-gray">🔁 horário</span>' : (t.tipo==='Recorrente flexível' ? '<span class="tag tag-gray">🔁 flexível</span>' : '');
+  return `<div class="card" onclick="openTaskModal('${t.id}')">
+    <div class="card-title">${escapeHtml(t.nome)}</div>
+    <div class="card-meta">
+      <span class="dot ${priorityClass(t.prioridade)}"></span>
+      ${recurTag}
+      <span class="task-date">${formatDate(t.data)}</span>
+    </div>
+    ${sub}
+  </div>`;
+}
+
+/* ---------- Lendo Sáficos ---------- */
+function renderLendoSaficos(){
+  const tab = ui.lendoTab;
+  return `<div class="page-header"><span class="page-emoji">📚</span><h1 class="page-title">Lendo Sáficos</h1></div>
+  <div class="pill-tabs">
+    <div class="pill-tab ${tab==='conteudo'?'active':''}" onclick="setLendoTab('conteudo')">Conteúdo</div>
+    <div class="pill-tab ${tab==='vendas'?'active':''}" onclick="setLendoTab('vendas')">Vendas &amp; Financeiro</div>
+    <div class="pill-tab ${tab==='revisao'?'active':''}" onclick="setLendoTab('revisao')">Revisão semanal</div>
+  </div>
+  ${tab==='conteudo' ? renderLendoConteudo() : (tab==='vendas' ? renderLendoVendas() : renderLendoRevisao())}`;
+}
+function renderLendoConteudo(){
+  const filtered = state.tasks.filter(t=>t.area==='Lendo Sáficos' && !t.parentId && t.nome.indexOf('Revisão de')!==0);
+  const cols = STATUSES.map(s=>({status:s, items:filtered.filter(t=>t.status===s)}));
+  return `<button class="btn" onclick="openQuickAdd('lendosaficos')">+ Nova tarefa</button>
+  <div class="board" style="margin-top:18px">${cols.map(c=>renderBoardCol(c.status,c.items)).join('')}</div>`;
+}
+function renderLendoVendas(){
+  const vtab = ui.vendasTab;
+  return `<div class="pill-tabs" style="margin-top:2px">
+    <div class="pill-tab ${vtab==='vendido'?'active':''}" onclick="setVendasTab('vendido')">O que foi vendido</div>
+    <div class="pill-tab ${vtab==='falta'?'active':''}" onclick="setVendasTab('falta')">O que falta</div>
+    <div class="pill-tab ${vtab==='feito'?'active':''}" onclick="setVendasTab('feito')">O que foi feito</div>
+    <div class="pill-tab ${vtab==='financeiro'?'active':''}" onclick="setVendasTab('financeiro')">Financeiro</div>
+  </div>
+  <button class="btn" onclick="openNewVendaModal()">+ Nova venda</button>
+  <div style="margin-top:18px">${renderVendasTabContent(vtab)}</div>`;
+}
+function renderVendasTabContent(tab){
+  if(tab==='financeiro') return renderFinanceiro();
+  let rows = state.vendas;
+  if(tab==='falta') rows = rows.filter(v=>v.statusEntrega!=='Entregue');
+  if(tab==='feito') rows = rows.filter(v=>v.statusEntrega==='Entregue');
+  if(!rows.length) return '<div class="empty">Nada por aqui ainda.</div>';
+  return renderVendasTable(rows);
+}
+function renderVendasTable(rows){
+  return `<table class="dtable"><thead><tr><th>Autora / Editora</th><th>O que foi vendido</th><th>Valor</th><th>Pagamento</th><th>Entrega</th><th>Data</th></tr></thead><tbody>
+  ${rows.map(v=>`<tr onclick="openVendaModal('${v.id}')">
+    <td>${escapeHtml(v.autora)}</td>
+    <td>${v.itens.map(i=>`<span class="tag tag-gray" style="margin-right:4px">${escapeHtml(i)}</span>`).join('')}</td>
+    <td>R$ ${Number(v.valor||0).toFixed(2)}</td>
+    <td><span class="tag ${v.statusPagamento==='Recebido'?'tag-green':'tag-yellow'}">${v.statusPagamento}</span></td>
+    <td><span class="tag ${v.statusEntrega==='Entregue'?'tag-green':(v.statusEntrega==='Fazendo'?'tag-blue':'tag-gray')}">${v.statusEntrega}</span></td>
+    <td>${formatDate(v.data)}</td>
+  </tr>`).join('')}
+  </tbody></table>`;
+}
+function renderFinanceiro(){
+  const aReceber = state.vendas.filter(v=>v.statusPagamento==='A receber');
+  const recebido = state.vendas.filter(v=>v.statusPagamento==='Recebido');
+  const sum = arr => arr.reduce((s,v)=>s+Number(v.valor||0),0);
+  return `<div class="stat-row">
+    <div class="stat-box"><div class="stat-num">R$ ${sum(aReceber).toFixed(2)}</div><div class="stat-label">A receber (${aReceber.length})</div></div>
+    <div class="stat-box"><div class="stat-num">R$ ${sum(recebido).toFixed(2)}</div><div class="stat-label">Recebido (${recebido.length})</div></div>
+    <div class="stat-box"><div class="stat-num">R$ ${sum(state.vendas).toFixed(2)}</div><div class="stat-label">Total (${state.vendas.length})</div></div>
+  </div>
+  ${state.vendas.length ? renderVendasTable(state.vendas) : '<div class="empty">Nada por aqui ainda.</div>'}`;
+}
+function renderLendoRevisao(){
+  const segunda = state.tasks.find(t=>t.nome==='Revisão de segunda');
+  const quinta = state.tasks.find(t=>t.nome==='Revisão de quinta');
+  const card = (t,label) => t ? `<div class="card" style="max-width:440px" onclick="openTaskModal('${t.id}')">
+      <div class="card-title">${label}</div>
+      <div class="card-meta"><span class="tag tag-gray">Recorrente semanal</span><span class="task-date">Próxima: ${formatDate(t.data)}</span></div>
+      <div class="card-sub">${escapeHtml(t.notas||'')}</div>
+    </div>` : '';
+  return `<div style="display:flex;flex-direction:column;gap:14px;max-width:460px">
+    ${card(segunda,'📅 Revisão de segunda — planejar a semana')}
+    ${card(quinta,'📅 Revisão de quinta — o que faltou')}
+  </div>`;
+}
+
+/* ---------- Recursos & Arquivo ---------- */
+function renderRecursos(){
+  return `<div class="page-header"><span class="page-emoji">🗂️</span><h1 class="page-title">Recursos &amp; Arquivo</h1></div>
+  <div class="pill-tabs">
+    <div class="pill-tab ${ui.recursosTab!=='arquivo'?'active':''}" onclick="setRecursosTab('recursos')">Recursos</div>
+    <div class="pill-tab ${ui.recursosTab==='arquivo'?'active':''}" onclick="setRecursosTab('arquivo')">Arquivo</div>
+  </div>
+  ${ui.recursosTab==='arquivo' ? renderArquivo() : renderRecursosList()}`;
+}
+function renderRecursosList(){
+  return `<div class="task-list">${state.recursos.map(r=>`<div class="task-row" style="cursor:default">
+    <span class="task-name" style="flex:0 0 auto;max-width:220px">${escapeHtml(r.titulo)}</span>
+    <input type="text" placeholder="colar link aqui" value="${escapeAttr(r.link)}" style="flex:1;border:1px solid var(--border-strong);border-radius:5px;padding:5px 8px;font-size:13px" onchange="updateRecursoLink('${r.id}',this.value)">
+    <button class="icon-btn" onclick="deleteRecurso('${r.id}')">✕</button>
+  </div>`).join('')}</div>
+  <div class="quick-add"><input type="text" id="novoRecursoNome" placeholder="Novo recurso..."><button class="btn" onclick="addRecurso()">+ Adicionar</button></div>`;
+}
+function updateRecursoLink(id,val){ const r = state.recursos.find(x=>x.id===id); if(r){ r.link=val; saveState(); } }
+function addRecurso(){
+  const el = document.getElementById('novoRecursoNome');
+  const nome = el.value.trim();
+  if(!nome) return;
+  state.recursos.push({id:genId(), titulo:nome, link:''});
+  saveState();
+  render();
+}
+function deleteRecurso(id){ state.recursos = state.recursos.filter(r=>r.id!==id); saveState(); render(); }
+function renderArquivo(){
+  const feitas = state.tasks.filter(t=>t.status==='Feito').sort((a,b)=>(b.completedAt||0)-(a.completedAt||0)).slice(0,30);
+  const entregues = state.vendas.filter(v=>v.statusEntrega==='Entregue');
+  return `<div class="section-label">Tarefas concluídas</div>${renderTaskList(feitas)}
+  <div class="section-label" style="margin-top:28px">Vendas entregues</div>
+  ${entregues.length ? renderVendasTable(entregues) : '<div class="empty">Nenhuma ainda.</div>'}`;
+}
+
+/* ---------- captura rápida ---------- */
+function openQuickAdd(context){
+  let prefillArea = '';
+  if(context==='publique') prefillArea='Publique';
+  if(context==='personnallite') prefillArea='Marketing Personnallité';
+  if(context==='brivia') prefillArea='Brivia';
+  if(context==='lendosaficos') prefillArea='Lendo Sáficos';
+  if(context==='pessoal') prefillArea='Pessoal';
+  const prefillData = (context==='hoje') ? todayStr() : '';
+  openNewTaskModal(prefillArea, prefillData);
+}
+
+/* ---------- modal de tarefa ---------- */
+function openTaskModal(id){
+  const t = state.tasks.find(x=>x.id===id);
+  if(!t) return;
+  modalState = { type:'task', id, draft:Object.assign({}, t) };
+  renderModal();
+}
+function openNewTaskModal(prefillArea, prefillData){
+  modalState = { type:'task', id:null, draft:{ nome:'', area:prefillArea||'', tipo:'Tarefa única', status:'A fazer', data:prefillData||'', prioridade:'Normal', notas:'', link:'', parentId:null, recorrencia:null } };
+  renderModal();
+}
+function closeModal(){ modalState=null; document.getElementById('modal-root').innerHTML=''; }
+function renderModal(){
+  const root = document.getElementById('modal-root');
+  if(!modalState){ root.innerHTML=''; return; }
+  root.innerHTML = modalState.type==='task' ? renderTaskModal() : renderVendaModal();
+}
+function renderTaskModal(){
+  const d = modalState.draft;
+  const isNew = !modalState.id;
+  const children = modalState.id ? state.tasks.filter(c=>c.parentId===modalState.id) : [];
+  const coverHTML = d.cover ? `
+    <div class="modal-cover" style="background-image: url('${escapeAttr(d.cover)}')">
+      <div class="cover-actions">
+        <button class="page-cover-btn" onclick="promptTaskCover()">Mudar capa</button>
+        <button class="page-cover-btn" onclick="modalState.draft.cover=''; renderModal()">Remover</button>
+      </div>
+    </div>
+  ` : '';
+  const addCoverHTML = !d.cover ? `<div style="margin-bottom:12px;margin-left:-8px"><button class="add-cover-btn" onclick="promptTaskCover()">🖼️ Adicionar capa</button></div>` : '';
+
+  return `<div class="modal-overlay" onclick="if(event.target===this) closeModal()">
+    <div class="modal">
+      ${coverHTML}
+      ${addCoverHTML}
+      <div class="modal-header"><h2>${isNew?'Nova tarefa':'Editar tarefa'}</h2><button class="icon-btn" onclick="closeModal()">✕</button></div>
+      <div class="field"><label>Nome</label><input type="text" value="${escapeAttr(d.nome)}" oninput="modalState.draft.nome=this.value" placeholder="Nome da tarefa"></div>
+      <div class="field-row">
+        <div class="field"><label>Área</label><select onchange="modalState.draft.area=this.value">
+          <option value="" ${d.area===''?'selected':''}>Sem área (Inbox)</option>
+          ${AREAS.map(a=>`<option value="${a}" ${d.area===a?'selected':''}>${a}</option>`).join('')}
+        </select></div>
+        <div class="field"><label>Tipo</label><select onchange="modalState.draft.tipo=this.value">
+          ${TIPOS.map(x=>`<option value="${x}" ${d.tipo===x?'selected':''}>${x}</option>`).join('')}
+        </select></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Status</label><select onchange="modalState.draft.status=this.value">
+          ${STATUSES.map(s=>`<option value="${s}" ${d.status===s?'selected':''}>${s}</option>`).join('')}
+        </select></div>
+        <div class="field"><label>Data</label><input type="date" value="${d.data||''}" onchange="modalState.draft.data=this.value"></div>
+        <div class="field"><label>Prioridade</label><select onchange="modalState.draft.prioridade=this.value">
+          ${PRIORIDADES.map(p=>`<option value="${p}" ${d.prioridade===p?'selected':''}>${p}</option>`).join('')}
+        </select></div>
+      </div>
+      <div class="field"><label>Notas</label><textarea oninput="modalState.draft.notas=this.value">${escapeHtml(d.notas||'')}</textarea></div>
+      <div class="field"><label>Link</label><input type="text" value="${escapeAttr(d.link||'')}" oninput="modalState.draft.link=this.value" placeholder="https://..."></div>
+      ${!isNew ? renderSubtasksBlock(modalState.id, children) : ''}
+      ${(!isNew && d.tipo==='Recorrente flexível') ? `<button class="btn recur-btn" onclick="completeAndRepeat('${modalState.id}')">✓ Concluir e repetir</button>` : ''}
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="saveModalTask()">Salvar</button>
+        ${!isNew ? `<button class="btn btn-danger" onclick="deleteTask('${modalState.id}')">Excluir</button>` : ''}
+        <button class="btn" onclick="closeModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>`;
+}
+function renderSubtasksBlock(parentId, children){
+  return `<div class="field"><label>Subtarefas</label>
+    ${children.length ? children.map(c=>`<div class="subtask">
+      <span class="chk ${c.status==='Feito'?'checked':''}" onclick="toggleTaskDone('${c.id}');renderModal();">${c.status==='Feito'?'✓':''}</span>
+      <span>${escapeHtml(c.nome)}</span>
+      <span class="task-date">${formatDate(c.data)}</span>
+    </div>`).join('') : '<div class="empty" style="padding:8px 2px">Sem subtarefas ainda.</div>'}
+    <div class="quick-add">
+      <input type="text" id="newSubName" placeholder="Nova subtarefa...">
+      <input type="date" id="newSubDate" style="max-width:150px">
+      <button class="btn" onclick="addSubtask('${parentId}')">+</button>
+    </div>
+  </div>`;
+}
+function addSubtask(parentId){
+  const nameEl = document.getElementById('newSubName');
+  const dateEl = document.getElementById('newSubDate');
+  const nome = nameEl.value.trim();
+  if(!nome) return;
+  const parent = state.tasks.find(t=>t.id===parentId);
+  state.tasks.push({id:genId(), nome, area:parent.area, tipo:'Tarefa única', status:'A fazer', data:dateEl.value||'', prioridade:'Normal', notas:'', link:'', parentId, recorrencia:null, completedAt:null});
+  saveState();
+  renderModal();
+  render();
+}
+function saveModalTask(){
+  const d = modalState.draft;
+  if(!d.nome || !d.nome.trim()){ alert('Dá um nome pra essa tarefa antes de salvar.'); return; }
+  if(modalState.id){
+    const idx = state.tasks.findIndex(t=>t.id===modalState.id);
+    state.tasks[idx] = Object.assign({}, state.tasks[idx], d);
+  } else {
+    state.tasks.push(Object.assign({id:genId(), parentId:null, recorrencia:null, completedAt:null}, d));
+  }
+  saveState();
+  closeModal();
+  render();
+}
+function deleteTask(id){
+  if(!confirm('Excluir esta tarefa e suas subtarefas?')) return;
+  state.tasks = state.tasks.filter(t=>t.id!==id && t.parentId!==id);
+  saveState();
+  closeModal();
+  render();
+}
+function completeAndRepeat(id){
+  const idx = state.tasks.findIndex(t=>t.id===id);
+  if(idx<0) return;
+  const t = state.tasks[idx];
+  t.status='Feito'; t.completedAt=Date.now();
+  const novo = Object.assign({}, t, {id:genId(), status:'A fazer', data:todayStr(), completedAt:null});
+  state.tasks.push(novo);
+  saveState();
+  closeModal();
+  render();
+}
+function updateFocus(txt){ state.focus = txt; saveState(); }
+
+/* ---------- modal de venda ---------- */
+function openVendaModal(id){
+  const v = state.vendas.find(x=>x.id===id);
+  if(!v) return;
+  modalState = { type:'venda', id, draft:Object.assign({}, v, {itens:[...v.itens]}) };
+  renderModal();
+}
+function openNewVendaModal(){
+  modalState = { type:'venda', id:null, draft:{ autora:'', tipoParceria:'Divulgação avulsa', itens:[], valor:0, statusPagamento:'A receber', statusEntrega:'A fazer', data:'', notas:'' } };
+  renderModal();
+}
+function renderVendaModal(){
+  const d = modalState.draft;
+  const isNew = !modalState.id;
+  const coverHTML = d.cover ? `
+    <div class="modal-cover" style="background-image: url('${escapeAttr(d.cover)}')">
+      <div class="cover-actions">
+        <button class="page-cover-btn" onclick="promptTaskCover()">Mudar capa</button>
+        <button class="page-cover-btn" onclick="modalState.draft.cover=''; renderModal()">Remover</button>
+      </div>
+    </div>
+  ` : '';
+  const addCoverHTML = !d.cover ? `<div style="margin-bottom:12px;margin-left:-8px"><button class="add-cover-btn" onclick="promptTaskCover()">🖼️ Adicionar capa</button></div>` : '';
+
+  return `<div class="modal-overlay" onclick="if(event.target===this) closeModal()">
+    <div class="modal">
+      ${coverHTML}
+      ${addCoverHTML}
+      <div class="modal-header"><h2>${isNew?'Nova venda':'Editar venda'}</h2><button class="icon-btn" onclick="closeModal()">✕</button></div>
+      <div class="field"><label>Autora / Editora</label><input type="text" value="${escapeAttr(d.autora)}" oninput="modalState.draft.autora=this.value"></div>
+      <div class="field"><label>Tipo de parceria</label><select onchange="modalState.draft.tipoParceria=this.value">
+        ${['Divulgação avulsa','Pacote mídia kit','Parceria com editora'].map(o=>`<option ${d.tipoParceria===o?'selected':''}>${o}</option>`).join('')}
+      </select></div>
+      <div class="field"><label>O que foi vendido</label>
+        <div class="multiselect">${VENDA_ITENS.map(i=>`<div class="chip ${d.itens.includes(i)?'sel':''}" onclick="toggleVendaItem('${i}')">${i}</div>`).join('')}</div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Valor (R$)</label><input type="number" value="${d.valor}" oninput="modalState.draft.valor=this.value"></div>
+        <div class="field"><label>Data combinada</label><input type="date" value="${d.data||''}" onchange="modalState.draft.data=this.value"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Pagamento</label><select onchange="modalState.draft.statusPagamento=this.value">
+          ${['A receber','Recebido'].map(o=>`<option ${d.statusPagamento===o?'selected':''}>${o}</option>`).join('')}
+        </select></div>
+        <div class="field"><label>Entrega</label><select onchange="modalState.draft.statusEntrega=this.value">
+          ${STATUS_ENTREGA.map(o=>`<option ${d.statusEntrega===o?'selected':''}>${o}</option>`).join('')}
+        </select></div>
+      </div>
+      <div class="field"><label>Notas</label><textarea oninput="modalState.draft.notas=this.value">${escapeHtml(d.notas||'')}</textarea></div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="saveModalVenda()">Salvar</button>
+        ${!isNew ? `<button class="btn btn-danger" onclick="deleteVenda('${modalState.id}')">Excluir</button>` : ''}
+        <button class="btn" onclick="closeModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>`;
+}
+function toggleVendaItem(i){
+  const arr = modalState.draft.itens;
+  const idx = arr.indexOf(i);
+  if(idx>=0) arr.splice(idx,1); else arr.push(i);
+  renderModal();
+}
+function saveModalVenda(){
+  const d = modalState.draft;
+  if(!d.autora || !d.autora.trim()){ alert('Adicione o nome da autora ou editora antes de salvar.'); return; }
+  if(modalState.id){
+    const idx = state.vendas.findIndex(v=>v.id===modalState.id);
+    state.vendas[idx] = Object.assign({}, state.vendas[idx], d);
+  } else {
+    state.vendas.push(Object.assign({id:genId()}, d));
+  }
+  saveState();
+  closeModal();
+  render();
+}
+function deleteVenda(id){
+  if(!confirm('Excluir esta venda?')) return;
+  state.vendas = state.vendas.filter(v=>v.id!==id);
+  saveState();
+  closeModal();
+  render();
+}
+
+/* ---------- inicialização ---------- */
+async function init(){
+  const prefs = await loadThemePrefs();
+  if(prefs) themePrefs = prefs;
+  applyTheme();
+  
+  const saved = await loadState();
+  if(saved){
+    state = saved;
+    if(!state.covers) state.covers = {};
+    rolloverRecurring();
+  } else {
+    state = seedState();
+  }
+  
+  const sn = document.getElementById('storage-note');
+  if(window.storage) sn.innerText = 'Sincronizado na nuvem';
+  else sn.innerText = 'Salvo localmente';
+  
+  render();
+}
+init();
+</script>
+</body>
+</html>
