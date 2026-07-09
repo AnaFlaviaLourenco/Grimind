@@ -219,8 +219,11 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
 .field label{display:block;font-size:11.5px;font-weight:800;color:var(--text-secondary);margin-bottom:5px;text-transform:uppercase;letter-spacing:.02em;}
 .field-label-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:5px;}
 .field-label-row label{margin-bottom:0;}
+.field-label-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;}
 .field-link-btn{border:0;background:transparent;color:var(--accent-strong);font-size:12px;font-weight:800;cursor:pointer;padding:4px 0;}
 .field-link-btn:hover{text-decoration:underline;}
+.field-label-row .field-link-btn{background:var(--accent-soft);border:1px solid var(--border);border-radius:999px;padding:5px 10px;text-decoration:none;}
+.field-label-row .field-link-btn:hover{border-color:var(--accent);text-decoration:none;}
 .field input[type=text],.field input[type=date],.field input[type=number],.field select,.field textarea{width:100%;padding:9px 11px;border:1.5px solid var(--border-strong);border-radius:var(--radius-sm);font-size:14px;font-family:inherit;background:var(--bg-input);color:var(--text);}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);}
 .field textarea{min-height:66px;resize:vertical;}
@@ -437,33 +440,52 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
 .projects-title{font-family:var(--font-display);font-size:42px;line-height:1;margin:0;color:var(--text);font-weight:600;}
 .projects-subtitle{font-size:14px;color:var(--text-secondary);margin:12px 0 0;}
 .projects-overview{display:grid;grid-template-columns:repeat(4,minmax(112px,1fr));gap:12px;flex:1;max-width:650px;}
-.project-stat{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;min-height:78px;}
-.project-stat-num{font-family:var(--font-display);font-size:27px;color:var(--accent-strong);line-height:1;}
-.project-stat-label{font-size:12px;color:var(--text-secondary);margin-top:8px;font-weight:700;}
-.project-focus-strip{display:grid;grid-template-columns:minmax(260px,1.2fr) minmax(220px,.8fr);gap:16px;margin:18px 0 24px;}
-.project-focus-box{background:var(--accent-soft);border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
+.project-stat{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:13px 14px;min-height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 5px 18px rgba(120,90,150,.025);}
+.project-stat-icon{font-size:20px;color:var(--accent-strong);line-height:1;margin-bottom:6px;opacity:.8;}
+.project-stat-num{font-family:var(--font-display);font-size:30px;color:var(--accent-strong);line-height:1;font-weight:700;}
+.project-stat-label{font-size:12.5px;color:var(--text);margin-top:7px;font-weight:800;line-height:1.35;}
+.project-focus-strip{border:1px solid var(--border);border-radius:12px;background:var(--bg-card);padding:13px 18px;display:grid;grid-template-columns:.8fr 1fr 1fr;gap:16px;margin:18px 0 22px;align-items:center;box-shadow:0 5px 18px rgba(120,90,150,.025);}
+.project-focus-box{background:transparent;border:0;border-left:1px solid var(--border);border-radius:0;padding:0 0 0 18px;}
+.project-focus-box:first-child{border-left:0;padding-left:0;}
 .project-focus-label{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-strong);font-weight:800;margin-bottom:8px;}
 .project-focus-text{font-size:15px;color:var(--text);font-weight:700;line-height:1.45;}
+.project-ritual-title{display:flex;align-items:center;gap:11px;color:var(--accent-strong);font-size:13px;text-transform:uppercase;letter-spacing:.14em;font-weight:900;}
+.project-ritual-icon{font-size:28px;color:var(--accent);}
 .project-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 22px;}
 .project-tab{border:1px solid var(--border);background:var(--bg-card);border-radius:999px;padding:8px 14px;font-size:13px;color:var(--text-secondary);font-weight:800;cursor:pointer;}
 .project-tab.active{background:var(--accent-soft);color:var(--accent-soft-text);border-color:var(--accent);}
-.project-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;}
-.project-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:20px;cursor:pointer;box-shadow:0 8px 26px rgba(150,90,120,.05);transition:transform .15s ease,border-color .15s ease;}
-.project-card:hover{transform:translateY(-2px);border-color:var(--accent);}
-.project-card-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:14px;}
-.project-card-title{font-family:var(--font-display);font-size:23px;color:var(--text);line-height:1.18;margin:0;}
-.project-card-area{font-size:12px;color:var(--text-secondary);font-weight:800;margin-top:6px;}
-.project-badges{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;}
+.project-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;}
+@media (min-width:1500px){.project-gallery{grid-template-columns:repeat(5,minmax(0,1fr));}}
+.project-card{--project-tone:var(--accent);--project-soft:var(--accent-soft);background:var(--bg-card);border:1px solid color-mix(in srgb, var(--project-tone) 24%, var(--border));border-radius:14px;padding:30px 18px 18px;cursor:pointer;box-shadow:0 6px 18px rgba(150,90,120,.035);transition:transform .15s ease,border-color .15s ease;position:relative;overflow:hidden;min-height:300px;}
+.project-card::before{content:'';position:absolute;inset:9px;border:1px solid color-mix(in srgb, var(--project-tone) 20%, transparent);border-radius:11px;pointer-events:none;}
+.project-card::after{content:'☾';position:absolute;left:50%;bottom:7px;transform:translateX(-50%);font-size:13px;color:color-mix(in srgb, var(--project-tone) 75%, var(--border));background:var(--bg-card);padding:0 7px;}
+.project-card:hover{transform:translateY(-2px);border-color:var(--project-tone);}
+.project-card.tone-pink{--project-tone:var(--pink-text);--project-soft:var(--pink-bg);}
+.project-card.tone-orange{--project-tone:var(--orange-text);--project-soft:var(--orange-bg);}
+.project-card.tone-blue{--project-tone:var(--blue-text);--project-soft:var(--blue-bg);}
+.project-card.tone-green{--project-tone:var(--green-text);--project-soft:var(--green-bg);}
+.project-card.tone-purple{--project-tone:var(--purple-text);--project-soft:var(--purple-bg);}
+.project-card.tone-gray{--project-tone:var(--gray-text);--project-soft:var(--gray-bg);}
+.project-card-ornament{position:absolute;top:10px;left:13px;color:var(--project-tone);font-size:15px;opacity:.55;}
+.project-card-ornament.center{left:50%;transform:translateX(-50%);font-size:20px;top:10px;opacity:.7;}
+.project-card-corner{display:none;}
+.project-card-top{display:block;text-align:center;margin:14px 0 22px;}
+.project-card-title{font-family:var(--font-display);font-size:19px;color:var(--text);line-height:1.16;margin:0;}
+.project-card-area{font-size:12px;color:var(--text-secondary);font-weight:800;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:7px;}
+.project-card-area::before{content:'';width:7px;height:7px;border-radius:999px;background:var(--project-tone);display:inline-block;}
+.project-badges{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:0 0 13px;padding:0 10px 13px;border-bottom:1px solid color-mix(in srgb, var(--project-tone) 15%, var(--border));}
 .project-badge{border-radius:999px;padding:5px 10px;font-size:12px;font-weight:800;background:var(--accent-soft);color:var(--accent-soft-text);}
 .project-badge.soft{background:var(--bg-subtle);color:var(--text-secondary);}
-.project-metric-badge{border-radius:999px;padding:10px 14px;font-size:12px;font-weight:900;background:var(--bg-subtle);color:var(--text-secondary);display:flex;flex-direction:column;align-items:flex-start;gap:7px;min-width:122px;}
-.project-metric-label{line-height:1;}
-.project-next{background:var(--bg-subtle);border:1px solid var(--border);border-radius:9px;padding:12px 13px;margin:12px 0;}
-.project-next-label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-strong);font-weight:900;margin-bottom:5px;}
-.project-next-text{font-size:14px;color:var(--text);line-height:1.4;font-weight:700;}
-.project-card-meta{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--text-secondary);margin:12px 0;}
-.project-progress{height:8px;background:var(--accent-soft);border-radius:999px;overflow:hidden;margin-top:12px;}
-.project-progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-strong));border-radius:999px;}
+.project-card-top .project-badge{position:absolute;top:14px;right:15px;background:var(--project-soft);color:var(--project-tone);padding:3px 8px;font-size:10px;line-height:1.1;}
+.project-metric-badge{border-radius:0;padding:0 8px;font-size:10px;font-weight:900;background:transparent;color:var(--text-secondary);display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0;text-align:center;}
+.project-metric-badge + .project-metric-badge{border-left:1px solid color-mix(in srgb, var(--project-tone) 18%, var(--border));}
+.project-metric-label{line-height:1;text-transform:uppercase;letter-spacing:.06em;}
+.project-next{background:transparent;border:0;border-bottom:1px solid color-mix(in srgb, var(--project-tone) 13%, var(--border));border-radius:0;padding:3px 10px 14px;margin:0 0 10px;}
+.project-next-label{font-size:9.5px;text-transform:uppercase;letter-spacing:.09em;color:var(--accent-strong);font-weight:900;margin-bottom:5px;}
+.project-next-text{font-family:var(--font-display);font-size:14px;color:var(--text);line-height:1.3;font-weight:600;}
+.project-card-meta{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;color:var(--text-secondary);margin:9px 0;font-weight:800;}
+.project-progress{height:6px;background:var(--accent-soft);border-radius:999px;overflow:hidden;margin-top:10px;}
+.project-progress-bar{height:100%;background:var(--project-tone);border-radius:999px;}
 .project-empty{background:var(--bg-card);border:1px dashed var(--border-strong);border-radius:12px;padding:26px;color:var(--text-secondary);font-size:14px;text-align:center;}
 .project-detail{display:grid;gap:16px;}
 .project-detail-hero{background:var(--bg-subtle);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:14px;}
@@ -532,11 +554,11 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
 .lendo-subtitle{font-size:14px;color:var(--text-secondary);font-weight:700;margin:6px 0 0;}
 .lendo-metrics{display:grid;grid-template-columns:repeat(5,minmax(150px,1fr));gap:14px;margin:18px 0 22px;}
 .lendo-metric{border:1px solid var(--border);background:var(--bg-card);border-radius:14px;padding:16px;min-height:112px;display:flex;justify-content:space-between;gap:12px;box-shadow:0 8px 24px rgba(120,90,150,.04);}
-.lendo-metric.pink{background:linear-gradient(135deg,var(--pink-bg),var(--bg-card));}
-.lendo-metric.purple{background:linear-gradient(135deg,var(--purple-bg),var(--bg-card));}
-.lendo-metric.blue{background:linear-gradient(135deg,var(--blue-bg),var(--bg-card));}
-.lendo-metric.green{background:linear-gradient(135deg,var(--green-bg),var(--bg-card));}
-.lendo-metric.orange{background:linear-gradient(135deg,var(--orange-bg),var(--bg-card));}
+.lendo-metric.pink{background:var(--pink-bg);}
+.lendo-metric.purple{background:var(--purple-bg);}
+.lendo-metric.blue{background:var(--blue-bg);}
+.lendo-metric.green{background:var(--green-bg);}
+.lendo-metric.orange{background:var(--orange-bg);}
 .lendo-metric-label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-secondary);font-weight:900;margin-bottom:8px;}
 .lendo-metric-num{font-family:var(--font-display);font-size:32px;line-height:1;color:var(--text);font-weight:700;}
 .lendo-metric-sub{font-size:12px;color:var(--text-secondary);font-weight:800;margin-top:8px;}
@@ -545,10 +567,10 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
 .lendo-section-title{display:flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:20px;color:var(--accent-strong);font-weight:700;margin:0 0 16px;}
 .lendo-flow-board{display:grid;grid-template-columns:repeat(4,minmax(210px,1fr));gap:16px;align-items:start;}
 .lendo-flow-col{border-radius:14px;padding:12px;min-height:260px;background:var(--bg-subtle);}
-.lendo-flow-col.todo{background:linear-gradient(180deg,var(--purple-bg),var(--bg-subtle));}
-.lendo-flow-col.doing{background:linear-gradient(180deg,var(--orange-bg),var(--bg-subtle));}
-.lendo-flow-col.waiting{background:linear-gradient(180deg,var(--pink-bg),var(--bg-subtle));}
-.lendo-flow-col.done{background:linear-gradient(180deg,var(--green-bg),var(--bg-subtle));}
+.lendo-flow-col.todo{background:var(--purple-bg);}
+.lendo-flow-col.doing{background:var(--orange-bg);}
+.lendo-flow-col.waiting{background:var(--pink-bg);}
+.lendo-flow-col.done{background:var(--green-bg);}
 .lendo-flow-head{display:flex;align-items:center;justify-content:space-between;color:var(--accent-strong);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;padding:0 4px;}
 .lendo-flow-count{color:var(--text-tertiary);margin-left:5px;}
 .lendo-task-card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:13px;margin-bottom:10px;cursor:pointer;box-shadow:0 8px 18px rgba(120,90,150,.06);transition:transform .15s ease,border-color .15s ease;}
@@ -585,6 +607,7 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
 .lendo-history-list.open{display:grid;gap:10px;}
 .lendo-history-card{border:1px solid var(--border);border-radius:10px;padding:12px;background:var(--bg-card);}
 .lendo-history-title{font-weight:900;color:var(--accent-strong);font-size:13px;margin-bottom:8px;}
+.lendo-history-wrap{margin-top:14px;padding:12px 14px;background:var(--bg-subtle);}
 @media (max-width:880px){
   .projects-header,.project-focus-strip{display:block;}
   .projects-overview{grid-template-columns:repeat(2,1fr);margin-top:18px;}
@@ -705,7 +728,9 @@ const PRIORIDADES = ['Urgente','Normal','Quando der'];
 const PROJECT_STATUSES = ['Ativo','Em andamento','Aguardando','Pausado','Concluído'];
 const PROJECT_PRIORITIES = ['Alta','Média','Baixa'];
 const ENERGY_LEVELS = ['Baixa','Média','Alta'];
-const VENDA_ITENS = ['Stories','Post feed','Vídeo-resenha','Reels','Combo'];
+const VENDA_ITENS_AVULSA = ['Pacote de lançamento','Post','Stories','Vídeo','Trechos'];
+const VENDA_ITENS_MIDIA_KIT = ['Plano 1','Plano 2'];
+const VENDA_ITENS = [...VENDA_ITENS_AVULSA, ...VENDA_ITENS_MIDIA_KIT];
 const STORAGE_KEY = 'ana-state';
 const THEME_KEY = 'ana-theme-prefs';
 const UI_KEY = 'ana-ui-prefs';
@@ -785,6 +810,12 @@ function formatDate(d){
 }
 function formatShortDate(d){ return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'}); }
 function byPriority(a,b){ const order={'Urgente':0,'Normal':1,'Quando der':2}; return (order[a.prioridade]??1)-(order[b.prioridade]??1); }
+function byDueDate(a,b){
+  const ad = a.data ? daysUntil(a.data) : 99999;
+  const bd = b.data ? daysUntil(b.data) : 99999;
+  if(ad !== bd) return ad - bd;
+  return byPriority(a,b);
+}
 function shuffleList(list){
   const arr = list.slice();
   for(let i=arr.length-1;i>0;i--){
@@ -857,6 +888,8 @@ function ensureProjectFields(){
       if(!t.referencias) t.referencias = '';
       if(!t.dataInicio) t.dataInicio = '';
       if(!t.dataFim) t.dataFim = t.data || '';
+      if(typeof t.sortTasksByDueDate === 'undefined') t.sortTasksByDueDate = true;
+      if(typeof t.hideCompletedTasks === 'undefined') t.hideCompletedTasks = false;
       t.parentId = null;
     } else {
       if(!t.energia) t.energia = 'Média';
@@ -1367,6 +1400,8 @@ function dropTaskOnSibling(event, targetId, parentId){
   event.currentTarget.classList.remove('drag-over');
   const sourceId = (event.dataTransfer && event.dataTransfer.getData('text/plain')) || draggedTaskId;
   if(!sourceId || sourceId===targetId) return;
+  const parentProject = getProjectById(parentId);
+  if(parentProject) parentProject.sortTasksByDueDate = false;
   reorderSiblingTasks(parentId || null, sourceId, targetId);
   saveState();
   render({preserveScroll:true});
@@ -1415,7 +1450,7 @@ function openProjectPortal(id){
 /* ---------- Projetos ---------- */
 function renderProjetos(){
   ensureProjectFields();
-  const projects = getProjects();
+  const projects = sortProjectsByDue(getProjects());
   const active = projects.filter(p=>!['Pausado','Concluído'].includes(p.projectStatus));
   const paused = projects.filter(p=>p.projectStatus==='Pausado');
   const done = projects.filter(p=>p.projectStatus==='Concluído');
@@ -1425,10 +1460,7 @@ function renderProjetos(){
   });
   const pendingTasks = projects.reduce((sum,p)=>sum+projectOpenTasks(p.id).length,0);
   const noNext = projects.filter(p=>p.projectStatus!=='Concluído' && !projectNextAction(p));
-  const nextProject = active.slice().sort((a,b)=>{
-    const ad = daysUntil(a.data); const bd = daysUntil(b.data);
-    return (ad??9999)-(bd??9999);
-  })[0];
+  const nextProject = active[0];
   const tab = ui.projetosTab || 'ativos';
   let visible = active;
   if(tab==='area') visible = projects;
@@ -1456,6 +1488,9 @@ function renderProjetos(){
 
       <div class="project-focus-strip">
         <div class="project-focus-box">
+          <div class="project-ritual-title"><span class="project-ritual-icon">◉</span><span>Ritual rápido de revisão</span></div>
+        </div>
+        <div class="project-focus-box">
           <div class="project-focus-label">O que pede ação agora</div>
           <div class="project-focus-text">${nextProject ? `${escapeHtml(nextProject.nome)}: ${escapeHtml(projectNextAction(nextProject)||'definir próxima ação')}` : 'Nenhum projeto ativo pedindo ação.'}</div>
         </div>
@@ -1478,8 +1513,19 @@ function renderProjetos(){
     </section>
   `;
 }
+function sortProjectsByDue(projects){
+  return projects.slice().sort((a,b)=>{
+    const ad = daysUntil(a.data);
+    const bd = daysUntil(b.data);
+    if(ad === null && bd === null) return (a.nome||'').localeCompare(b.nome||'');
+    if(ad === null) return 1;
+    if(bd === null) return -1;
+    return ad - bd;
+  });
+}
 function renderProjectStat(num,label){
-  return `<div class="project-stat"><div class="project-stat-num">${num}</div><div class="project-stat-label">${label}</div></div>`;
+  const icons = {'Projetos ativos':'✧','Projetos pausados':'☾','Prazo próximo':'◌','Tarefas pendentes':'✦'};
+  return `<div class="project-stat"><div class="project-stat-icon">${icons[label]||'✦'}</div><div class="project-stat-num">${num}</div><div class="project-stat-label">${label}</div></div>`;
 }
 function renderProjectTab(key,label,tab){
   return `<button class="project-tab ${tab===key?'active':''}" onclick="setProjetosTab('${key}')">${label}</button>`;
@@ -1498,13 +1544,35 @@ function renderProjectsByArea(projects){
     </div>
   `).join('');
 }
+function projectToneClass(p){
+  if(p.area==='Lendo Sáficos') return 'tone-pink';
+  if(p.area==='Brivia') return 'tone-orange';
+  if(p.area==='Publique') return 'tone-blue';
+  if(p.area==='Pessoal') return 'tone-green';
+  if(p.area==='Marketing Personnallité') return 'tone-purple';
+  return 'tone-gray';
+}
+function projectCenterIcon(p){
+  const priority = p.projectPriority || priorityToProjectPriority(p.prioridade);
+  if(priority==='Alta') return '☀';
+  if((p.projectStatus || '').includes('Pausado')) return '☾';
+  if(p.area==='Lendo Sáficos') return '♢';
+  return '✧';
+}
 function renderProjectCard(p){
   const open = projectOpenTasks(p.id);
   const progress = projectProgress(p.id);
   const days = daysUntil(p.data);
   const dueText = p.data ? (days===0 ? 'Hoje' : (days>0 ? `em ${days} dia${days===1?'':'s'}` : `${Math.abs(days)} dia${Math.abs(days)===1?'':'s'} atrás`)) : 'sem prazo';
   const next = projectNextAction(p) || 'Definir próxima ação';
-  return `<article class="project-card" onclick="openTaskModal('${p.id}')">
+  const tone = projectToneClass(p);
+  const centerIcon = projectCenterIcon(p);
+  return `<article class="project-card ${tone}" onclick="openTaskModal('${p.id}')">
+    <span class="project-card-ornament">⌁</span>
+    <span class="project-card-ornament center">${centerIcon}</span>
+    <span class="project-card-corner tr">⌝</span>
+    <span class="project-card-corner bl">⌞</span>
+    <span class="project-card-corner br">⌟</span>
     <div class="project-card-top">
       <div>
         <h2 class="project-card-title">${escapeHtml(p.nome)}</h2>
@@ -1644,7 +1712,7 @@ function renderCard(t){
 
 /* ---------- Lendo Sáficos ---------- */
 function renderLendoSaficos(){
-  const tab = ui.lendoTab;
+  const tab = ui.lendoTab === 'revisao' ? 'conteudo' : ui.lendoTab;
   return `<section class="lendo-page">
   <header class="lendo-header">
     <div>
@@ -1659,9 +1727,8 @@ function renderLendoSaficos(){
     <div class="pill-tab ${tab==='ideias'?'active':''}" onclick="setLendoTab('ideias')">Ideias</div>
     <div class="pill-tab ${tab==='listas'?'active':''}" onclick="setLendoTab('listas')">Gerador de listas</div>
     <div class="pill-tab ${tab==='vendas'?'active':''}" onclick="setLendoTab('vendas')">Vendas &amp; Financeiro</div>
-    <div class="pill-tab ${tab==='revisao'?'active':''}" onclick="setLendoTab('revisao')">Revisão semanal</div>
   </div>
-  ${tab==='conteudo' ? renderLendoConteudo() : (tab==='ideias' ? renderLendoIdeiasPage() : (tab==='listas' ? renderLendoListGenerator() : (tab==='vendas' ? renderLendoVendas() : renderLendoRevisao())))}
+  ${tab==='conteudo' ? renderLendoConteudo() : (tab==='ideias' ? renderLendoIdeiasPage() : (tab==='listas' ? renderLendoListGenerator() : renderLendoVendas()))}
   </section>`;
 }
 function renderLendoConteudo(){
@@ -1843,7 +1910,6 @@ function renderLendoListGenerator(){
       <p class="lendo-subtitle">Escolha um trope e eu peço a quantidade de livros. A lista sai mesclada e evita repetir livros usados nas últimas 5 gerações.</p>
       <div class="field"><label>Trope desejado</label><input type="text" id="generateTrope" value="${escapeAttr(selectedTrope)}" placeholder="Ex: slow burn"></div>
       <button class="btn btn-primary" onclick="generateLendoList()">Gerar lista</button>
-      <button class="btn" style="margin-left:8px" onclick="toggleGeneratedHistory()">Listas que já gerei</button>
       <div class="lendo-generated-list">
         ${lendoCurrentGeneratedList.map((b,i)=>`<div class="lendo-generated-item">
           <div class="lendo-book-title">${i+1}. ${escapeHtml(b.titulo)}</div>
@@ -1851,11 +1917,14 @@ function renderLendoListGenerator(){
           ${b.link ? `<a href="${escapeAttr(b.link)}" target="_blank" rel="noopener">Abrir link</a>` : ''}
         </div>`).join('')}
       </div>
-      <div class="lendo-history-list ${ui.showLendoGeneratedHistory?'open':''}">
-        ${(state.lendoGeneratedHistory || []).length ? state.lendoGeneratedHistory.map(renderGeneratedHistoryCard).join('') : '<div class="empty">Nenhuma lista salva como referência ainda.</div>'}
-      </div>
     </section>
-  </div>`;
+  </div>
+  <section class="lendo-panel lendo-history-wrap">
+    <button class="field-link-btn" onclick="toggleGeneratedHistory()">${ui.showLendoGeneratedHistory ? 'Ocultar listas que já gerei' : 'Listas que já gerei'}</button>
+    <div class="lendo-history-list ${ui.showLendoGeneratedHistory?'open':''}">
+      ${(state.lendoGeneratedHistory || []).length ? state.lendoGeneratedHistory.map(renderGeneratedHistoryCard).join('') : '<div class="empty">Nenhuma lista salva como referência ainda.</div>'}
+    </div>
+  </section>`;
 }
 function renderLendoBookCard(book){
   return `<div class="lendo-book-card">
@@ -1916,27 +1985,51 @@ function renderVendasTabContent(tab){
   return renderVendasTable(rows);
 }
 function renderVendasTable(rows){
-  return `<table class="dtable"><thead><tr><th>Autora / Editora</th><th>O que foi vendido</th><th>Valor</th><th>Pagamento</th><th>Entrega</th><th>Data</th></tr></thead><tbody>
+  return `<table class="dtable"><thead><tr><th>Autora / Editora</th><th>O que foi vendido</th><th>Valor</th><th>Pagamento</th><th>Forma</th><th>Entrega</th><th>Data</th></tr></thead><tbody>
   ${rows.map(v=>`<tr onclick="openVendaModal('${v.id}')">
     <td>${escapeHtml(v.autora)}</td>
-    <td>${v.itens.map(i=>`<span class="tag tag-gray" style="margin-right:4px">${escapeHtml(i)}</span>`).join('')}</td>
+    <td>${(v.itens||[]).map(i=>`<span class="tag tag-gray" style="margin-right:4px">${escapeHtml(i)}</span>`).join('')}</td>
     <td>R$ ${Number(v.valor||0).toFixed(2)}</td>
     <td><span class="tag ${v.statusPagamento==='Recebido'?'tag-green':'tag-yellow'}">${v.statusPagamento}</span></td>
+    <td>${escapeHtml(vendaFormaPagamentoLabel(v.formaPagamento))}</td>
     <td><span class="tag ${v.statusEntrega==='Entregue'?'tag-green':(v.statusEntrega==='Fazendo'?'tag-blue':'tag-gray')}">${v.statusEntrega}</span></td>
     <td>${formatDate(v.data)}</td>
   </tr>`).join('')}
   </tbody></table>`;
 }
 function renderFinanceiro(){
-  const aReceber = state.vendas.filter(v=>v.statusPagamento==='A receber');
-  const recebido = state.vendas.filter(v=>v.statusPagamento==='Recebido');
-  const sum = arr => arr.reduce((s,v)=>s+Number(v.valor||0),0);
+  const recebidoTotal = state.vendas.reduce((s,v)=>s+vendaValorRecebido(v),0);
+  const contratadoTotal = state.vendas.reduce((s,v)=>s+vendaValorContratado(v),0);
+  const aReceberTotal = Math.max(0, contratadoTotal - recebidoTotal);
+  const monthRows = state.vendas.filter(v=>isSameMonth(v.data));
+  const recebidoMes = monthRows.reduce((s,v)=>s+vendaValorRecebido(v),0);
+  const contratadoMes = monthRows.reduce((s,v)=>s+vendaValorContratado(v),0);
   return `<div class="stat-row">
-    <div class="stat-box"><div class="stat-num">R$ ${sum(aReceber).toFixed(2)}</div><div class="stat-label">A receber (${aReceber.length})</div></div>
-    <div class="stat-box"><div class="stat-num">R$ ${sum(recebido).toFixed(2)}</div><div class="stat-label">Recebido (${recebido.length})</div></div>
-    <div class="stat-box"><div class="stat-num">R$ ${sum(state.vendas).toFixed(2)}</div><div class="stat-label">Total (${state.vendas.length})</div></div>
+    <div class="stat-box"><div class="stat-num">R$ ${aReceberTotal.toFixed(2)}</div><div class="stat-label">A receber</div></div>
+    <div class="stat-box"><div class="stat-num">R$ ${recebidoTotal.toFixed(2)}</div><div class="stat-label">Recebido</div></div>
+    <div class="stat-box"><div class="stat-num">R$ ${contratadoTotal.toFixed(2)}</div><div class="stat-label">Recebido + a receber</div></div>
   </div>
-  ${state.vendas.length ? renderVendasTable(state.vendas) : '<div class="empty">Nada por aqui ainda.</div>'}`;
+  ${state.vendas.length ? `${renderVendasTable(state.vendas)}
+    <div class="stat-row" style="margin-top:14px">
+      <div class="stat-box"><div class="stat-num">R$ ${recebidoMes.toFixed(2)}</div><div class="stat-label">Recebido neste mês</div></div>
+      <div class="stat-box"><div class="stat-num">R$ ${contratadoMes.toFixed(2)}</div><div class="stat-label">Recebido + a receber neste mês</div></div>
+    </div>` : '<div class="empty">Nada por aqui ainda.</div>'}`;
+}
+function vendaValorContratado(v){
+  return Number(v.valor || 0);
+}
+function vendaValorRecebido(v){
+  const valor = vendaValorContratado(v);
+  if(v.statusPagamento === 'Recebido') return valor;
+  return v.formaPagamento === '50_entrega' ? valor / 2 : 0;
+}
+function vendaFormaPagamentoLabel(value){
+  return value === '50_entrega' ? '50% + entrega' : '100%';
+}
+function vendaItensOptions(tipo){
+  if(tipo === 'Pacote mídia kit') return VENDA_ITENS_MIDIA_KIT;
+  if(tipo === 'Divulgação avulsa') return VENDA_ITENS_AVULSA;
+  return VENDA_ITENS;
 }
 function renderLendoRevisao(){
   const segunda = state.tasks.find(t=>t.nome==='Revisão de segunda');
@@ -2265,12 +2358,39 @@ function renderProjectFields(d){
   </div>`;
 }
 function renderProjectPortal(parentId, d, children){
+  const sortByDue = d.sortTasksByDueDate !== false;
+  const hideDone = d.hideCompletedTasks === true;
+  const filteredChildren = hideDone ? children.filter(t=>t.status !== 'Feito') : children;
+  const visibleChildren = sortByDue ? filteredChildren.slice().sort(byDueDate) : filteredChildren;
   return `<div class="project-detail">
-    <div class="field"><label>Tarefas vinculadas</label>
-      ${children.length ? renderTaskList(children, parentId) : '<div class="empty">Sem tarefas vinculadas ainda.</div>'}
+    <div class="field">
+      <div class="field-label-row">
+        <label>Tarefas vinculadas</label>
+        <div class="field-label-actions">
+          <button class="field-link-btn" onclick="toggleProjectTaskSort('${parentId}')">${sortByDue ? 'Ordenado por vencimento' : 'Ordem manual'}</button>
+          <button class="field-link-btn" onclick="toggleProjectCompletedVisibility('${parentId}')">${hideDone ? 'Mostrar concluídas' : 'Ocultar concluídas'}</button>
+        </div>
+      </div>
+      ${visibleChildren.length ? renderTaskList(visibleChildren, parentId) : '<div class="empty">Sem tarefas vinculadas ainda.</div>'}
       ${renderSubtasksBlock(parentId, [], true)}
     </div>
   </div>`;
+}
+function toggleProjectTaskSort(projectId){
+  const project = getProjectById(projectId);
+  if(!project) return;
+  project.sortTasksByDueDate = project.sortTasksByDueDate === false;
+  saveState();
+  renderModal({preserveScroll:true});
+  render({preserveScroll:true});
+}
+function toggleProjectCompletedVisibility(projectId){
+  const project = getProjectById(projectId);
+  if(!project) return;
+  project.hideCompletedTasks = !project.hideCompletedTasks;
+  saveState();
+  renderModal({preserveScroll:true});
+  render({preserveScroll:true});
 }
 function addSubtask(parentId){
   const nameEl = document.getElementById('newSubName');
@@ -2427,16 +2547,17 @@ function deleteHabit(id){
 function openVendaModal(id){
   const v = state.vendas.find(x=>x.id===id);
   if(!v) return;
-  modalState = { type:'venda', id, draft:Object.assign({}, v, {itens:[...v.itens]}) };
+  modalState = { type:'venda', id, draft:Object.assign({formaPagamento:'100'}, v, {itens:[...(v.itens||[])]}) };
   renderModal();
 }
 function openNewVendaModal(){
-  modalState = { type:'venda', id:null, draft:{ autora:'', tipoParceria:'Divulgação avulsa', itens:[], valor:0, statusPagamento:'A receber', statusEntrega:'A fazer', data:'', notas:'' } };
+  modalState = { type:'venda', id:null, draft:{ autora:'', tipoParceria:'Divulgação avulsa', itens:[], valor:0, formaPagamento:'100', statusPagamento:'A receber', statusEntrega:'A fazer', data:'', notas:'' } };
   renderModal();
 }
 function renderVendaModal(){
   const d = modalState.draft;
   const isNew = !modalState.id;
+  const itensOptions = vendaItensOptions(d.tipoParceria);
   const coverHTML = d.cover ? `
     <div class="modal-cover" style="background-image: url('${escapeAttr(d.cover)}')">
       <div class="cover-actions">
@@ -2453,11 +2574,11 @@ function renderVendaModal(){
       ${addCoverHTML}
       <div class="modal-header"><h2>${isNew?'Nova venda':'Editar venda'}</h2><button class="icon-btn" onclick="closeModal()">✕</button></div>
       <div class="field"><label>Autora / Editora</label><input type="text" value="${escapeAttr(d.autora)}" oninput="modalState.draft.autora=this.value"></div>
-      <div class="field"><label>Tipo de parceria</label><select onchange="modalState.draft.tipoParceria=this.value">
+      <div class="field"><label>Tipo de parceria</label><select onchange="modalState.draft.tipoParceria=this.value; modalState.draft.itens=[]; renderModal({preserveScroll:true});">
         ${['Divulgação avulsa','Pacote mídia kit','Parceria com editora'].map(o=>`<option ${d.tipoParceria===o?'selected':''}>${o}</option>`).join('')}
       </select></div>
       <div class="field"><label>O que foi vendido</label>
-        <div class="multiselect">${VENDA_ITENS.map(i=>`<div class="chip ${d.itens.includes(i)?'sel':''}" onclick="toggleVendaItem('${i}')">${i}</div>`).join('')}</div>
+        <div class="multiselect">${itensOptions.map(i=>`<div class="chip ${(d.itens||[]).includes(i)?'sel':''}" onclick="toggleVendaItem('${i}')">${i}</div>`).join('')}</div>
       </div>
       <div class="field-row">
         <div class="field"><label>Valor (R$)</label><input type="number" value="${d.valor}" oninput="modalState.draft.valor=this.value"></div>
@@ -2466,6 +2587,10 @@ function renderVendaModal(){
       <div class="field-row">
         <div class="field"><label>Pagamento</label><select onchange="modalState.draft.statusPagamento=this.value">
           ${['A receber','Recebido'].map(o=>`<option ${d.statusPagamento===o?'selected':''}>${o}</option>`).join('')}
+        </select></div>
+        <div class="field"><label>Forma de pagamento</label><select onchange="modalState.draft.formaPagamento=this.value">
+          <option value="100" ${(d.formaPagamento||'100')==='100'?'selected':''}>100%</option>
+          <option value="50_entrega" ${d.formaPagamento==='50_entrega'?'selected':''}>50% agora + restante na entrega</option>
         </select></div>
         <div class="field"><label>Entrega</label><select onchange="modalState.draft.statusEntrega=this.value">
           ${STATUS_ENTREGA.map(o=>`<option ${d.statusEntrega===o?'selected':''}>${o}</option>`).join('')}
@@ -2481,7 +2606,7 @@ function renderVendaModal(){
   </div>`;
 }
 function toggleVendaItem(i){
-  const arr = modalState.draft.itens;
+  const arr = modalState.draft.itens || (modalState.draft.itens = []);
   const idx = arr.indexOf(i);
   if(idx>=0) arr.splice(idx,1); else arr.push(i);
   renderModal();
