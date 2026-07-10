@@ -200,21 +200,29 @@ a{color:inherit;}
 .area-project-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-size:11px;color:var(--text-secondary);font-weight:800;white-space:nowrap;}
 .marketing-page{max-width:min(100%,1460px);margin:0 auto;padding-bottom:46px;}
 .marketing-header{display:flex;align-items:center;gap:18px;margin-bottom:24px;}
-.marketing-icon{width:86px;height:86px;border-radius:999px;background:var(--pink-bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:42px;box-shadow:0 10px 28px rgba(180,90,130,.08);}
+.marketing-page{--client-bg:var(--pink-bg);--client-text:var(--pink-text);}
+.marketing-page.theme-blue{--client-bg:var(--blue-bg);--client-text:var(--blue-text);}
+.marketing-icon{width:86px;height:86px;border-radius:999px;background:var(--client-bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:42px;box-shadow:0 10px 28px rgba(180,90,130,.08);}
 .marketing-title{font-family:var(--font-display);font-size:46px;line-height:1;margin:0;color:var(--text);font-weight:600;letter-spacing:0;}
 .marketing-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
-.marketing-tag{border-radius:999px;background:var(--pink-bg);color:var(--pink-text);font-size:13px;font-weight:900;padding:6px 10px;}
-.marketing-hero{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:18px;background:var(--pink-bg);padding:24px 38px;margin:16px 0 22px;display:grid;grid-template-columns:minmax(320px,1fr) repeat(3,minmax(150px,210px));gap:24px;align-items:center;}
-.marketing-hero::after{content:'✦';position:absolute;right:36px;top:28px;color:var(--pink-text);font-size:34px;opacity:.35;}
+.marketing-tag{border-radius:999px;background:var(--client-bg);color:var(--client-text);font-size:13px;font-weight:900;padding:6px 10px;}
+.marketing-hero{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:18px;background:var(--client-bg);padding:24px 38px;margin:16px 0 22px;display:grid;grid-template-columns:minmax(320px,1fr) repeat(3,minmax(150px,210px));gap:24px;align-items:center;}
+.marketing-hero::after{content:'✦';position:absolute;right:36px;top:28px;color:var(--client-text);font-size:34px;opacity:.35;}
 .marketing-hero-copy{display:grid;gap:18px;}
 .marketing-hero-title{font-family:var(--font-display);font-size:24px;line-height:1.25;color:var(--text);font-weight:700;max-width:520px;}
 .marketing-hero-meta{display:flex;gap:28px;flex-wrap:wrap;color:var(--text-secondary);font-size:13px;font-weight:900;}
 .marketing-hero-stat{border-left:1px solid var(--border);padding-left:24px;min-height:82px;display:flex;flex-direction:column;justify-content:center;}
-.marketing-stat-icon{width:42px;height:42px;border-radius:999px;background:rgba(255,255,255,.58);display:flex;align-items:center;justify-content:center;color:var(--pink-text);font-size:20px;margin-bottom:8px;}
+.marketing-stat-icon{width:42px;height:42px;border-radius:999px;background:rgba(255,255,255,.58);display:flex;align-items:center;justify-content:center;color:var(--client-text);font-size:20px;margin-bottom:8px;}
 .marketing-stat-label{font-size:12px;color:var(--text-secondary);font-weight:900;margin-bottom:8px;}
 .marketing-stat-num{font-family:var(--font-display);font-size:30px;color:var(--text);font-weight:700;line-height:1;}
 .marketing-stat-sub{font-size:12px;color:var(--text-secondary);font-weight:800;margin-top:6px;}
 .marketing-projects{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:24px;}
+.marketing-projects.compact{padding:14px 16px;margin-top:24px;}
+.marketing-projects.compact .marketing-project-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;}
+.marketing-projects.compact .marketing-project-card{padding:12px;grid-template-columns:1fr auto;}
+.marketing-projects.compact .marketing-project-symbol{display:none;}
+.marketing-projects.compact .marketing-project-title{font-size:17px;}
+.marketing-projects.compact .marketing-project-next{font-size:12px;}
 .marketing-access{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:18px 20px;margin-bottom:24px;}
 .marketing-access-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;}
 .marketing-access-title{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--text-secondary);font-weight:900;}
@@ -222,15 +230,15 @@ a{color:inherit;}
 .marketing-access textarea:focus{border-color:var(--accent);}
 .marketing-project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px;}
 .marketing-project-card{border:1px solid var(--border);background:var(--bg-card);border-radius:12px;padding:18px;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;cursor:pointer;box-shadow:0 8px 22px rgba(160,90,130,.04);}
-.marketing-project-symbol{width:66px;height:66px;border-radius:999px;background:var(--pink-bg);display:flex;align-items:center;justify-content:center;color:var(--pink-text);font-size:30px;}
+.marketing-project-symbol{width:66px;height:66px;border-radius:999px;background:var(--client-bg);display:flex;align-items:center;justify-content:center;color:var(--client-text);font-size:30px;}
 .marketing-project-title{font-family:var(--font-display);font-size:21px;color:var(--text);font-weight:700;line-height:1.15;}
 .marketing-project-next{font-size:13px;color:var(--text-secondary);font-weight:800;margin-top:6px;}
 .marketing-project-progress{height:7px;background:var(--accent-soft);border-radius:999px;overflow:hidden;margin-top:12px;}
-.marketing-project-progress span{display:block;height:100%;background:var(--pink-text);border-radius:999px;}
+.marketing-project-progress span{display:block;height:100%;background:var(--client-text);border-radius:999px;}
 .marketing-project-side{text-align:right;font-size:12px;color:var(--text-secondary);font-weight:900;display:grid;gap:8px;}
 .marketing-board{display:grid;grid-template-columns:repeat(4,minmax(220px,1fr));gap:18px;align-items:start;}
-.marketing-col{background:var(--pink-bg);border-radius:16px;padding:16px;min-height:460px;}
-.marketing-col.drag-over{outline:1.5px dashed var(--pink-text);outline-offset:-8px;background:var(--hover);}
+.marketing-col{background:var(--client-bg);border-radius:16px;padding:16px;min-height:460px;}
+.marketing-col.drag-over{outline:1.5px dashed var(--client-text);outline-offset:-8px;background:var(--hover);}
 .marketing-col-head{display:flex;justify-content:space-between;align-items:center;text-transform:uppercase;letter-spacing:.06em;font-size:13px;color:var(--text-secondary);font-weight:900;margin-bottom:18px;}
 .marketing-task-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 8px 20px rgba(120,70,120,.07);cursor:pointer;}
 .marketing-task-card.drag-enabled{cursor:grab;}
@@ -238,7 +246,24 @@ a{color:inherit;}
 .marketing-task-title{font-size:14px;line-height:1.35;color:var(--text);font-weight:900;margin-bottom:10px;}
 .marketing-task-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--text-tertiary);font-size:12px;font-weight:800;}
 .marketing-empty{border:1.5px dashed var(--border-strong);border-radius:12px;min-height:300px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--text-tertiary);font-size:13px;font-weight:800;line-height:1.45;padding:18px;}
-.marketing-add-task{border:0;background:transparent;color:var(--pink-text);font-size:13px;font-weight:900;cursor:pointer;margin-top:10px;padding:8px 4px;}
+.marketing-add-task{border:0;background:transparent;color:var(--client-text);font-size:13px;font-weight:900;cursor:pointer;margin-top:10px;padding:8px 4px;}
+.publique-routine{display:grid;grid-template-columns:minmax(320px,1fr) minmax(320px,1fr);gap:16px;margin-bottom:24px;}
+.publique-routine-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:18px 20px;}
+.publique-routine-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px;}
+.publique-routine-title{font-family:var(--font-display);font-size:22px;color:var(--text);font-weight:700;line-height:1.1;}
+.publique-routine-sub{font-size:12px;color:var(--text-secondary);font-weight:800;margin-top:5px;}
+.publique-miss-alert{grid-column:1 / -1;border:1px solid var(--border-strong);background:var(--yellow-bg);color:var(--yellow-text);border-radius:14px;padding:13px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;font-size:13px;font-weight:850;line-height:1.45;}
+.publique-routine-list{display:grid;gap:9px;}
+.publique-routine-row{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:12px;background:var(--bg-subtle);padding:10px 11px;}
+.publique-routine-row.done{opacity:.72;}
+.publique-routine-row .chk{flex:0 0 auto;}
+.publique-routine-name{flex:1;font-size:13px;color:var(--text);font-weight:850;line-height:1.35;}
+.publique-add-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:12px;}
+.publique-add-row input{width:100%;border:1.5px solid var(--border-strong);border-radius:10px;background:var(--bg-input);color:var(--text);font:inherit;font-size:13px;padding:10px 11px;outline:none;}
+.publique-add-row input:focus{border-color:var(--accent);}
+.publique-muted-action{border:0;background:transparent;color:var(--text-tertiary);cursor:pointer;font-size:15px;padding:2px 4px;}
+.publique-muted-action:hover{color:var(--danger);}
+@media (max-width:980px){.publique-routine{grid-template-columns:1fr;}}
 @media (max-width:1100px){.marketing-hero{grid-template-columns:1fr 1fr;}.marketing-board{grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media (max-width:760px){.marketing-header{align-items:flex-start}.marketing-icon{width:64px;height:64px;font-size:32px}.marketing-title{font-size:34px}.marketing-hero,.marketing-board{grid-template-columns:1fr}.marketing-project-grid{grid-template-columns:1fr}.marketing-project-card{grid-template-columns:1fr}.marketing-project-side{text-align:left;display:flex;justify-content:space-between}.marketing-hero-stat{border-left:0;border-top:1px solid var(--border);padding-left:0;padding-top:16px;}}
 
@@ -766,6 +791,7 @@ let modalState = null;
 let draggedTaskId = null;
 let dragClickGuard = false;
 let uiSaveTimer = null;
+let midnightTimer = null;
 let themePrefs = { mode:'light', accent:'lavanda' };
 let lendoCurrentGeneratedList = [];
 
@@ -776,6 +802,7 @@ function todayStr(){ return fmt(new Date()); }
 function addDaysStr(n){ const d=new Date(); d.setDate(d.getDate()+n); return fmt(d); }
 function nextWeekday(target){ const d=new Date(); const diff=(target - d.getDay() + 7) % 7; d.setDate(d.getDate()+diff); return fmt(d); }
 function startOfWeek(d=new Date()){ const x=new Date(d); const diff=(x.getDay()+6)%7; x.setDate(x.getDate()-diff); x.setHours(0,0,0,0); return x; }
+function weekKey(d=new Date()){ return fmt(startOfWeek(d)); }
 function addDaysToDate(d,n){ const x=new Date(d); x.setDate(x.getDate()+n); return x; }
 function escapeHtml(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function escapeAttr(s){ return escapeHtml(s).replace(/"/g,'&quot;'); }
@@ -863,6 +890,8 @@ function ensureProjectFields(){
   if(!state.lendoGeneratedHistory) state.lendoGeneratedHistory = [];
   if(!state.lendoGenerationMemory) state.lendoGenerationMemory = [];
   if(typeof state.marketingAccess === 'undefined') state.marketingAccess = '';
+  if(typeof state.publiqueAccess === 'undefined') state.publiqueAccess = '';
+  ensurePubliqueRoutine();
   state.tasks.forEach(t=>{
     if(isProject(t)){
       if(!t.projectStatus) t.projectStatus = projectStatusFromTaskStatus(t.status);
@@ -883,6 +912,30 @@ function ensureProjectFields(){
     }
   });
   if(!state.revisaoLog) state.revisaoLog = {};
+}
+function ensurePubliqueRoutine(){
+  if(!state.publiqueRoutine){
+    state.publiqueRoutine = {
+      dailyFields:[
+        {id:genId(), nome:'Responder mensagens do cliente'},
+        {id:genId(), nome:'Conferir pendências do dia'},
+        {id:genId(), nome:'Atualizar entregas'}
+      ],
+      weeklyItems:[
+        {id:genId(), nome:'Planejar conteúdos da semana'},
+        {id:genId(), nome:'Revisar calendário editorial'},
+        {id:genId(), nome:'Enviar status semanal'}
+      ],
+      dailyLog:{},
+      weeklyLog:{},
+      dismissedMisses:{}
+    };
+  }
+  if(!state.publiqueRoutine.dailyFields) state.publiqueRoutine.dailyFields = [];
+  if(!state.publiqueRoutine.weeklyItems) state.publiqueRoutine.weeklyItems = [];
+  if(!state.publiqueRoutine.dailyLog) state.publiqueRoutine.dailyLog = {};
+  if(!state.publiqueRoutine.weeklyLog) state.publiqueRoutine.weeklyLog = {};
+  if(!state.publiqueRoutine.dismissedMisses) state.publiqueRoutine.dismissedMisses = {};
 }
 function projectPriorityLevel(p){
   const priority = p.projectPriority || priorityToProjectPriority(p.prioridade);
@@ -975,7 +1028,7 @@ function seedState(){
   ];
   const habitosLog = {};
 
-  return { focus:'', tasks, vendas, recursos, covers:{}, habitos, habitosLog, marketingAccess:'', pageEmojis:Object.assign({}, DEFAULT_PAGE_EMOJIS) };
+  return { focus:'', tasks, vendas, recursos, covers:{}, habitos, habitosLog, marketingAccess:'', publiqueAccess:'', publiqueRoutine:null, pageEmojis:Object.assign({}, DEFAULT_PAGE_EMOJIS) };
 }
 
 /* ---------- armazenamento ---------- */
@@ -1141,7 +1194,7 @@ function renderPage(page){
   if(page==='hoje') content = renderHoje();
   else if(page==='inbox') content = renderInbox();
   else if(page==='projetos') content = renderProjetos();
-  else if(page==='publique') content = renderArea('Publique');
+  else if(page==='publique') content = renderPublique();
   else if(page==='personnallite') content = renderMarketingPersonnalite();
   else if(page==='brivia') content = renderArea('Brivia');
   else if(page==='lendosaficos') content = renderLendoSaficos();
@@ -1648,30 +1701,56 @@ function renderInbox(){
 }
 
 /* ---------- páginas de área (kanban) ---------- */
+function renderPublique(){
+  return renderClientAreaPage({
+    area:'Publique',
+    pageKey:'publique',
+    title:'Publique',
+    themeClass:'theme-blue',
+    tags:['● Cliente ativo','✦ Agronegócio','Copy e social media'],
+    heroTitle:'Conteúdos, campanhas e entregas',
+    tagClass:'tag-blue',
+    accessKey:'publiqueAccess',
+    routine:true,
+    compactProjects:true
+  });
+}
 function renderMarketingPersonnalite(){
-  const area = 'Marketing Personnallité';
+  return renderClientAreaPage({
+    area:'Marketing Personnallité',
+    pageKey:'personnallite',
+    title:'Marketing Personnallité',
+    themeClass:'',
+    tags:['● Cliente ativo','✦ Saúde','Conteúdo e relacionamento'],
+    heroTitle:'Conteúdos, campanhas e entregas',
+    tagClass:'tag-pink',
+    accessKey:'marketingAccess'
+  });
+}
+function renderClientAreaPage(config){
+  const area = config.area;
+  if(config.routine) ensurePubliqueRoutine();
   const tasks = areaKanbanTasks(area);
   const openTasks = tasks.filter(t=>t.status!=='Feito');
   const projects = sortProjectsByDue(getProjects().filter(p=>p.area===area && p.projectStatus!=='Concluído'));
+  const routine = config.routine ? state.publiqueRoutine : null;
   const nextTask = openTasks.filter(t=>t.data).sort(byDueDate)[0];
   const cols = STATUSES.map(s=>({status:s, items:tasks.filter(t=>t.status===s).sort(byDueDate)}));
-  return `<section class="marketing-page">
+  return `<section class="marketing-page ${config.themeClass||''}">
     <header class="marketing-header">
-      <div class="marketing-icon">${pageEmoji('personnallite')}</div>
+      <div class="marketing-icon">${pageEmoji(config.pageKey)}</div>
       <div>
-        <h1 class="marketing-title">Marketing Personnallité</h1>
+        <h1 class="marketing-title">${escapeHtml(config.title)}</h1>
         <div class="marketing-tags">
-          <span class="marketing-tag">● Cliente ativo</span>
-          <span class="marketing-tag">✦ Saúde</span>
-          <span class="marketing-tag">Conteúdo e relacionamento</span>
+          ${config.tags.map(tag=>`<span class="marketing-tag">${escapeHtml(tag)}</span>`).join('')}
         </div>
       </div>
     </header>
-    <button class="btn" onclick="openQuickAdd('personnallite')">+ Nova tarefa</button>
+    <button class="btn" onclick="openQuickAdd('${config.pageKey}')">+ Nova tarefa</button>
 
     <section class="marketing-hero">
       <div class="marketing-hero-copy">
-        <div class="marketing-hero-title">Conteúdos, campanhas e entregas</div>
+        <div class="marketing-hero-title">${escapeHtml(config.heroTitle)}</div>
         <div class="marketing-hero-meta">
           <span>◷ Última atualização hoje</span>
           <span>✓ ${openTasks.length} tarefa${openTasks.length===1?'':'s'} para organizar</span>
@@ -1685,9 +1764,9 @@ function renderMarketingPersonnalite(){
       </div>
       <div class="marketing-hero-stat">
         <div class="marketing-stat-icon">□</div>
-        <div class="marketing-stat-label">Projetos ativos</div>
-        <div class="marketing-stat-num">${projects.length}</div>
-        <div class="marketing-stat-sub">projeto${projects.length===1?'':'s'}</div>
+        <div class="marketing-stat-label">${config.routine ? 'Rotina diária' : 'Projetos ativos'}</div>
+        <div class="marketing-stat-num">${config.routine ? routine.dailyFields.length : projects.length}</div>
+        <div class="marketing-stat-sub">${config.routine ? 'campos' : `projeto${projects.length===1?'':'s'}`}</div>
       </div>
       <div class="marketing-hero-stat">
         <div class="marketing-stat-icon">☑</div>
@@ -1697,26 +1776,121 @@ function renderMarketingPersonnalite(){
       </div>
     </section>
 
-    ${renderMarketingAccess()}
-    ${renderMarketingProjects(projects)}
+    ${renderClientAccess(config)}
+    ${config.routine ? renderPubliqueRoutine() : ''}
+    ${config.compactProjects ? '' : renderMarketingProjects(projects, config)}
     <div class="marketing-board">${cols.map(c=>renderMarketingBoardCol(area,c.status,c.items)).join('')}</div>
+    ${config.compactProjects ? renderMarketingProjects(projects, config) : ''}
   </section>`;
 }
-function renderMarketingAccess(){
+function renderClientAccess(config){
+  const value = state[config.accessKey] || '';
   return `<section class="marketing-access">
     <div class="marketing-access-head">
       <div class="marketing-access-title">Acessos rápidos</div>
-      <span class="tag tag-pink">Drive, senhas, links úteis</span>
+      <span class="tag ${config.tagClass}">Drive, senhas, links úteis</span>
     </div>
-    <textarea placeholder="Cole aqui links de Drive, senhas, briefing, pastas, acessos frequentes..." oninput="updateMarketingAccess(this.value)">${escapeHtml(state.marketingAccess||'')}</textarea>
+    <textarea placeholder="Cole aqui links de Drive, senhas, briefing, pastas, acessos frequentes..." oninput="updateClientAccess('${config.accessKey}',this.value)">${escapeHtml(value)}</textarea>
   </section>`;
 }
-function updateMarketingAccess(value){
-  state.marketingAccess = value;
+function updateClientAccess(key, value){
+  state[key] = value;
   saveState();
 }
-function renderMarketingProjects(projects){
-  return `<section class="marketing-projects">
+function renderPubliqueRoutine(){
+  ensurePubliqueRoutine();
+  const routine = state.publiqueRoutine;
+  const today = todayStr();
+  const yesterday = addDaysStr(-1);
+  const week = weekKey();
+  const yesterdayLog = routine.dailyLog[yesterday] || {};
+  const missing = routine.dailyFields.filter(f=>!yesterdayLog[f.id]);
+  const showMissing = missing.length && !routine.dismissedMisses[yesterday];
+  const dailyLog = routine.dailyLog[today] || {};
+  const weeklyLog = routine.weeklyLog[week] || {};
+  return `<section class="publique-routine">
+    ${showMissing ? `<div class="publique-miss-alert">
+      <div>Ontem você não fez ${missing.map(f=>escapeHtml(f.nome)).join(', ')}.</div>
+      <button class="field-link-btn" onclick="dismissPubliqueMiss('${yesterday}')">Apagar mensagem</button>
+    </div>` : ''}
+    <div class="publique-routine-card">
+      <div class="publique-routine-head">
+        <div>
+          <div class="publique-routine-title">Diário de hoje</div>
+          <div class="publique-routine-sub">Atualiza automaticamente a cada novo dia.</div>
+        </div>
+        <span class="tag tag-blue">${formatDate(today)}</span>
+      </div>
+      <div class="publique-routine-list">
+        ${routine.dailyFields.length ? routine.dailyFields.map(field=>renderPubliqueRoutineRow(field, !!dailyLog[field.id], 'daily')).join('') : '<div class="empty">Adicione campos para acompanhar todo dia.</div>'}
+      </div>
+      <div class="publique-add-row">
+        <input id="newPubliqueDaily" type="text" placeholder="Novo campo diário...">
+        <button class="btn" onclick="addPubliqueRoutineItem('daily')">+</button>
+      </div>
+    </div>
+    <div class="publique-routine-card">
+      <div class="publique-routine-head">
+        <div>
+          <div class="publique-routine-title">Checklist semanal</div>
+          <div class="publique-routine-sub">Recomeça a cada segunda-feira.</div>
+        </div>
+        <span class="tag tag-blue">Semana</span>
+      </div>
+      <div class="publique-routine-list">
+        ${routine.weeklyItems.length ? routine.weeklyItems.map(item=>renderPubliqueRoutineRow(item, !!weeklyLog[item.id], 'weekly')).join('') : '<div class="empty">Adicione itens para revisar toda semana.</div>'}
+      </div>
+      <div class="publique-add-row">
+        <input id="newPubliqueWeekly" type="text" placeholder="Novo item semanal...">
+        <button class="btn" onclick="addPubliqueRoutineItem('weekly')">+</button>
+      </div>
+    </div>
+  </section>`;
+}
+function renderPubliqueRoutineRow(item, done, type){
+  return `<div class="publique-routine-row ${done?'done':''}">
+    <span class="chk ${done?'checked':''}" onclick="togglePubliqueRoutine('${type}','${item.id}')">${done?'✓':''}</span>
+    <div class="publique-routine-name">${escapeHtml(item.nome)}</div>
+    <button class="publique-muted-action" title="Remover" onclick="deletePubliqueRoutineItem('${type}','${item.id}')">✕</button>
+  </div>`;
+}
+function togglePubliqueRoutine(type, id){
+  ensurePubliqueRoutine();
+  const routine = state.publiqueRoutine;
+  const key = type === 'weekly' ? weekKey() : todayStr();
+  const bucketName = type === 'weekly' ? 'weeklyLog' : 'dailyLog';
+  if(!routine[bucketName][key]) routine[bucketName][key] = {};
+  routine[bucketName][key][id] = !routine[bucketName][key][id];
+  saveState();
+  render({preserveScroll:true});
+}
+function addPubliqueRoutineItem(type){
+  ensurePubliqueRoutine();
+  const input = document.getElementById(type === 'weekly' ? 'newPubliqueWeekly' : 'newPubliqueDaily');
+  const nome = input && input.value.trim();
+  if(!nome) return;
+  const listName = type === 'weekly' ? 'weeklyItems' : 'dailyFields';
+  state.publiqueRoutine[listName].push({id:genId(), nome});
+  saveState();
+  render({preserveScroll:true});
+}
+function deletePubliqueRoutineItem(type, id){
+  ensurePubliqueRoutine();
+  const listName = type === 'weekly' ? 'weeklyItems' : 'dailyFields';
+  state.publiqueRoutine[listName] = state.publiqueRoutine[listName].filter(item=>item.id!==id);
+  const logName = type === 'weekly' ? 'weeklyLog' : 'dailyLog';
+  Object.keys(state.publiqueRoutine[logName]).forEach(key=>{ delete state.publiqueRoutine[logName][key][id]; });
+  saveState();
+  render({preserveScroll:true});
+}
+function dismissPubliqueMiss(dateStr){
+  ensurePubliqueRoutine();
+  state.publiqueRoutine.dismissedMisses[dateStr] = true;
+  saveState();
+  render({preserveScroll:true});
+}
+function renderMarketingProjects(projects, config={}){
+  return `<section class="marketing-projects ${config.compactProjects?'compact':''}">
     <div class="section-label-hoje">Projetos vinculados <span class="count">${projects.length}</span></div>
     ${projects.length ? `<div class="marketing-project-grid">${projects.map((p,i)=>renderMarketingProjectCard(p,i)).join('')}</div>` : '<div class="empty">Nenhum projeto vinculado ainda.</div>'}
   </section>`;
@@ -1741,7 +1915,7 @@ function renderMarketingProjectCard(p, index){
   </article>`;
 }
 function renderMarketingBoardCol(area,status,items){
-  return `<section class="marketing-col" ondragover="allowTaskDrop(event)" ondragleave="clearDragOver(event)" ondrop="dropTaskOnStatus(event,'${status}','Marketing Personnallité')">
+  return `<section class="marketing-col" ondragover="allowTaskDrop(event)" ondragleave="clearDragOver(event)" ondrop="dropTaskOnStatus(event,'${status}',${jsArg(area)})">
     <div class="marketing-col-head"><span>${status}</span><span>${items.length}</span></div>
     ${items.length ? items.map(renderMarketingTaskCard).join('') : `<div class="marketing-empty">✧<br>${status==='Feito' ? 'Parabéns!<br>Nada por aqui' : 'Arraste uma tarefa<br>para começar'}</div>`}
     <button class="marketing-add-task" onclick="openNewAreaStatusTask('${areaContextKey(area)}','${status}')">+ Nova tarefa</button>
@@ -1749,11 +1923,12 @@ function renderMarketingBoardCol(area,status,items){
 }
 function renderMarketingTaskCard(t){
   const project = getTaskProject(t);
+  const tagClass = t.area==='Publique' ? 'tag-blue' : 'tag-pink';
   return `<article class="marketing-task-card drag-enabled" draggable="true" ondragstart="startTaskDrag(event,'${t.id}')" ondragend="endTaskDrag(event)" onclick="if(ignoreDragClick()) return; openTaskModal('${t.id}')">
     <div class="marketing-task-title">${escapeHtml(t.nome)}</div>
     <div class="marketing-task-meta">
       <span class="dot ${priorityClass(t.prioridade)}"></span>
-      ${project ? `<span class="tag tag-pink">${escapeHtml(project.nome)}</span>` : ''}
+      ${project ? `<span class="tag ${tagClass}">${escapeHtml(project.nome)}</span>` : ''}
       <span>${formatDate(t.data)}</span>
       <span>☆</span>
     </div>
@@ -1773,7 +1948,7 @@ function renderArea(area){
   <div class="board" style="margin-top:18px">${cols.map(c=>renderBoardCol(area,c.status,c.items)).join('')}</div>`;
 }
 function areaKanbanTasks(area){
-  if(area !== 'Marketing Personnallité'){
+  if(!['Marketing Personnallité','Publique'].includes(area)){
     return state.tasks.filter(t=>t.area===area && !t.parentId);
   }
   return state.tasks.filter(t=>{
@@ -2732,6 +2907,17 @@ function deleteVenda(id){
   closeModal();
   render({preserveScroll:true});
 }
+function scheduleMidnightRefresh(){
+  clearTimeout(midnightTimer);
+  const now = new Date();
+  const next = new Date(now);
+  next.setDate(next.getDate() + 1);
+  next.setHours(0,0,1,0);
+  midnightTimer = setTimeout(()=>{
+    render({preserveScroll:true});
+    scheduleMidnightRefresh();
+  }, Math.max(1000, next - now));
+}
 
 /* ---------- inicialização ---------- */
 async function init(){
@@ -2768,6 +2954,7 @@ async function init(){
   const content = document.getElementById('content');
   if(content) content.addEventListener('scroll', scheduleSaveUiPrefs, {passive:true});
   window.addEventListener('beforeunload', saveUiPrefs);
+  scheduleMidnightRefresh();
 }
 init();
 </script>
