@@ -188,6 +188,13 @@ a{color:inherit;}
 .card-title{font-size:13.5px;font-weight:700;margin-bottom:8px;}
 .card-meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
 .card-sub{font-size:11px;color:var(--text-tertiary);margin-top:8px;font-weight:600;}
+.area-projects-panel{margin-top:18px;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:14px;}
+.area-projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:10px;}
+.area-project-card{border:1px solid var(--border);background:var(--bg-subtle);border-radius:10px;padding:12px;cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:flex-start;transition:border-color .15s ease,transform .15s ease;}
+.area-project-card:hover{border-color:var(--accent);transform:translateY(-1px);}
+.area-project-title{font-family:var(--font-display);font-size:17px;color:var(--text);line-height:1.2;font-weight:700;}
+.area-project-next{font-size:12px;color:var(--text-secondary);font-weight:700;line-height:1.35;margin-top:5px;}
+.area-project-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-size:11px;color:var(--text-secondary);font-weight:800;white-space:nowrap;}
 
 .pill-tabs{display:flex;gap:0;margin-bottom:22px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
 .pill-tab{padding:8px 2px;font-size:14px;font-weight:600;color:var(--text-secondary);cursor:pointer;border-bottom:2.5px solid transparent;margin-right:22px;}
@@ -1683,11 +1690,46 @@ function renderInbox(){
 
 /* ---------- páginas de área (kanban) ---------- */
 function renderArea(area){
-  const tasks = state.tasks.filter(t=>t.area===area && !t.parentId);
+  const tasks = areaKanbanTasks(area);
   const cols = STATUSES.map(s=>({status:s, items:tasks.filter(t=>t.status===s)}));
   return `<div class="page-header"><span class="page-emoji">${pageEmoji(areaContextKey(area))}</span><h1 class="page-title">${escapeHtml(area)}</h1></div>
   <button class="btn" onclick="openQuickAdd('${areaContextKey(area)}')">+ Nova tarefa</button>
+  ${area==='Marketing Personnallité' ? renderAreaProjectsSection(area) : ''}
   <div class="board" style="margin-top:18px">${cols.map(c=>renderBoardCol(c.status,c.items)).join('')}</div>`;
+}
+function areaKanbanTasks(area){
+  if(area !== 'Marketing Personnallité'){
+    return state.tasks.filter(t=>t.area===area && !t.parentId);
+  }
+  return state.tasks.filter(t=>{
+    if(t.area !== area || isProject(t)) return false;
+    if(!t.parentId) return true;
+    const parent = state.tasks.find(p=>p.id===t.parentId);
+    return parent && isProject(parent);
+  });
+}
+function renderAreaProjectsSection(area){
+  const projects = sortProjectsByDue(getProjects().filter(p=>p.area===area && p.projectStatus!=='Concluído'));
+  return `<section class="area-projects-panel">
+    <div class="section-label-hoje">Projetos vinculados <span class="count">${projects.length}</span></div>
+    ${projects.length ? `<div class="area-projects-grid">${projects.map(renderAreaProjectCard).join('')}</div>` : '<div class="empty">Nenhum projeto vinculado a esta área ainda.</div>'}
+  </section>`;
+}
+function renderAreaProjectCard(p){
+  const open = projectOpenTasks(p.id).length;
+  const progress = projectProgress(p.id);
+  const next = projectNextAction(p) || 'Definir próxima ação';
+  return `<article class="area-project-card" onclick="openTaskModal('${p.id}')">
+    <div>
+      <div class="area-project-title">${escapeHtml(p.nome)}</div>
+      <div class="area-project-next">${escapeHtml(next)}</div>
+    </div>
+    <div class="area-project-meta">
+      <span class="project-badge">${escapeHtml(p.projectStatus||projectStatusFromTaskStatus(p.status))}</span>
+      <span>${open} aberta${open===1?'':'s'}</span>
+      <span>${progress}%</span>
+    </div>
+  </article>`;
 }
 function renderBoardCol(status, items){
   return `<div class="board-col">
@@ -1697,6 +1739,7 @@ function renderBoardCol(status, items){
 }
 function renderCard(t){
   const children = state.tasks.filter(c=>c.parentId===t.id);
+  const project = getTaskProject(t);
   const sub = children.length ? `<div class="card-sub">${children.filter(c=>c.status==='Feito').length}/${children.length} subtarefas</div>` : '';
   const recurTag = (t.tipo==='Recorrente com horário') ? '<span class="tag tag-gray">🔁 horário</span>' : (t.tipo==='Recorrente flexível' ? '<span class="tag tag-gray">🔁 flexível</span>' : '');
   return `<div class="card" onclick="openTaskModal('${t.id}')">
@@ -1704,6 +1747,7 @@ function renderCard(t){
     <div class="card-meta">
       <span class="dot ${priorityClass(t.prioridade)}"></span>
       ${recurTag}
+      ${project ? `<span class="tag tag-purple">${escapeHtml(project.nome)}</span>` : ''}
       <span class="task-date">${formatDate(t.data)}</span>
     </div>
     ${sub}
@@ -2181,6 +2225,10 @@ function returnToProjectModal(){
   if(!modalState || !modalState.returnToProjectId) return;
   openTaskModal(modalState.returnToProjectId);
 }
+function openLinkedProjectFromTask(){
+  if(!modalState || !modalState.draft || !modalState.draft.parentId) return;
+  openTaskModal(modalState.draft.parentId);
+}
 function currentModalScrollTop(){
   return document.querySelector('#modal-root .modal-overlay')?.scrollTop || 0;
 }
@@ -2237,6 +2285,7 @@ function renderTaskModal(){
   const projects = getProjects().filter(p=>p.id!==modalState.id);
   const isProjectDraft = d.tipo==='Projeto';
   const returnProject = modalState.returnToProjectId ? state.tasks.find(t=>t.id===modalState.returnToProjectId) : null;
+  const linkedProject = !isProjectDraft && d.parentId ? getProjectById(d.parentId) : null;
   const coverHTML = d.cover ? `
     <div class="modal-cover" style="background-image: url('${escapeAttr(d.cover)}')">
       <div class="cover-actions">
@@ -2276,7 +2325,7 @@ function renderTaskModal(){
         </select></div>` : ''}
       </div>
       ${!isProjectDraft ? `<div class="field-row">
-        <div class="field"><label>Projeto relacionado</label><select onchange="modalState.draft.parentId=this.value||null" ${isProjectDraft?'disabled':''}>
+        <div class="field"><label>Projeto relacionado</label><select onchange="modalState.draft.parentId=this.value||null; renderModal({preserveScroll:true});" ${isProjectDraft?'disabled':''}>
           <option value="" ${!d.parentId?'selected':''}>Sem projeto</option>
           ${projects.map(p=>`<option value="${p.id}" ${d.parentId===p.id?'selected':''}>${escapeHtml(p.nome)}</option>`).join('')}
         </select></div>
@@ -2285,6 +2334,7 @@ function renderTaskModal(){
         </select></div>
         <div class="field"><label>Tempo estimado</label><input type="text" value="${escapeAttr(d.tempoEstimado||'')}" oninput="modalState.draft.tempoEstimado=this.value" placeholder="ex: 25 min"></div>
       </div>` : ''}
+      ${linkedProject && !returnProject ? `<button class="btn btn-return-project" onclick="openLinkedProjectFromTask()">Ir para ${escapeHtml(linkedProject.nome)} →</button>` : ''}
       ${isProjectDraft ? renderProjectFields(d) : ''}
       ${!isProjectDraft && d.area==='Lendo Sáficos' ? `<label class="field-check"><input type="checkbox" ${d.isConteudo?'checked':''} onchange="modalState.draft.isConteudo=this.checked"> Contabilizar como conteúdo do mês</label>` : ''}
       <div class="field">
