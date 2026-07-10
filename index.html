@@ -131,7 +131,7 @@ a{color:inherit;}
 
 .page-header{display:flex;align-items:center;gap:12px;margin-bottom:26px;}
 .page-emoji{font-size:32px;}
-.page-title{font-family:var(--font-display);font-size:28px;font-weight:600;margin:0;letter-spacing:-.01em;}
+.page-title{font-family:var(--font-display);font-size:42px;line-height:1;font-weight:600;margin:0;letter-spacing:0;}
 
 .callout{display:flex;gap:12px;background:linear-gradient(135deg,var(--grad-a),var(--grad-b));border-radius:18px;padding:18px 20px;margin-bottom:30px;box-shadow:var(--shadow);}
 .callout-icon{font-size:19px;}
@@ -182,8 +182,11 @@ a{color:inherit;}
 
 .board{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;align-items:flex-start;padding-bottom:14px;}
 .board-col{min-width:0;background:var(--bg-subtle);border-radius:16px;padding:12px;}
+.board-col.drag-over{outline:1.5px dashed var(--accent);outline-offset:-6px;background:var(--hover);}
 .board-col-head{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;font-weight:800;color:var(--text-secondary);padding:4px 6px 10px;text-transform:uppercase;letter-spacing:.02em;}
 .card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;margin-bottom:9px;cursor:pointer;box-shadow:var(--shadow);transition:border-color .15s ease,transform .15s ease;}
+.card.drag-enabled{cursor:grab;}
+.card.drag-enabled:active{cursor:grabbing;}
 .card:hover{border-color:var(--accent);transform:translateY(-1px);}
 .card-title{font-size:13.5px;font-weight:700;margin-bottom:8px;}
 .card-meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
@@ -195,6 +198,44 @@ a{color:inherit;}
 .area-project-title{font-family:var(--font-display);font-size:17px;color:var(--text);line-height:1.2;font-weight:700;}
 .area-project-next{font-size:12px;color:var(--text-secondary);font-weight:700;line-height:1.35;margin-top:5px;}
 .area-project-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-size:11px;color:var(--text-secondary);font-weight:800;white-space:nowrap;}
+.marketing-page{max-width:min(100%,1460px);margin:0 auto;padding-bottom:46px;}
+.marketing-header{display:flex;align-items:center;gap:18px;margin-bottom:24px;}
+.marketing-icon{width:86px;height:86px;border-radius:999px;background:var(--pink-bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:42px;box-shadow:0 10px 28px rgba(180,90,130,.08);}
+.marketing-title{font-family:var(--font-display);font-size:46px;line-height:1;margin:0;color:var(--text);font-weight:600;letter-spacing:0;}
+.marketing-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+.marketing-tag{border-radius:999px;background:var(--pink-bg);color:var(--pink-text);font-size:13px;font-weight:900;padding:6px 10px;}
+.marketing-hero{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:18px;background:var(--pink-bg);padding:24px 38px;margin:16px 0 22px;display:grid;grid-template-columns:minmax(320px,1fr) repeat(3,minmax(150px,210px));gap:24px;align-items:center;}
+.marketing-hero::after{content:'✦';position:absolute;right:36px;top:28px;color:var(--pink-text);font-size:34px;opacity:.35;}
+.marketing-hero-copy{display:grid;gap:18px;}
+.marketing-hero-title{font-family:var(--font-display);font-size:24px;line-height:1.25;color:var(--text);font-weight:700;max-width:520px;}
+.marketing-hero-meta{display:flex;gap:28px;flex-wrap:wrap;color:var(--text-secondary);font-size:13px;font-weight:900;}
+.marketing-hero-stat{border-left:1px solid var(--border);padding-left:24px;min-height:82px;display:flex;flex-direction:column;justify-content:center;}
+.marketing-stat-icon{width:42px;height:42px;border-radius:999px;background:rgba(255,255,255,.58);display:flex;align-items:center;justify-content:center;color:var(--pink-text);font-size:20px;margin-bottom:8px;}
+.marketing-stat-label{font-size:12px;color:var(--text-secondary);font-weight:900;margin-bottom:8px;}
+.marketing-stat-num{font-family:var(--font-display);font-size:30px;color:var(--text);font-weight:700;line-height:1;}
+.marketing-stat-sub{font-size:12px;color:var(--text-secondary);font-weight:800;margin-top:6px;}
+.marketing-projects{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:24px;}
+.marketing-project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px;}
+.marketing-project-card{border:1px solid var(--border);background:var(--bg-card);border-radius:12px;padding:18px;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;cursor:pointer;box-shadow:0 8px 22px rgba(160,90,130,.04);}
+.marketing-project-symbol{width:66px;height:66px;border-radius:999px;background:var(--pink-bg);display:flex;align-items:center;justify-content:center;color:var(--pink-text);font-size:30px;}
+.marketing-project-title{font-family:var(--font-display);font-size:21px;color:var(--text);font-weight:700;line-height:1.15;}
+.marketing-project-next{font-size:13px;color:var(--text-secondary);font-weight:800;margin-top:6px;}
+.marketing-project-progress{height:7px;background:var(--accent-soft);border-radius:999px;overflow:hidden;margin-top:12px;}
+.marketing-project-progress span{display:block;height:100%;background:var(--pink-text);border-radius:999px;}
+.marketing-project-side{text-align:right;font-size:12px;color:var(--text-secondary);font-weight:900;display:grid;gap:8px;}
+.marketing-board{display:grid;grid-template-columns:repeat(4,minmax(220px,1fr));gap:18px;align-items:start;}
+.marketing-col{background:var(--pink-bg);border-radius:16px;padding:16px;min-height:460px;}
+.marketing-col.drag-over{outline:1.5px dashed var(--pink-text);outline-offset:-8px;background:var(--hover);}
+.marketing-col-head{display:flex;justify-content:space-between;align-items:center;text-transform:uppercase;letter-spacing:.06em;font-size:13px;color:var(--text-secondary);font-weight:900;margin-bottom:18px;}
+.marketing-task-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 8px 20px rgba(120,70,120,.07);cursor:pointer;}
+.marketing-task-card.drag-enabled{cursor:grab;}
+.marketing-task-card.drag-enabled:active{cursor:grabbing;}
+.marketing-task-title{font-size:14px;line-height:1.35;color:var(--text);font-weight:900;margin-bottom:10px;}
+.marketing-task-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--text-tertiary);font-size:12px;font-weight:800;}
+.marketing-empty{border:1.5px dashed var(--border-strong);border-radius:12px;min-height:300px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--text-tertiary);font-size:13px;font-weight:800;line-height:1.45;padding:18px;}
+.marketing-add-task{border:0;background:transparent;color:var(--pink-text);font-size:13px;font-weight:900;cursor:pointer;margin-top:10px;padding:8px 4px;}
+@media (max-width:1100px){.marketing-hero{grid-template-columns:1fr 1fr;}.marketing-board{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media (max-width:760px){.marketing-header{align-items:flex-start}.marketing-icon{width:64px;height:64px;font-size:32px}.marketing-title{font-size:34px}.marketing-hero,.marketing-board{grid-template-columns:1fr}.marketing-project-grid{grid-template-columns:1fr}.marketing-project-card{grid-template-columns:1fr}.marketing-project-side{text-align:left;display:flex;justify-content:space-between}.marketing-hero-stat{border-left:0;border-top:1px solid var(--border);padding-left:0;padding-top:16px;}}
 
 .pill-tabs{display:flex;gap:0;margin-bottom:22px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
 .pill-tab{padding:8px 2px;font-size:14px;font-weight:600;color:var(--text-secondary);cursor:pointer;border-bottom:2.5px solid transparent;margin-right:22px;}
@@ -264,87 +305,6 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
 .multiselect .chip{padding:6px 12px;border-radius:var(--radius-pill);border:1.5px solid var(--border-strong);font-size:12.5px;cursor:pointer;font-weight:600;color:var(--text);}
 .multiselect .chip.sel{background:var(--accent);color:#fff;border-color:var(--accent);}
 .recur-btn{margin:4px 0 18px;}
-
-.page-cover {
-  height: 220px;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  margin: -52px -68px 24px -68px;
-}
-.page-cover .cover-actions {
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
-  display: flex;
-  gap: 8px;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-.page-cover:hover .cover-actions, .modal-cover:hover .cover-actions { opacity: 1; }
-.page-cover-btn {
-  background: rgba(0,0,0,0.5);
-  color: #fff;
-  border: none;
-  padding: 5px 12px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  backdrop-filter: blur(4px);
-  transition: background 0.15s;
-}
-.page-cover-btn:hover { background: rgba(0,0,0,0.7); }
-@media (max-width:880px){
-  .page-cover { margin: -32px -32px 24px -32px; height: 160px; }
-}
-@media (max-width:720px){
-  .page-cover { margin: -22px -18px 20px -18px; }
-}
-.add-cover-btn {
-  font-size: 12.5px;
-  font-weight: 700;
-  color: var(--text-tertiary);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 6px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.15s ease;
-  opacity: 0.6;
-}
-.add-cover-btn:hover {
-  background: var(--hover);
-  color: var(--text-secondary);
-  opacity: 1;
-}
-.modal-cover {
-  height: 140px;
-  background-size: cover;
-  background-position: center;
-  margin: -28px -32px 16px -32px;
-  border-radius: 20px 20px 0 0;
-  position: relative;
-}
-.modal-cover .cover-actions {
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
-  display: flex;
-  gap: 8px;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-@media (max-width:720px){
-  .modal-cover { margin: -22px -20px 16px -20px; }
-}
-@media (hover: none) {
-  .page-cover .cover-actions, .modal-cover .cover-actions { opacity: 1; }
-  .add-cover-btn { opacity: 1; }
-}
 
 @media (max-width:720px){
   .mobile-bar{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg-sidebar);z-index:25;color:var(--text);}
@@ -574,6 +534,7 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
 .lendo-section-title{display:flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:20px;color:var(--accent-strong);font-weight:700;margin:0 0 16px;}
 .lendo-flow-board{display:grid;grid-template-columns:repeat(4,minmax(210px,1fr));gap:16px;align-items:start;}
 .lendo-flow-col{border-radius:14px;padding:12px;min-height:260px;background:var(--bg-subtle);}
+.lendo-flow-col.drag-over{outline:1.5px dashed var(--accent);outline-offset:-6px;background:var(--hover);}
 .lendo-flow-col.todo{background:var(--purple-bg);}
 .lendo-flow-col.doing{background:var(--orange-bg);}
 .lendo-flow-col.waiting{background:var(--pink-bg);}
@@ -581,6 +542,8 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
 .lendo-flow-head{display:flex;align-items:center;justify-content:space-between;color:var(--accent-strong);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;padding:0 4px;}
 .lendo-flow-count{color:var(--text-tertiary);margin-left:5px;}
 .lendo-task-card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:13px;margin-bottom:10px;cursor:pointer;box-shadow:0 8px 18px rgba(120,90,150,.06);transition:transform .15s ease,border-color .15s ease;}
+.lendo-task-card.drag-enabled{cursor:grab;}
+.lendo-task-card.drag-enabled:active{cursor:grabbing;}
 .lendo-task-card:hover{transform:translateY(-1px);border-color:var(--accent);}
 .lendo-task-title{font-weight:900;color:var(--text);font-size:14px;line-height:1.35;margin-bottom:9px;}
 .lendo-task-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--text-tertiary);font-size:12px;font-weight:800;}
@@ -1164,7 +1127,7 @@ function renderPage(page){
   else if(page==='inbox') content = renderInbox();
   else if(page==='projetos') content = renderProjetos();
   else if(page==='publique') content = renderArea('Publique');
-  else if(page==='personnallite') content = renderArea('Marketing Personnallité');
+  else if(page==='personnallite') content = renderMarketingPersonnalite();
   else if(page==='brivia') content = renderArea('Brivia');
   else if(page==='lendosaficos') content = renderLendoSaficos();
   else if(page==='pessoal') content = renderArea('Pessoal');
@@ -1172,41 +1135,7 @@ function renderPage(page){
   else if(page==='habitos') content = renderHabitos();
   else if(page==='recursos') content = renderRecursos();
 
-  const coverUrl = state.covers && state.covers[page];
-  const coverHTML = coverUrl ? `
-    <div class="page-cover" style="background-image: url('${escapeAttr(coverUrl)}')">
-      <div class="cover-actions">
-        <button class="page-cover-btn" onclick="promptCover('${page}')">Mudar capa</button>
-        <button class="page-cover-btn" onclick="removeCover('${page}')">Remover</button>
-      </div>
-    </div>
-  ` : '';
-  const addCoverHTML = (!coverUrl && !['hoje','projetos'].includes(page)) ? `<div style="margin-bottom:8px;margin-left:-8px"><button class="add-cover-btn" onclick="promptCover('${page}')">🖼️ Adicionar capa</button></div>` : '';
-
-  return coverHTML + addCoverHTML + content;
-}
-function promptCover(page){
-  const url = prompt("URL da imagem de capa:");
-  if(url){
-    if(!state.covers) state.covers = {};
-    state.covers[page] = url;
-    saveState();
-    render({preserveScroll:true});
-  }
-}
-function removeCover(page){
-  if(state.covers && state.covers[page]){
-    delete state.covers[page];
-    saveState();
-    render({preserveScroll:true});
-  }
-}
-function promptTaskCover(){
-  const url = prompt("URL da imagem de capa:");
-  if(url){
-    modalState.draft.cover = url;
-    renderModal();
-  }
+  return content;
 }
 
 /* ---------- Hoje ---------- */
@@ -1411,6 +1340,21 @@ function dropTaskOnSibling(event, targetId, parentId){
   if(parentProject) parentProject.sortTasksByDueDate = false;
   reorderSiblingTasks(parentId || null, sourceId, targetId);
   saveState();
+  render({preserveScroll:true});
+  renderModal({preserveScroll:true});
+}
+function dropTaskOnStatus(event, status, area=''){
+  event.preventDefault();
+  event.stopPropagation();
+  event.currentTarget.classList.remove('drag-over');
+  const taskId = (event.dataTransfer && event.dataTransfer.getData('text/plain')) || draggedTaskId;
+  const task = state.tasks.find(t=>t.id===taskId);
+  if(!task || isProject(task)) return;
+  if(area && task.area !== area) return;
+  task.status = status;
+  task.completedAt = status === 'Feito' ? Date.now() : null;
+  saveState();
+  if(modalState && modalState.id === task.id) modalState.draft.status = status;
   render({preserveScroll:true});
   renderModal({preserveScroll:true});
 }
@@ -1689,13 +1633,115 @@ function renderInbox(){
 }
 
 /* ---------- páginas de área (kanban) ---------- */
+function renderMarketingPersonnalite(){
+  const area = 'Marketing Personnallité';
+  const tasks = areaKanbanTasks(area);
+  const openTasks = tasks.filter(t=>t.status!=='Feito');
+  const projects = sortProjectsByDue(getProjects().filter(p=>p.area===area && p.projectStatus!=='Concluído'));
+  const nextTask = openTasks.filter(t=>t.data).sort(byDueDate)[0];
+  const cols = STATUSES.map(s=>({status:s, items:tasks.filter(t=>t.status===s).sort(byDueDate)}));
+  return `<section class="marketing-page">
+    <header class="marketing-header">
+      <div class="marketing-icon">${pageEmoji('personnallite')}</div>
+      <div>
+        <h1 class="marketing-title">Marketing Personnallité</h1>
+        <div class="marketing-tags">
+          <span class="marketing-tag">● Cliente ativo</span>
+          <span class="marketing-tag">✦ Saúde</span>
+          <span class="marketing-tag">Conteúdo e relacionamento</span>
+        </div>
+      </div>
+    </header>
+    <button class="btn" onclick="openQuickAdd('personnallite')">+ Nova tarefa</button>
+
+    <section class="marketing-hero">
+      <div class="marketing-hero-copy">
+        <div class="marketing-hero-title">Conteúdos, campanhas e entregas</div>
+        <div class="marketing-hero-meta">
+          <span>◷ Última atualização hoje</span>
+          <span>✓ ${openTasks.length} tarefa${openTasks.length===1?'':'s'} para organizar</span>
+        </div>
+      </div>
+      <div class="marketing-hero-stat">
+        <div class="marketing-stat-icon">▣</div>
+        <div class="marketing-stat-label">Próxima entrega</div>
+        <div class="marketing-stat-num">${nextTask ? formatDate(nextTask.data) : '—'}</div>
+        <div class="marketing-stat-sub">${nextTask ? escapeHtml(getTaskProject(nextTask)?.nome || nextTask.nome) : 'sem prazo'}</div>
+      </div>
+      <div class="marketing-hero-stat">
+        <div class="marketing-stat-icon">□</div>
+        <div class="marketing-stat-label">Projetos ativos</div>
+        <div class="marketing-stat-num">${projects.length}</div>
+        <div class="marketing-stat-sub">projeto${projects.length===1?'':'s'}</div>
+      </div>
+      <div class="marketing-hero-stat">
+        <div class="marketing-stat-icon">☑</div>
+        <div class="marketing-stat-label">Tarefas abertas</div>
+        <div class="marketing-stat-num">${openTasks.length}</div>
+        <div class="marketing-stat-sub">no total</div>
+      </div>
+    </section>
+
+    ${renderMarketingProjects(projects)}
+    <div class="marketing-board">${cols.map(c=>renderMarketingBoardCol(area,c.status,c.items)).join('')}</div>
+  </section>`;
+}
+function renderMarketingProjects(projects){
+  return `<section class="marketing-projects">
+    <div class="section-label-hoje">Projetos vinculados <span class="count">${projects.length}</span></div>
+    ${projects.length ? `<div class="marketing-project-grid">${projects.map((p,i)=>renderMarketingProjectCard(p,i)).join('')}</div>` : '<div class="empty">Nenhum projeto vinculado ainda.</div>'}
+  </section>`;
+}
+function renderMarketingProjectCard(p, index){
+  const symbols = ['🧠','♙','✦','☉','☾'];
+  const open = projectOpenTasks(p.id).length;
+  const progress = projectProgress(p.id);
+  const next = projectNextAction(p) || 'Definir próxima ação';
+  return `<article class="marketing-project-card" onclick="openTaskModal('${p.id}')">
+    <div class="marketing-project-symbol">${symbols[index % symbols.length]}</div>
+    <div>
+      <div class="marketing-project-title">${escapeHtml(p.nome)}</div>
+      <div class="marketing-project-next">${escapeHtml(next)}</div>
+      <div class="marketing-project-progress"><span style="width:${progress}%"></span></div>
+    </div>
+    <div class="marketing-project-side">
+      <span class="project-badge">${escapeHtml(p.projectStatus||projectStatusFromTaskStatus(p.status))}</span>
+      <span>${open} aberta${open===1?'':'s'}</span>
+      <span>${progress}%</span>
+    </div>
+  </article>`;
+}
+function renderMarketingBoardCol(area,status,items){
+  return `<section class="marketing-col" ondragover="allowTaskDrop(event)" ondragleave="clearDragOver(event)" ondrop="dropTaskOnStatus(event,'${status}','Marketing Personnallité')">
+    <div class="marketing-col-head"><span>${status}</span><span>${items.length}</span></div>
+    ${items.length ? items.map(renderMarketingTaskCard).join('') : `<div class="marketing-empty">✧<br>${status==='Feito' ? 'Parabéns!<br>Nada por aqui' : 'Arraste uma tarefa<br>para começar'}</div>`}
+    <button class="marketing-add-task" onclick="openNewAreaStatusTask('${areaContextKey(area)}','${status}')">+ Nova tarefa</button>
+  </section>`;
+}
+function renderMarketingTaskCard(t){
+  const project = getTaskProject(t);
+  return `<article class="marketing-task-card drag-enabled" draggable="true" ondragstart="startTaskDrag(event,'${t.id}')" ondragend="endTaskDrag(event)" onclick="if(ignoreDragClick()) return; openTaskModal('${t.id}')">
+    <div class="marketing-task-title">${escapeHtml(t.nome)}</div>
+    <div class="marketing-task-meta">
+      <span class="dot ${priorityClass(t.prioridade)}"></span>
+      ${project ? `<span class="tag tag-pink">${escapeHtml(project.nome)}</span>` : ''}
+      <span>${formatDate(t.data)}</span>
+      <span>☆</span>
+    </div>
+  </article>`;
+}
+function openNewAreaStatusTask(context,status){
+  openQuickAdd(context);
+  if(modalState && modalState.draft) modalState.draft.status = status;
+  renderModal();
+}
 function renderArea(area){
   const tasks = areaKanbanTasks(area);
-  const cols = STATUSES.map(s=>({status:s, items:tasks.filter(t=>t.status===s)}));
+  const cols = STATUSES.map(s=>({status:s, items:tasks.filter(t=>t.status===s).sort(byDueDate)}));
   return `<div class="page-header"><span class="page-emoji">${pageEmoji(areaContextKey(area))}</span><h1 class="page-title">${escapeHtml(area)}</h1></div>
   <button class="btn" onclick="openQuickAdd('${areaContextKey(area)}')">+ Nova tarefa</button>
   ${area==='Marketing Personnallité' ? renderAreaProjectsSection(area) : ''}
-  <div class="board" style="margin-top:18px">${cols.map(c=>renderBoardCol(c.status,c.items)).join('')}</div>`;
+  <div class="board" style="margin-top:18px">${cols.map(c=>renderBoardCol(area,c.status,c.items)).join('')}</div>`;
 }
 function areaKanbanTasks(area){
   if(area !== 'Marketing Personnallité'){
@@ -1731,8 +1777,8 @@ function renderAreaProjectCard(p){
     </div>
   </article>`;
 }
-function renderBoardCol(status, items){
-  return `<div class="board-col">
+function renderBoardCol(area, status, items){
+  return `<div class="board-col" ondragover="allowTaskDrop(event)" ondragleave="clearDragOver(event)" ondrop="dropTaskOnStatus(event,'${status}',${jsArg(area)})">
     <div class="board-col-head">${status} <span class="count">${items.length}</span></div>
     ${items.map(renderCard).join('') || '<div class="empty">Vazio</div>'}
   </div>`;
@@ -1742,7 +1788,7 @@ function renderCard(t){
   const project = getTaskProject(t);
   const sub = children.length ? `<div class="card-sub">${children.filter(c=>c.status==='Feito').length}/${children.length} subtarefas</div>` : '';
   const recurTag = (t.tipo==='Recorrente com horário') ? '<span class="tag tag-gray">🔁 horário</span>' : (t.tipo==='Recorrente flexível' ? '<span class="tag tag-gray">🔁 flexível</span>' : '');
-  return `<div class="card" onclick="openTaskModal('${t.id}')">
+  return `<div class="card drag-enabled" draggable="true" ondragstart="startTaskDrag(event,'${t.id}')" ondragend="endTaskDrag(event)" onclick="if(ignoreDragClick()) return; openTaskModal('${t.id}')">
     <div class="card-title">${escapeHtml(t.nome)}</div>
     <div class="card-meta">
       <span class="dot ${priorityClass(t.prioridade)}"></span>
@@ -1791,7 +1837,7 @@ function renderLendoConteudo(){
   <section class="lendo-workflow">
     <h2 class="lendo-section-title">▦ Fluxo de trabalho</h2>
     <div class="lendo-flow-board">
-      ${columns.map(c=>renderLendoFlowColumn(c, tasks.filter(t=>t.status===c.status))).join('')}
+      ${columns.map(c=>renderLendoFlowColumn(c, tasks.filter(t=>t.status===c.status).sort(byDueDate))).join('')}
     </div>
   </section>
   <div class="lendo-bottom-grid">
@@ -1835,16 +1881,16 @@ function renderLendoMetric(label, num, sub, icon, tone, action=''){
   </article>`;
 }
 function renderLendoFlowColumn(col, items){
-  return `<div class="lendo-flow-col ${col.cls}">
+  return `<div class="lendo-flow-col ${col.cls}" ondragover="allowTaskDrop(event)" ondragleave="clearDragOver(event)" ondrop="dropTaskOnStatus(event,'${col.status}','Lendo Sáficos')">
     <div class="lendo-flow-head"><span>${col.label} <span class="lendo-flow-count">${items.length}</span></span><span>⋮</span></div>
-    ${items.slice(0,8).map(renderLendoTaskCard).join('') || '<div class="empty">Vazio</div>'}
+    ${items.map(renderLendoTaskCard).join('') || '<div class="empty">Vazio</div>'}
     <button class="lendo-add-task" onclick="openNewLendoTask('${col.status}')">+ Nova tarefa</button>
   </div>`;
 }
 function renderLendoTaskCard(t){
   const project = getTaskProject(t);
   const typeTag = inferLendoType(t);
-  return `<article class="lendo-task-card" onclick="openTaskModal('${t.id}')">
+  return `<article class="lendo-task-card drag-enabled" draggable="true" ondragstart="startTaskDrag(event,'${t.id}')" ondragend="endTaskDrag(event)" onclick="if(ignoreDragClick()) return; openTaskModal('${t.id}')">
     <div class="lendo-task-title">${escapeHtml(t.nome)}</div>
     <div class="lendo-task-meta">
       <span class="tag ${lendoTypeTagClass(typeTag)}">${escapeHtml(typeTag)}</span>
@@ -2286,20 +2332,8 @@ function renderTaskModal(){
   const isProjectDraft = d.tipo==='Projeto';
   const returnProject = modalState.returnToProjectId ? state.tasks.find(t=>t.id===modalState.returnToProjectId) : null;
   const linkedProject = !isProjectDraft && d.parentId ? getProjectById(d.parentId) : null;
-  const coverHTML = d.cover ? `
-    <div class="modal-cover" style="background-image: url('${escapeAttr(d.cover)}')">
-      <div class="cover-actions">
-        <button class="page-cover-btn" onclick="promptTaskCover()">Mudar capa</button>
-        <button class="page-cover-btn" onclick="modalState.draft.cover=''; renderModal()">Remover</button>
-      </div>
-    </div>
-  ` : '';
-  const addCoverHTML = !d.cover ? `<div style="margin-bottom:12px;margin-left:-8px"><button class="add-cover-btn" onclick="promptTaskCover()">🖼️ Adicionar capa</button></div>` : '';
-
   return `<div class="modal-overlay" onclick="if(event.target===this) closeModal()">
     <div class="modal ${isProjectDraft?'project-modal':'task-modal'}">
-      ${coverHTML}
-      ${addCoverHTML}
       <div class="modal-header"><h2>${isProjectDraft ? (isNew?'Novo projeto':'Editar projeto') : (isNew?'Nova tarefa':'Editar tarefa')}</h2><button class="icon-btn" onclick="closeModal()">✕</button></div>
       ${returnProject && !isProjectDraft ? `<button class="btn btn-return-project" onclick="returnToProjectModal()">← Voltar para ${escapeHtml(returnProject.nome)}</button>` : ''}
       <div class="field"><label>Nome</label><input type="text" value="${escapeAttr(d.nome)}" oninput="modalState.draft.nome=this.value" placeholder="Nome da tarefa"></div>
@@ -2608,20 +2642,8 @@ function renderVendaModal(){
   const d = modalState.draft;
   const isNew = !modalState.id;
   const itensOptions = vendaItensOptions(d.tipoParceria);
-  const coverHTML = d.cover ? `
-    <div class="modal-cover" style="background-image: url('${escapeAttr(d.cover)}')">
-      <div class="cover-actions">
-        <button class="page-cover-btn" onclick="promptTaskCover()">Mudar capa</button>
-        <button class="page-cover-btn" onclick="modalState.draft.cover=''; renderModal()">Remover</button>
-      </div>
-    </div>
-  ` : '';
-  const addCoverHTML = !d.cover ? `<div style="margin-bottom:12px;margin-left:-8px"><button class="add-cover-btn" onclick="promptTaskCover()">🖼️ Adicionar capa</button></div>` : '';
-
   return `<div class="modal-overlay" onclick="if(event.target===this) closeModal()">
     <div class="modal">
-      ${coverHTML}
-      ${addCoverHTML}
       <div class="modal-header"><h2>${isNew?'Nova venda':'Editar venda'}</h2><button class="icon-btn" onclick="closeModal()">✕</button></div>
       <div class="field"><label>Autora / Editora</label><input type="text" value="${escapeAttr(d.autora)}" oninput="modalState.draft.autora=this.value"></div>
       <div class="field"><label>Tipo de parceria</label><select onchange="modalState.draft.tipoParceria=this.value; modalState.draft.itens=[]; renderModal({preserveScroll:true});">
