@@ -254,10 +254,14 @@ a{color:inherit;}
 .publique-routine-sub{font-size:12px;color:var(--text-secondary);font-weight:800;margin-top:5px;}
 .publique-miss-alert{grid-column:1 / -1;border:1px solid var(--border-strong);background:var(--yellow-bg);color:var(--yellow-text);border-radius:14px;padding:13px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;font-size:13px;font-weight:850;line-height:1.45;}
 .publique-routine-list{display:grid;gap:9px;}
-.publique-routine-row{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:12px;background:var(--bg-subtle);padding:10px 11px;}
+.publique-routine-row{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:12px;background:var(--client-bg);padding:10px 11px;}
 .publique-routine-row.done{opacity:.72;}
 .publique-routine-row .chk{flex:0 0 auto;}
-.publique-routine-name{flex:1;font-size:13px;color:var(--text);font-weight:850;line-height:1.35;}
+.publique-routine-name{flex:1;border:0;background:transparent;text-align:left;font:inherit;font-size:13px;color:var(--text);font-weight:850;line-height:1.35;cursor:pointer;padding:0;}
+.publique-routine-name:hover{color:var(--client-text);}
+.publique-note-editor{min-height:50vh;border:1.5px solid var(--border-strong);border-radius:12px;background:var(--bg-input);color:var(--text);font-size:15px;line-height:1.7;padding:16px;outline:none;overflow:auto;}
+.publique-note-editor:focus{border-color:var(--accent);}
+.publique-note-editor:empty:before{content:attr(data-placeholder);color:var(--text-tertiary);font-style:italic;}
 .publique-add-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:12px;}
 .publique-add-row input{width:100%;border:1.5px solid var(--border-strong);border-radius:10px;background:var(--bg-input);color:var(--text);font:inherit;font-size:13px;padding:10px 11px;outline:none;}
 .publique-add-row input:focus{border-color:var(--accent);}
@@ -612,6 +616,12 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
 .lendo-history-card{border:1px solid var(--border);border-radius:10px;padding:12px;background:var(--bg-card);}
 .lendo-history-title{font-weight:900;color:var(--accent-strong);font-size:13px;margin-bottom:8px;}
 .lendo-history-wrap{margin-top:14px;padding:12px 14px;background:var(--bg-subtle);}
+.notes-page{max-width:min(100%,960px);margin:0 auto;padding-bottom:42px;}
+.site-notes-card{border:1px solid var(--border);border-radius:14px;background:var(--bg-card);padding:18px;box-shadow:var(--shadow-soft);}
+.site-notes-editor{min-height:60vh;border:1.5px solid var(--border-strong);border-radius:12px;background:var(--bg-input);color:var(--text);font-size:15px;line-height:1.7;padding:18px;outline:none;overflow:auto;}
+.site-notes-editor:focus{border-color:var(--accent);}
+.site-notes-editor hr{border:0;border-top:1px solid var(--border-strong);margin:18px 0;}
+.site-notes-editor:empty:before{content:attr(data-placeholder);color:var(--text-tertiary);font-style:italic;}
 @media (max-width:880px){
   .projects-header,.project-focus-strip{display:block;}
   .projects-overview{grid-template-columns:repeat(2,1fr);margin-top:18px;}
@@ -687,6 +697,7 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
     </div>
     <div class="nav-item" data-page="hoje" onclick="setPage('hoje')"><span class="nav-emoji" data-emoji-page="hoje" onclick="event.stopPropagation();changePageEmoji('hoje')" title="Trocar emoji">🏠</span>Hoje</div>
     <div class="nav-item" data-page="inbox" onclick="setPage('inbox')"><span class="nav-emoji" data-emoji-page="inbox" onclick="event.stopPropagation();changePageEmoji('inbox')" title="Trocar emoji">📥</span>Inbox</div>
+    <div class="nav-item" data-page="notas" onclick="setPage('notas')"><span class="nav-emoji" data-emoji-page="notas" onclick="event.stopPropagation();changePageEmoji('notas')" title="Trocar emoji">📝</span>Notas</div>
     <div class="nav-item" data-page="projetos" onclick="setPage('projetos')"><span class="nav-emoji" data-emoji-page="projetos" onclick="event.stopPropagation();changePageEmoji('projetos')" title="Trocar emoji">✦</span>Projetos</div>
     <div class="nav-item" data-page="publique" onclick="setPage('publique')"><span class="nav-emoji" data-emoji-page="publique" onclick="event.stopPropagation();changePageEmoji('publique')" title="Trocar emoji">🏢</span>Publique</div>
     <div class="nav-item" data-page="personnallite" onclick="setPage('personnallite')"><span class="nav-emoji" data-emoji-page="personnallite" onclick="event.stopPropagation();changePageEmoji('personnallite')" title="Trocar emoji">🏢</span>Marketing Personnallité</div>
@@ -745,7 +756,7 @@ const THEME_KEY = 'ana-theme-prefs';
 const UI_KEY = 'ana-ui-prefs';
 const DEFAULT_PAGE_EMOJIS = {
   hoje:'🏠', inbox:'📥', projetos:'✦', publique:'🏢', personnallite:'🏢', brivia:'🏢',
-  lendosaficos:'📚', pessoal:'🌱', revisao:'🔎', habitos:'📅', recursos:'🗂️'
+  lendosaficos:'📚', pessoal:'🌱', revisao:'🔎', notas:'📝', habitos:'📅', recursos:'🗂️'
 };
 const MAJOR_ARCANA = [
   {num:'0', nome:'O Louco', icon:'🌬️', sub:'começo leve, presença e coragem'},
@@ -891,6 +902,7 @@ function ensureProjectFields(){
   if(!state.lendoGenerationMemory) state.lendoGenerationMemory = [];
   if(typeof state.marketingAccess === 'undefined') state.marketingAccess = '';
   if(typeof state.publiqueAccess === 'undefined') state.publiqueAccess = '';
+  if(typeof state.siteNotes === 'undefined') state.siteNotes = '';
   ensurePubliqueRoutine();
   state.tasks.forEach(t=>{
     if(isProject(t)){
@@ -936,6 +948,8 @@ function ensurePubliqueRoutine(){
   if(!state.publiqueRoutine.dailyLog) state.publiqueRoutine.dailyLog = {};
   if(!state.publiqueRoutine.weeklyLog) state.publiqueRoutine.weeklyLog = {};
   if(!state.publiqueRoutine.dismissedMisses) state.publiqueRoutine.dismissedMisses = {};
+  state.publiqueRoutine.dailyFields.forEach(item=>{ if(typeof item.notes === 'undefined') item.notes = ''; });
+  state.publiqueRoutine.weeklyItems.forEach(item=>{ if(typeof item.notes === 'undefined') item.notes = ''; });
 }
 function projectPriorityLevel(p){
   const priority = p.projectPriority || priorityToProjectPriority(p.prioridade);
@@ -1028,7 +1042,7 @@ function seedState(){
   ];
   const habitosLog = {};
 
-  return { focus:'', tasks, vendas, recursos, covers:{}, habitos, habitosLog, marketingAccess:'', publiqueAccess:'', publiqueRoutine:null, pageEmojis:Object.assign({}, DEFAULT_PAGE_EMOJIS) };
+  return { focus:'', tasks, vendas, recursos, covers:{}, habitos, habitosLog, marketingAccess:'', publiqueAccess:'', publiqueRoutine:null, siteNotes:'', pageEmojis:Object.assign({}, DEFAULT_PAGE_EMOJIS) };
 }
 
 /* ---------- armazenamento ---------- */
@@ -1200,10 +1214,42 @@ function renderPage(page){
   else if(page==='lendosaficos') content = renderLendoSaficos();
   else if(page==='pessoal') content = renderArea('Pessoal');
   else if(page==='revisao') content = renderRevisao();
+  else if(page==='notas') content = renderNotas();
   else if(page==='habitos') content = renderHabitos();
   else if(page==='recursos') content = renderRecursos();
 
   return content;
+}
+
+/* ---------- Notas ---------- */
+function renderNotas(){
+  return `<div class="notes-page">
+    <div class="page-head">
+      <div>
+        <h1>${pageEmoji('notas')} Notas</h1>
+        <div class="subtitle">Um espaço simples para guardar ideias, lembretes e referências rápidas.</div>
+      </div>
+    </div>
+    <div class="site-notes-card">
+      <div class="note-toolbar">
+        <button class="note-tool" onclick="siteNoteFormat('bold')" title="Negrito"><b>B</b></button>
+        <button class="note-tool" onclick="siteNoteFormat('italic')" title="Itálico"><i>I</i></button>
+        <button class="note-tool" onclick="siteNoteFormat('underline')" title="Sublinhado"><u>U</u></button>
+        <button class="note-tool" onclick="siteNoteFormat('insertHorizontalRule')" title="Linha divisória">Linha</button>
+      </div>
+      <div id="siteNotesEditor" class="site-notes-editor" contenteditable="true" data-placeholder="Escreva suas notas aqui..." oninput="updateSiteNotes(this.innerHTML)">${state.siteNotes||''}</div>
+    </div>
+  </div>`;
+}
+function updateSiteNotes(value){
+  state.siteNotes = value;
+  saveState();
+}
+function siteNoteFormat(command){
+  const editor = document.getElementById('siteNotesEditor');
+  if(editor) editor.focus();
+  document.execCommand(command, false, null);
+  if(editor) updateSiteNotes(editor.innerHTML);
 }
 
 /* ---------- Hoje ---------- */
@@ -1850,7 +1896,8 @@ function renderPubliqueRoutine(){
 function renderPubliqueRoutineRow(item, done, type){
   return `<div class="publique-routine-row ${done?'done':''}">
     <span class="chk ${done?'checked':''}" onclick="togglePubliqueRoutine('${type}','${item.id}')">${done?'✓':''}</span>
-    <div class="publique-routine-name">${escapeHtml(item.nome)}</div>
+    <button class="publique-routine-name" onclick="openPubliqueRoutineNote('${type}','${item.id}')">${escapeHtml(item.nome)}</button>
+    <button class="publique-muted-action" title="Abrir notas" onclick="openPubliqueRoutineNote('${type}','${item.id}')">✎</button>
     <button class="publique-muted-action" title="Remover" onclick="deletePubliqueRoutineItem('${type}','${item.id}')">✕</button>
   </div>`;
 }
@@ -1870,7 +1917,7 @@ function addPubliqueRoutineItem(type){
   const nome = input && input.value.trim();
   if(!nome) return;
   const listName = type === 'weekly' ? 'weeklyItems' : 'dailyFields';
-  state.publiqueRoutine[listName].push({id:genId(), nome});
+  state.publiqueRoutine[listName].push({id:genId(), nome, notes:''});
   saveState();
   render({preserveScroll:true});
 }
@@ -1887,6 +1934,52 @@ function dismissPubliqueMiss(dateStr){
   ensurePubliqueRoutine();
   state.publiqueRoutine.dismissedMisses[dateStr] = true;
   saveState();
+  render({preserveScroll:true});
+}
+function getPubliqueRoutineItem(type, id){
+  ensurePubliqueRoutine();
+  const listName = type === 'weekly' ? 'weeklyItems' : 'dailyFields';
+  return state.publiqueRoutine[listName].find(item=>item.id===id);
+}
+function openPubliqueRoutineNote(type, id){
+  const item = getPubliqueRoutineItem(type, id);
+  if(!item) return;
+  document.getElementById('modal-root').innerHTML = `<div class="modal-overlay" onclick="if(event.target===this) closePubliqueRoutineNote()">
+    <div class="modal wide-note">
+      <div class="modal-header">
+        <h2>${escapeHtml(item.nome)}</h2>
+        <button class="icon-btn" onclick="closePubliqueRoutineNote()">✕</button>
+      </div>
+      <div class="note-toolbar">
+        <button class="note-tool" onclick="publiqueNoteFormat('bold','${type}','${id}')" title="Negrito"><b>B</b></button>
+        <button class="note-tool" onclick="publiqueNoteFormat('italic','${type}','${id}')" title="Itálico"><i>I</i></button>
+        <button class="note-tool" onclick="publiqueNoteFormat('underline','${type}','${id}')" title="Sublinhado"><u>U</u></button>
+        <button class="note-tool" onclick="publiqueNoteFormat('foreColor','${type}','${id}','#4077a8')" title="Colorido">Cor</button>
+        <button class="note-tool" onclick="publiqueNoteFormat('backColor','${type}','${id}','#e8f2fb')" title="Marcado">Marcado</button>
+        <button class="note-tool" onclick="publiqueNoteFormat('backColor','${type}','${id}','#fff1a8')" title="Destacado">Destaque</button>
+      </div>
+      <div id="publiqueRoutineNotesEditor" class="publique-note-editor" contenteditable="true" data-placeholder="Escreva aqui as legendas, ideias e observações desse item..." oninput="updatePubliqueRoutineNote('${type}','${id}',this.innerHTML)">${item.notes||''}</div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="closePubliqueRoutineNote()">Voltar para Publique</button>
+      </div>
+    </div>
+  </div>`;
+  setTimeout(()=>document.getElementById('publiqueRoutineNotesEditor')?.focus(),0);
+}
+function updatePubliqueRoutineNote(type, id, value){
+  const item = getPubliqueRoutineItem(type, id);
+  if(!item) return;
+  item.notes = value;
+  saveState();
+}
+function publiqueNoteFormat(command, type, id, value=null){
+  const editor = document.getElementById('publiqueRoutineNotesEditor');
+  if(editor) editor.focus();
+  document.execCommand(command, false, value);
+  if(editor) updatePubliqueRoutineNote(type, id, editor.innerHTML);
+}
+function closePubliqueRoutineNote(){
+  document.getElementById('modal-root').innerHTML = '';
   render({preserveScroll:true});
 }
 function renderMarketingProjects(projects, config={}){
