@@ -285,7 +285,7 @@ button.editorial-summary-card:hover{border-color:var(--client-text);background:v
 .editorial-section-sub{font-size:12px;color:var(--text-secondary);font-weight:800;margin-top:5px;}
 .editorial-calendar-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
 .editorial-month-label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-secondary);font-weight:900;min-width:128px;text-align:center;}
-.editorial-board{display:grid;grid-template-columns:repeat(7,minmax(155px,1fr));gap:12px;align-items:start;}
+.editorial-board{display:grid;grid-template-columns:repeat(8,minmax(145px,1fr));gap:12px;align-items:start;}
 .editorial-col{border:1px solid var(--border);border-radius:14px;background:var(--bg-subtle);padding:11px;min-height:290px;}
 .editorial-col.drag-over{outline:1.5px dashed var(--client-text);outline-offset:-7px;background:var(--hover);}
 .editorial-col.demanda{background:var(--gray-bg);}
@@ -293,6 +293,7 @@ button.editorial-summary-card:hover{border-color:var(--client-text);background:v
 .editorial-col.arte{background:var(--orange-bg);}
 .editorial-col.legenda{background:var(--pink-bg);}
 .editorial-col.aprovacao{background:var(--yellow-bg);}
+.editorial-col.aprovado{background:var(--green-bg);}
 .editorial-col.programado{background:var(--blue-bg);}
 .editorial-col.postado{background:var(--green-bg);}
 .editorial-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:10px;box-shadow:0 8px 18px rgba(120,70,120,.06);cursor:pointer;transition:transform .15s ease,border-color .15s ease;}
@@ -307,10 +308,15 @@ button.editorial-summary-card:hover{border-color:var(--client-text);background:v
 .editorial-day.today{border-color:var(--client-text);box-shadow:0 0 0 2px var(--client-bg) inset;background:linear-gradient(180deg,var(--bg-card),var(--client-bg));}
 .editorial-today-pill{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--client-text);background:rgba(255,255,255,.72);border:1px solid var(--border);border-radius:999px;padding:1px 6px;}
 .editorial-day-num{font-size:11px;color:var(--text-secondary);font-weight:900;display:flex;justify-content:space-between;}
-.editorial-day-task{border:1px solid var(--border);border-radius:8px;background:var(--client-bg);padding:6px 7px;font-size:10.5px;color:var(--text);font-weight:850;line-height:1.25;cursor:pointer;display:grid;gap:3px;}
+.editorial-day-task{border:1px solid var(--border);border-radius:8px;background:var(--client-bg);padding:6px 7px;font-size:10.5px;color:var(--text);font-weight:850;line-height:1.25;cursor:pointer;display:grid;gap:3px;position:relative;}
+.editorial-day-task-title{padding-right:22px;}
+.editorial-duplicate-btn{position:absolute;right:5px;top:5px;width:18px;height:18px;border:1px solid var(--border);border-radius:6px;background:rgba(255,255,255,.72);color:var(--text-secondary);font-size:11px;font-weight:900;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;}
+.editorial-duplicate-btn:hover{border-color:var(--client-text);color:var(--client-text);background:#fff;}
 .editorial-day-task.channel-instagram{background:var(--pink-bg);}
 .editorial-day-task.channel-linkedin{background:var(--blue-bg);}
 .editorial-day-task.channel-whatsapp{background:var(--green-bg);}
+.editorial-day-task.is-posted{background:rgba(255,255,255,.72);border-color:var(--border);opacity:.72;color:var(--text-secondary);}
+.editorial-day-task.is-posted .editorial-day-meta span{background:rgba(255,255,255,.5);}
 .editorial-day-meta{display:flex;gap:4px;flex-wrap:wrap;font-size:9.5px;color:var(--text-secondary);font-weight:900;text-transform:uppercase;letter-spacing:.02em;}
 .editorial-day-meta span{background:rgba(255,255,255,.55);border-radius:999px;padding:1px 5px;}
 .editorial-doc-panel{border:1px solid var(--border);border-radius:16px;background:var(--bg-card);padding:14px 16px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:14px;}
@@ -1987,6 +1993,7 @@ function editorialStages(){
     {key:'arte', label:'Criação de arte', icon:'◇', cls:'arte'},
     {key:'legenda', label:'Legenda', icon:'✍', cls:'legenda'},
     {key:'aprovacao', label:'Aprovação', icon:'◌', cls:'aprovacao'},
+    {key:'aprovado', label:'Aprovado', icon:'✓', cls:'aprovado'},
     {key:'programado', label:'Programado', icon:'□', cls:'programado'},
     {key:'postado', label:'Postado', icon:'☑', cls:'postado'}
   ];
@@ -2072,7 +2079,7 @@ function renderMarketingEditorialPage(){
       <div class="editorial-section-head">
         <div>
           <div class="editorial-section-title">Fluxo Doc4doc</div>
-          <div class="editorial-section-sub">Arraste entre as etapas: demanda, ideia, arte, legenda, aprovação, programado e postado.</div>
+          <div class="editorial-section-sub">Arraste entre as etapas: demanda, ideia, arte, legenda, aprovação, aprovado, programado e postado.</div>
         </div>
       </div>
       <div class="editorial-board">
@@ -2174,8 +2181,10 @@ function renderEditorialCalendar(tasks){
       <div class="editorial-day-num"><span>${d.getDate()}</span><span>${dateStr===today ? '<span class="editorial-today-pill">Hoje</span>' : (dayTasks.length || '')}</span></div>
       ${dayTasks.slice(0,4).map(t=>{
         const stage = editorialStages().find(s=>s.key===editorialStageForTask(t));
-        return `<div class="editorial-day-task ${editorialChannelClass(t.channel)}" onclick="openTaskModal('${t.id}')">
-          <div>${escapeHtml(t.nome)}</div>
+        const isPosted = editorialStageForTask(t) === 'postado';
+        return `<div class="editorial-day-task ${editorialChannelClass(t.channel)} ${isPosted?'is-posted':''}" onclick="openTaskModal('${t.id}')">
+          <button class="editorial-duplicate-btn" title="Duplicar entrega" onclick="event.stopPropagation();duplicateEditorialTask('${t.id}')">⧉</button>
+          <div class="editorial-day-task-title">${escapeHtml(t.nome)}</div>
           <div class="editorial-day-meta"><span>${escapeHtml(stage?.label || 'Etapa')}</span><span>${escapeHtml(t.channel||'Instagram')}</span></div>
         </div>`;
       }).join('')}
@@ -2227,6 +2236,18 @@ function addEditorialTask(stageOverride=''){
   const channel = document.getElementById('editorialChannel')?.value || 'Instagram';
   const stage = stageOverride || document.getElementById('editorialStage')?.value || 'demanda';
   state.tasks.push({id:genId(), nome:title, area:'Marketing Personnallité', tipo:'Tarefa única', status:editorialStatusForStage(stage), data:date, prioridade:'Normal', notas:'', link:'', parentId:null, recorrencia:null, completedAt:stage==='postado'?Date.now():null, energia:'Média', tempoEstimado:'', editorialStage:stage, channel});
+  saveState();
+  render({preserveScroll:true});
+}
+function duplicateEditorialTask(id){
+  const original = state.tasks.find(t=>t.id===id);
+  if(!original) return;
+  const copy = Object.assign({}, original, {
+    id: genId(),
+    nome: `${original.nome || 'Entrega'} (cópia)`,
+    completedAt: null
+  });
+  state.tasks.push(copy);
   saveState();
   render({preserveScroll:true});
 }
