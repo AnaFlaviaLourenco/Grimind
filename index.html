@@ -207,15 +207,32 @@ a{color:inherit;}
 .marketing-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
 .marketing-tag{border-radius:999px;background:var(--client-bg);color:var(--client-text);font-size:13px;font-weight:900;padding:6px 10px;}
 .marketing-hero{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:18px;background:var(--client-bg);padding:24px 38px;margin:16px 0 22px;display:grid;grid-template-columns:minmax(320px,1fr) repeat(3,minmax(150px,210px));gap:24px;align-items:center;}
+.marketing-hero.is-compact{padding:10px 28px;grid-template-columns:minmax(160px,.55fr) repeat(3,minmax(130px,190px));gap:16px;margin:12px 0 18px;}
 .marketing-hero::after{content:'✦';position:absolute;right:36px;top:28px;color:var(--client-text);font-size:34px;opacity:.35;}
+.marketing-hero.is-compact::after{right:28px;top:18px;font-size:26px;}
 .marketing-hero-copy{display:grid;gap:18px;}
+.marketing-hero.is-compact .marketing-hero-copy{gap:0;}
 .marketing-hero-title{font-family:var(--font-display);font-size:24px;line-height:1.25;color:var(--text);font-weight:700;max-width:520px;}
 .marketing-hero-meta{display:flex;gap:28px;flex-wrap:wrap;color:var(--text-secondary);font-size:13px;font-weight:900;}
+.marketing-hero.is-compact .marketing-hero-meta{font-size:12px;gap:12px;}
 .marketing-hero-stat{border-left:1px solid var(--border);padding-left:24px;min-height:82px;display:flex;flex-direction:column;justify-content:center;}
+.marketing-hero.is-compact .marketing-hero-stat{min-height:56px;padding-left:18px;}
 .marketing-stat-icon{width:42px;height:42px;border-radius:999px;background:rgba(255,255,255,.58);display:flex;align-items:center;justify-content:center;color:var(--client-text);font-size:20px;margin-bottom:8px;}
+.marketing-hero.is-compact .marketing-stat-icon{width:30px;height:30px;font-size:15px;margin-bottom:5px;}
 .marketing-stat-label{font-size:12px;color:var(--text-secondary);font-weight:900;margin-bottom:8px;}
+.marketing-hero.is-compact .marketing-stat-label{font-size:11px;margin-bottom:4px;}
 .marketing-stat-num{font-family:var(--font-display);font-size:30px;color:var(--text);font-weight:700;line-height:1;}
+.marketing-hero.is-compact .marketing-stat-num{font-size:24px;}
 .marketing-stat-sub{font-size:12px;color:var(--text-secondary);font-weight:800;margin-top:6px;}
+.marketing-hero.is-compact .marketing-stat-sub{font-size:11px;margin-top:4px;}
+.marketing-hero-strip{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:18px;background:var(--client-bg);padding:12px 26px;margin:12px 0 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:center;}
+.marketing-hero-strip::after{content:'✦';position:absolute;right:24px;top:50%;transform:translateY(-50%);color:var(--client-text);font-size:23px;opacity:.3;}
+.marketing-strip-item{min-height:42px;display:flex;align-items:center;gap:12px;padding:0 20px;border-left:1px solid var(--border);}
+.marketing-strip-item:first-child{border-left:0;padding-left:0;}
+.marketing-strip-icon{width:34px;height:34px;border-radius:999px;background:rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;color:var(--client-text);font-size:16px;font-weight:900;flex:0 0 auto;}
+.marketing-strip-copy{min-width:0;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
+.marketing-strip-label,.marketing-strip-sub{font-size:12px;color:var(--text-secondary);font-weight:850;line-height:1.35;}
+.marketing-strip-num{font-family:var(--font-body);font-size:12px;color:var(--text);font-weight:950;line-height:1.35;}
 .marketing-projects{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:24px;}
 .marketing-projects.compact{padding:14px 16px;margin-top:24px;}
 .marketing-projects.compact .marketing-project-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;}
@@ -247,6 +264,58 @@ a{color:inherit;}
 .marketing-task-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--text-tertiary);font-size:12px;font-weight:800;}
 .marketing-empty{border:1.5px dashed var(--border-strong);border-radius:12px;min-height:300px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--text-tertiary);font-size:13px;font-weight:800;line-height:1.45;padding:18px;}
 .marketing-add-task{border:0;background:transparent;color:var(--client-text);font-size:13px;font-weight:900;cursor:pointer;margin-top:10px;padding:8px 4px;}
+.editorial-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0 18px;}
+.editorial-summary-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:10px;min-height:64px;}
+button.editorial-summary-card{font:inherit;text-align:left;color:inherit;cursor:pointer;width:100%;}
+button.editorial-summary-card:hover{border-color:var(--client-text);background:var(--hover);}
+.editorial-summary-icon{width:34px;height:34px;border-radius:999px;background:var(--client-bg);display:flex;align-items:center;justify-content:center;color:var(--client-text);font-size:16px;font-weight:900;}
+.editorial-summary-label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-secondary);font-weight:900;}
+.editorial-summary-num{font-family:var(--font-display);font-size:24px;line-height:1;color:var(--text);font-weight:700;}
+.editorial-open-list{border:1px solid var(--border);border-radius:14px;background:var(--bg-card);padding:12px 14px;margin:-6px 0 18px;display:grid;gap:8px;}
+.editorial-open-item{border:1px solid var(--border);border-radius:10px;background:var(--bg-subtle);padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;}
+.editorial-open-item:hover{border-color:var(--client-text);background:var(--hover);}
+.editorial-open-title{font-size:13px;color:var(--text);font-weight:900;line-height:1.35;}
+.editorial-open-meta{display:flex;gap:6px;flex-wrap:wrap;color:var(--text-secondary);font-size:11px;font-weight:850;}
+.editorial-quick-add{border:1px solid var(--border);border-radius:16px;background:var(--bg-card);padding:14px;margin-bottom:18px;display:grid;grid-template-columns:minmax(220px,1fr) 150px 150px 170px auto;gap:9px;align-items:end;}
+.editorial-quick-add input,.editorial-quick-add select{width:100%;border:1.5px solid var(--border-strong);border-radius:10px;background:var(--bg-input);color:var(--text);font:inherit;font-size:13px;padding:10px 11px;outline:none;}
+.editorial-quick-add input:focus,.editorial-quick-add select:focus{border-color:var(--accent);}
+.editorial-section{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:18px;}
+.editorial-section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px;}
+.editorial-section-title{font-family:var(--font-display);font-size:22px;color:var(--text);font-weight:700;line-height:1.1;}
+.editorial-section-sub{font-size:12px;color:var(--text-secondary);font-weight:800;margin-top:5px;}
+.editorial-calendar-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+.editorial-month-label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-secondary);font-weight:900;min-width:128px;text-align:center;}
+.editorial-board{display:grid;grid-template-columns:repeat(7,minmax(155px,1fr));gap:12px;align-items:start;}
+.editorial-col{border:1px solid var(--border);border-radius:14px;background:var(--bg-subtle);padding:11px;min-height:290px;}
+.editorial-col.drag-over{outline:1.5px dashed var(--client-text);outline-offset:-7px;background:var(--hover);}
+.editorial-col.demanda{background:var(--gray-bg);}
+.editorial-col.ideia{background:var(--purple-bg);}
+.editorial-col.arte{background:var(--orange-bg);}
+.editorial-col.legenda{background:var(--pink-bg);}
+.editorial-col.aprovacao{background:var(--yellow-bg);}
+.editorial-col.programado{background:var(--blue-bg);}
+.editorial-col.postado{background:var(--green-bg);}
+.editorial-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:10px;box-shadow:0 8px 18px rgba(120,70,120,.06);cursor:pointer;transition:transform .15s ease,border-color .15s ease;}
+.editorial-card.drag-enabled{cursor:grab;}
+.editorial-card:hover{transform:translateY(-1px);border-color:var(--client-text);}
+.editorial-card-title{font-size:13.5px;line-height:1.35;color:var(--text);font-weight:900;margin-bottom:9px;}
+.editorial-card-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap;color:var(--text-tertiary);font-size:11.5px;font-weight:850;}
+.editorial-calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px;}
+.editorial-calendar-head{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-tertiary);font-weight:900;text-align:center;padding:3px 0;}
+.editorial-day{border:1px solid var(--border);border-radius:10px;background:var(--bg-card);min-height:118px;padding:7px;display:flex;flex-direction:column;gap:5px;}
+.editorial-day.muted{opacity:.45;background:var(--bg-subtle);}
+.editorial-day.today{border-color:var(--client-text);box-shadow:0 0 0 2px var(--client-bg) inset;background:linear-gradient(180deg,var(--bg-card),var(--client-bg));}
+.editorial-today-pill{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--client-text);background:rgba(255,255,255,.72);border:1px solid var(--border);border-radius:999px;padding:1px 6px;}
+.editorial-day-num{font-size:11px;color:var(--text-secondary);font-weight:900;display:flex;justify-content:space-between;}
+.editorial-day-task{border:1px solid var(--border);border-radius:8px;background:var(--client-bg);padding:6px 7px;font-size:10.5px;color:var(--text);font-weight:850;line-height:1.25;cursor:pointer;display:grid;gap:3px;}
+.editorial-day-task.channel-instagram{background:var(--pink-bg);}
+.editorial-day-task.channel-linkedin{background:var(--blue-bg);}
+.editorial-day-task.channel-whatsapp{background:var(--green-bg);}
+.editorial-day-meta{display:flex;gap:4px;flex-wrap:wrap;font-size:9.5px;color:var(--text-secondary);font-weight:900;text-transform:uppercase;letter-spacing:.02em;}
+.editorial-day-meta span{background:rgba(255,255,255,.55);border-radius:999px;padding:1px 5px;}
+.editorial-doc-panel{border:1px solid var(--border);border-radius:16px;background:var(--bg-card);padding:14px 16px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:14px;}
+.editorial-doc-title{font-family:var(--font-display);font-size:20px;color:var(--text);font-weight:700;}
+.editorial-doc-meta{font-size:12px;color:var(--text-secondary);font-weight:850;margin-top:4px;}
 .publique-routine{display:grid;grid-template-columns:minmax(320px,1fr) minmax(320px,1fr);gap:16px;margin-bottom:24px;}
 .publique-routine-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:18px 20px;}
 .publique-routine-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px;}
@@ -268,8 +337,8 @@ a{color:inherit;}
 .publique-muted-action{border:0;background:transparent;color:var(--text-tertiary);cursor:pointer;font-size:15px;padding:2px 4px;}
 .publique-muted-action:hover{color:var(--danger);}
 @media (max-width:980px){.publique-routine{grid-template-columns:1fr;}}
-@media (max-width:1100px){.marketing-hero{grid-template-columns:1fr 1fr;}.marketing-board{grid-template-columns:repeat(2,minmax(0,1fr));}}
-@media (max-width:760px){.marketing-header{align-items:flex-start}.marketing-icon{width:64px;height:64px;font-size:32px}.marketing-title{font-size:34px}.marketing-hero,.marketing-board{grid-template-columns:1fr}.marketing-project-grid{grid-template-columns:1fr}.marketing-project-card{grid-template-columns:1fr}.marketing-project-side{text-align:left;display:flex;justify-content:space-between}.marketing-hero-stat{border-left:0;border-top:1px solid var(--border);padding-left:0;padding-top:16px;}}
+@media (max-width:1100px){.marketing-hero{grid-template-columns:1fr 1fr;}.marketing-hero-strip{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.marketing-strip-item:nth-child(odd){border-left:0;padding-left:0}.marketing-board{grid-template-columns:repeat(2,minmax(0,1fr));}.editorial-summary{grid-template-columns:repeat(2,minmax(0,1fr));}.editorial-quick-add{grid-template-columns:1fr 1fr 1fr;}.editorial-board{grid-template-columns:repeat(3,minmax(190px,1fr));}}
+@media (max-width:760px){.marketing-header{align-items:flex-start}.marketing-icon{width:64px;height:64px;font-size:32px}.marketing-title{font-size:34px}.marketing-hero,.marketing-board,.marketing-hero-strip,.editorial-summary,.editorial-quick-add,.editorial-board{grid-template-columns:1fr}.marketing-project-grid{grid-template-columns:1fr}.marketing-project-card{grid-template-columns:1fr}.marketing-project-side{text-align:left;display:flex;justify-content:space-between}.marketing-hero-stat{border-left:0;border-top:1px solid var(--border);padding-left:0;padding-top:16px;}.marketing-strip-item{border-left:0;border-top:1px solid var(--border);padding:8px 0}.marketing-strip-item:first-child{border-top:0}.editorial-calendar{grid-template-columns:repeat(2,minmax(0,1fr));}.editorial-calendar-head{display:none}.editorial-day{min-height:104px}}
 
 .pill-tabs{display:flex;gap:0;margin-bottom:22px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
 .pill-tab{padding:8px 2px;font-size:14px;font-weight:600;color:var(--text-secondary);cursor:pointer;border-bottom:2.5px solid transparent;margin-right:22px;}
@@ -586,6 +655,28 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
 .lendo-task-title{font-weight:900;color:var(--text);font-size:14px;line-height:1.35;margin-bottom:9px;}
 .lendo-task-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--text-tertiary);font-size:12px;font-weight:800;}
 .lendo-add-task{border:0;background:transparent;color:var(--text-secondary);font-weight:900;font-size:13px;cursor:pointer;padding:8px 4px;}
+.video-studio-hero{border:1px solid var(--border);border-radius:18px;background:linear-gradient(135deg,var(--pink-bg),var(--purple-bg));padding:18px;margin-bottom:18px;display:grid;grid-template-columns:minmax(260px,1fr) minmax(300px,520px);gap:18px;align-items:center;}
+.video-studio-title{font-family:var(--font-display);font-size:30px;color:var(--text);line-height:1;margin:0 0 7px;}
+.video-studio-copy{color:var(--text-secondary);font-size:13px;font-weight:850;line-height:1.45;}
+.video-quick-add{display:grid;grid-template-columns:minmax(180px,1fr) 150px auto;gap:9px;align-items:end;background:rgba(255,255,255,.5);border:1px solid var(--border);border-radius:14px;padding:12px;}
+.video-quick-add input{width:100%;border:1.5px solid var(--border-strong);border-radius:10px;background:var(--bg-input);color:var(--text);font:inherit;font-size:13px;padding:10px 11px;outline:none;}
+.video-quick-add input:focus{border-color:var(--accent);}
+.video-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:18px;}
+.video-metric{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:10px;}
+.video-metric-icon{width:32px;height:32px;border-radius:999px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;color:var(--accent-strong);font-size:15px;font-weight:900;}
+.video-metric-label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-secondary);font-weight:900;}
+.video-metric-num{font-family:var(--font-display);font-size:24px;color:var(--text);line-height:1;font-weight:700;}
+.video-board{display:grid;grid-template-columns:repeat(4,minmax(220px,1fr));gap:16px;align-items:start;}
+.video-col{border:1px solid var(--border);border-radius:16px;background:var(--bg-card);padding:12px;min-height:360px;}
+.video-col.drag-over{outline:1.5px dashed var(--accent);outline-offset:-7px;background:var(--hover);}
+.video-col.ideia{background:var(--purple-bg);}
+.video-col.roteiro{background:var(--pink-bg);}
+.video-col.edicao{background:var(--orange-bg);}
+.video-col.publicacao{background:var(--green-bg);}
+.video-card{background:var(--bg-card);border:1px solid var(--border);border-radius:13px;padding:13px;margin-bottom:10px;box-shadow:0 10px 20px rgba(120,70,120,.07);cursor:pointer;transition:transform .15s ease,border-color .15s ease;}
+.video-card.drag-enabled{cursor:grab;}
+.video-card:hover{border-color:var(--accent);transform:translateY(-1px);}
+.video-card-note{font-size:12px;line-height:1.45;color:var(--text-secondary);font-weight:750;margin:8px 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .lendo-bottom-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
 .lendo-panel{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:18px;min-height:250px;}
 .lendo-panel-title{font-family:var(--font-display);font-size:19px;font-weight:700;color:var(--accent-strong);margin:0 0 14px;}
@@ -631,7 +722,8 @@ table.dtable tr:hover td{background:var(--hover);cursor:pointer;}
   .review-grid{grid-template-columns:1fr;}
   .lendo-header{display:block;}
   .lendo-metrics{grid-template-columns:repeat(2,minmax(0,1fr));}
-  .lendo-flow-board,.lendo-bottom-grid{grid-template-columns:1fr;}
+  .lendo-flow-board,.lendo-bottom-grid,.video-board,.video-studio-hero,.video-metrics{grid-template-columns:1fr;}
+  .video-quick-add{grid-template-columns:1fr;}
   .lendo-ideas-layout,.lendo-generator-layout{grid-template-columns:1fr;}
 }
 @media (max-width:720px){
@@ -797,7 +889,7 @@ const ACCENTS = [
 ];
 
 let state = null;
-let ui = { page:'hoje', openToggles:{}, lendoTab:'conteudo', vendasTab:'vendido', recursosTab:'recursos', projetosTab:'ativos', hojeView:'dia' };
+let ui = { page:'hoje', openToggles:{}, lendoTab:'conteudo', vendasTab:'vendido', recursosTab:'recursos', projetosTab:'ativos', hojeView:'dia', marketingMonthOffset:0, showMarketingOpenDeliveries:false };
 let modalState = null;
 let draggedTaskId = null;
 let dragClickGuard = false;
@@ -898,11 +990,13 @@ function visibleTasksForDate(dateStr){
 function ensureProjectFields(){
   if(!state.tasks) return;
   if(!state.lendoBooks) state.lendoBooks = [];
+  normalizeLendoBooks();
   if(!state.lendoGeneratedHistory) state.lendoGeneratedHistory = [];
   if(!state.lendoGenerationMemory) state.lendoGenerationMemory = [];
   if(typeof state.marketingAccess === 'undefined') state.marketingAccess = '';
   if(typeof state.publiqueAccess === 'undefined') state.publiqueAccess = '';
   if(typeof state.siteNotes === 'undefined') state.siteNotes = '';
+  const migrateMarketingDemand = !state.marketingDemandMigrationDone;
   ensurePubliqueRoutine();
   state.tasks.forEach(t=>{
     if(isProject(t)){
@@ -921,9 +1015,38 @@ function ensureProjectFields(){
       if(!t.energia) t.energia = 'Média';
       if(!t.tempoEstimado) t.tempoEstimado = '';
       if(typeof t.isConteudo === 'undefined') t.isConteudo = t.area==='Lendo Sáficos' && !/^Revisão de/.test(t.nome||'');
+      if(t.area==='Lendo Sáficos' && !t.videoStage && isLendoVideoTask(t)) t.videoStage = lendoVideoStage(t);
+      if(t.area==='Marketing Personnallité'){
+        if(migrateMarketingDemand) t.editorialStage = 'demanda';
+        if(!t.editorialStage) t.editorialStage = editorialStageForTask(t);
+        if(!t.channel) t.channel = 'Instagram';
+        if(/postar foto do treinamento valen[cç]a no grupo como tbt/i.test(t.nome || '') && t.editorialStage === 'demanda'){
+          t.editorialStage = 'ideia';
+          t.channel = 'WhatsApp';
+          t.status = editorialStatusForStage(t.editorialStage);
+        }
+      }
     }
   });
+  if(migrateMarketingDemand) state.marketingDemandMigrationDone = true;
   if(!state.revisaoLog) state.revisaoLog = {};
+}
+function normalizeLendoTrope(value){
+  return (value || '').trim().replace(/\s+/g,' ').toLocaleLowerCase('pt-BR');
+}
+function formatLendoTrope(value){
+  const normalized = normalizeLendoTrope(value);
+  return normalized ? normalized.charAt(0).toLocaleUpperCase('pt-BR') + normalized.slice(1) : '';
+}
+function normalizeLendoBooks(){
+  (state.lendoBooks || []).forEach(book=>{
+    const seen = new Set();
+    book.tropes = (book.tropes || []).map(normalizeLendoTrope).filter(trope=>{
+      if(!trope || seen.has(trope)) return false;
+      seen.add(trope);
+      return true;
+    });
+  });
 }
 function ensurePubliqueRoutine(){
   if(!state.publiqueRoutine){
@@ -1758,20 +1881,13 @@ function renderPublique(){
     tagClass:'tag-blue',
     accessKey:'publiqueAccess',
     routine:true,
-    compactProjects:true
+    compactProjects:true,
+    hideHeroTitle:true,
+    hideTaskMeta:true
   });
 }
 function renderMarketingPersonnalite(){
-  return renderClientAreaPage({
-    area:'Marketing Personnallité',
-    pageKey:'personnallite',
-    title:'Marketing Personnallité',
-    themeClass:'',
-    tags:['● Cliente ativo','✦ Saúde','Conteúdo e relacionamento'],
-    heroTitle:'Conteúdos, campanhas e entregas',
-    tagClass:'tag-pink',
-    accessKey:'marketingAccess'
-  });
+  return renderMarketingEditorialPage();
 }
 function renderClientAreaPage(config){
   const area = config.area;
@@ -1794,33 +1910,7 @@ function renderClientAreaPage(config){
     </header>
     <button class="btn" onclick="openQuickAdd('${config.pageKey}')">+ Nova tarefa</button>
 
-    <section class="marketing-hero">
-      <div class="marketing-hero-copy">
-        <div class="marketing-hero-title">${escapeHtml(config.heroTitle)}</div>
-        <div class="marketing-hero-meta">
-          <span>◷ Última atualização hoje</span>
-          <span>✓ ${openTasks.length} tarefa${openTasks.length===1?'':'s'} para organizar</span>
-        </div>
-      </div>
-      <div class="marketing-hero-stat">
-        <div class="marketing-stat-icon">▣</div>
-        <div class="marketing-stat-label">Próxima entrega</div>
-        <div class="marketing-stat-num">${nextTask ? formatDate(nextTask.data) : '—'}</div>
-        <div class="marketing-stat-sub">${nextTask ? escapeHtml(getTaskProject(nextTask)?.nome || nextTask.nome) : 'sem prazo'}</div>
-      </div>
-      <div class="marketing-hero-stat">
-        <div class="marketing-stat-icon">□</div>
-        <div class="marketing-stat-label">${config.routine ? 'Rotina diária' : 'Projetos ativos'}</div>
-        <div class="marketing-stat-num">${config.routine ? routine.dailyFields.length : projects.length}</div>
-        <div class="marketing-stat-sub">${config.routine ? 'campos' : `projeto${projects.length===1?'':'s'}`}</div>
-      </div>
-      <div class="marketing-hero-stat">
-        <div class="marketing-stat-icon">☑</div>
-        <div class="marketing-stat-label">Tarefas abertas</div>
-        <div class="marketing-stat-num">${openTasks.length}</div>
-        <div class="marketing-stat-sub">no total</div>
-      </div>
-    </section>
+    ${renderClientHero(config, openTasks, routine, projects, nextTask)}
 
     ${renderClientAccess(config)}
     ${config.routine ? renderPubliqueRoutine() : ''}
@@ -1828,6 +1918,331 @@ function renderClientAreaPage(config){
     <div class="marketing-board">${cols.map(c=>renderMarketingBoardCol(area,c.status,c.items)).join('')}</div>
     ${config.compactProjects ? renderMarketingProjects(projects, config) : ''}
   </section>`;
+}
+function renderClientHero(config, openTasks, routine, projects, nextTask){
+  if(config.hideHeroTitle){
+    return `<section class="marketing-hero-strip">
+      <div class="marketing-strip-item">
+        <span class="marketing-strip-icon">◷</span>
+        <span class="marketing-strip-label">Última atualização hoje</span>
+      </div>
+      <div class="marketing-strip-item">
+        <span class="marketing-strip-icon">▣</span>
+        <span class="marketing-strip-copy">
+          <span class="marketing-strip-label">Próxima entrega</span>
+          <span class="marketing-strip-num">${nextTask ? formatDate(nextTask.data) : '—'}</span>
+          <span class="marketing-strip-sub">${nextTask ? escapeHtml(getTaskProject(nextTask)?.nome || nextTask.nome) : 'sem prazo'}</span>
+        </span>
+      </div>
+      <div class="marketing-strip-item">
+        <span class="marketing-strip-icon">□</span>
+        <span class="marketing-strip-copy">
+          <span class="marketing-strip-label">${config.routine ? 'Rotina diária' : 'Projetos ativos'}</span>
+          <span class="marketing-strip-num">${config.routine ? routine.dailyFields.length : projects.length}</span>
+          <span class="marketing-strip-sub">${config.routine ? 'campos' : `projeto${projects.length===1?'':'s'}`}</span>
+        </span>
+      </div>
+      <div class="marketing-strip-item">
+        <span class="marketing-strip-icon">☑</span>
+        <span class="marketing-strip-copy">
+          <span class="marketing-strip-label">Tarefas abertas</span>
+          <span class="marketing-strip-num">${openTasks.length}</span>
+          <span class="marketing-strip-sub">no total</span>
+        </span>
+      </div>
+    </section>`;
+  }
+  return `<section class="marketing-hero">
+    <div class="marketing-hero-copy">
+      <div class="marketing-hero-title">${escapeHtml(config.heroTitle)}</div>
+      <div class="marketing-hero-meta">
+        <span>◷ Última atualização hoje</span>
+        ${config.hideTaskMeta ? '' : `<span>✓ ${openTasks.length} tarefa${openTasks.length===1?'':'s'} para organizar</span>`}
+      </div>
+    </div>
+    <div class="marketing-hero-stat">
+      <div class="marketing-stat-icon">▣</div>
+      <div class="marketing-stat-label">Próxima entrega</div>
+      <div class="marketing-stat-num">${nextTask ? formatDate(nextTask.data) : '—'}</div>
+      <div class="marketing-stat-sub">${nextTask ? escapeHtml(getTaskProject(nextTask)?.nome || nextTask.nome) : 'sem prazo'}</div>
+    </div>
+    <div class="marketing-hero-stat">
+      <div class="marketing-stat-icon">□</div>
+      <div class="marketing-stat-label">${config.routine ? 'Rotina diária' : 'Projetos ativos'}</div>
+      <div class="marketing-stat-num">${config.routine ? routine.dailyFields.length : projects.length}</div>
+      <div class="marketing-stat-sub">${config.routine ? 'campos' : `projeto${projects.length===1?'':'s'}`}</div>
+    </div>
+    <div class="marketing-hero-stat">
+      <div class="marketing-stat-icon">☑</div>
+      <div class="marketing-stat-label">Tarefas abertas</div>
+      <div class="marketing-stat-num">${openTasks.length}</div>
+      <div class="marketing-stat-sub">no total</div>
+    </div>
+  </section>`;
+}
+function editorialStages(){
+  return [
+    {key:'demanda', label:'Demanda', icon:'☷', cls:'demanda'},
+    {key:'ideia', label:'Ideia', icon:'✦', cls:'ideia'},
+    {key:'arte', label:'Criação de arte', icon:'◇', cls:'arte'},
+    {key:'legenda', label:'Legenda', icon:'✍', cls:'legenda'},
+    {key:'aprovacao', label:'Aprovação', icon:'◌', cls:'aprovacao'},
+    {key:'programado', label:'Programado', icon:'□', cls:'programado'},
+    {key:'postado', label:'Postado', icon:'☑', cls:'postado'}
+  ];
+}
+function editorialChannels(){
+  return ['Instagram','LinkedIn','WhatsApp'];
+}
+function editorialStatusForStage(stage){
+  if(stage === 'demanda') return 'A fazer';
+  if(stage === 'ideia') return 'A fazer';
+  if(stage === 'aprovacao') return 'Aguardando';
+  if(stage === 'postado') return 'Feito';
+  return 'Fazendo';
+}
+function editorialStageForTask(t){
+  if(t.editorialStage) return t.editorialStage;
+  return 'demanda';
+}
+function editorialChannelClass(channel){
+  const c = (channel || '').toLowerCase();
+  if(c.includes('linkedin')) return 'channel-linkedin';
+  if(c.includes('whatsapp')) return 'channel-whatsapp';
+  return 'channel-instagram';
+}
+function doc4docProject(){
+  return getProjects().find(p=>p.area==='Marketing Personnallité' && /doc\s*4\s*doc|doc4doc/i.test(p.nome || ''));
+}
+function marketingEditorialTasks(){
+  const tasks = areaKanbanTasks('Marketing Personnallité').filter(t=>!isProject(t));
+  return tasks;
+}
+function renderMarketingEditorialPage(){
+  const area = 'Marketing Personnallité';
+  const tasks = marketingEditorialTasks();
+  const projects = sortProjectsByDue(getProjects().filter(p=>p.area===area && p.projectStatus!=='Concluído'));
+  const doc = doc4docProject();
+  const open = tasks.filter(t=>t.status !== 'Feito');
+  const scheduled = tasks.filter(t=>editorialStageForTask(t)==='programado');
+  const postedMonth = tasks.filter(t=>editorialStageForTask(t)==='postado' && isSameMonth(t.data));
+  const next = open.filter(t=>t.data).sort(byDueDate)[0];
+  return `<section class="marketing-page">
+    <header class="marketing-header">
+      <div class="marketing-icon">${pageEmoji('personnallite')}</div>
+      <div>
+        <h1 class="marketing-title">Marketing Personnallité</h1>
+        <div class="marketing-tags">
+          <span class="marketing-tag">● Cliente ativo</span>
+          <span class="marketing-tag">Doc4doc</span>
+          <span class="marketing-tag">Calendário editorial</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="editorial-summary">
+      ${renderEditorialSummary('Entregas abertas', open.length, '☷', "toggleMarketingOpenDeliveries()")}
+      ${renderEditorialSummary('Próxima entrega', next ? formatDate(next.data) : '—', '◷', next ? `openTaskModal('${next.id}')` : '')}
+      ${renderEditorialSummary('Programados', scheduled.length, '□')}
+      ${renderEditorialSummary('Postados no mês', postedMonth.length, '☑')}
+    </div>
+    ${ui.showMarketingOpenDeliveries ? renderMarketingOpenDeliveries(open) : ''}
+
+    ${renderDoc4docPanel(doc, projects)}
+    ${renderEditorialQuickAdd(doc)}
+    ${renderClientAccess({accessKey:'marketingAccess', tagClass:'tag-pink'})}
+
+    <section class="editorial-section">
+      <div class="editorial-section-head">
+        <div>
+          <div class="editorial-section-title">Calendário editorial</div>
+          <div class="editorial-section-sub">Datas, etapas e redes visíveis para bater o olho e organizar a semana. Demandas ficam só no fluxo abaixo.</div>
+        </div>
+        <div class="editorial-calendar-controls">
+          <button class="btn" onclick="shiftMarketingCalendar(-1)">← Mês anterior</button>
+          <div class="editorial-month-label">${editorialCalendarMonthLabel()}</div>
+          <button class="btn" onclick="shiftMarketingCalendar(1)">Próximo mês →</button>
+          <button class="btn" onclick="openNewEditorialTask('ideia')">+ Nova entrega</button>
+        </div>
+      </div>
+      ${renderEditorialCalendar(tasks)}
+    </section>
+
+    <section class="editorial-section">
+      <div class="editorial-section-head">
+        <div>
+          <div class="editorial-section-title">Fluxo Doc4doc</div>
+          <div class="editorial-section-sub">Arraste entre as etapas: demanda, ideia, arte, legenda, aprovação, programado e postado.</div>
+        </div>
+      </div>
+      <div class="editorial-board">
+        ${editorialStages().map(stage=>renderEditorialColumn(stage, tasks.filter(t=>editorialStageForTask(t)===stage.key).sort(byDueDate))).join('')}
+      </div>
+    </section>
+  </section>`;
+}
+function renderEditorialSummary(label, value, icon, action=''){
+  const tag = action ? 'button' : 'div';
+  return `<${tag} class="editorial-summary-card" ${action ? `onclick="${action}"` : ''}>
+    <div class="editorial-summary-icon">${icon}</div>
+    <div><div class="editorial-summary-label">${escapeHtml(label)}</div><div class="editorial-summary-num">${escapeHtml(String(value))}</div></div>
+  </${tag}>`;
+}
+function renderMarketingOpenDeliveries(open){
+  const items = open.slice().sort(byDueDate);
+  return `<section class="editorial-open-list">
+    ${items.length ? items.map(t=>{
+      const stage = editorialStages().find(s=>s.key===editorialStageForTask(t));
+      return `<article class="editorial-open-item" onclick="openTaskModal('${t.id}')">
+        <div>
+          <div class="editorial-open-title">${escapeHtml(t.nome)}</div>
+          <div class="editorial-open-meta">
+            <span>${escapeHtml(stage?.label || 'Etapa')}</span>
+            <span>${escapeHtml(t.channel || 'Instagram')}</span>
+            <span>${formatDate(t.data)}</span>
+          </div>
+        </div>
+        <span class="tag tag-pink">Abrir</span>
+      </article>`;
+    }).join('') : '<div class="empty">Nenhuma entrega aberta agora.</div>'}
+  </section>`;
+}
+function renderDoc4docPanel(doc, projects){
+  const count = projects.length;
+  if(doc){
+    const open = projectOpenTasks(doc.id).length;
+    return `<section class="editorial-doc-panel">
+      <div>
+        <div class="editorial-doc-title">${escapeHtml(doc.nome)}</div>
+        <div class="editorial-doc-meta">${open} entrega${open===1?'':'s'} aberta${open===1?'':'s'} vinculada${open===1?'':'s'} ao projeto.</div>
+      </div>
+      <button class="btn" onclick="openTaskModal('${doc.id}')">Abrir projeto</button>
+    </section>`;
+  }
+  return `<section class="editorial-doc-panel">
+    <div>
+      <div class="editorial-doc-title">Doc4doc</div>
+      <div class="editorial-doc-meta">${count} projeto${count===1?'':'s'} de Marketing Personnallité. Crie ou renomeie um projeto como Doc4doc para vínculo automático.</div>
+    </div>
+    <button class="btn" onclick="openNewProject()">+ Projeto</button>
+  </section>`;
+}
+function renderEditorialQuickAdd(doc){
+  return `<section class="editorial-quick-add">
+    <input id="editorialTitle" type="text" placeholder="Nova entrega: post, carrossel, story...">
+    <input id="editorialDate" type="date">
+    <select id="editorialChannel">${editorialChannels().map(c=>`<option>${c}</option>`).join('')}</select>
+    <select id="editorialStage">${editorialStages().map(s=>`<option value="${s.key}">${s.label}</option>`).join('')}</select>
+    <button class="btn btn-primary" onclick="addEditorialTask()">+ Adicionar</button>
+  </section>`;
+}
+function renderEditorialColumn(stage, items){
+  return `<section class="editorial-col ${stage.cls}" ondragover="allowTaskDrop(event)" ondragleave="clearDragOver(event)" ondrop="dropEditorialTaskOnStage(event,'${stage.key}')">
+    <div class="marketing-col-head"><span>${stage.icon} ${stage.label}</span><span>${items.length}</span></div>
+    ${items.length ? items.map(renderEditorialCard).join('') : '<div class="marketing-empty">Arraste uma entrega<br>para cá</div>'}
+    <button class="marketing-add-task" onclick="openNewEditorialTask('${stage.key}')">+ Nova entrega</button>
+  </section>`;
+}
+function renderEditorialCard(t){
+  const stage = editorialStageForTask(t);
+  const channel = t.channel || 'Instagram';
+  return `<article class="editorial-card drag-enabled" draggable="true" ondragstart="startTaskDrag(event,'${t.id}')" ondragend="endTaskDrag(event)" onclick="if(ignoreDragClick()) return; openTaskModal('${t.id}')">
+    <div class="editorial-card-title">${escapeHtml(t.nome)}</div>
+    <div class="editorial-card-meta">
+      <span class="tag ${editorialChannelClass(channel)==='channel-linkedin'?'tag-blue':(editorialChannelClass(channel)==='channel-whatsapp'?'tag-green':'tag-pink')}">${escapeHtml(channel)}</span>
+      <span>${formatDate(t.data)}</span>
+      <span>${escapeHtml(editorialStages().find(s=>s.key===stage)?.label || stage)}</span>
+    </div>
+  </article>`;
+}
+function renderEditorialCalendar(tasks){
+  const now = editorialCalendarDate();
+  const year = now.getFullYear();
+  const month = now.getMonth();
+  const first = new Date(year, month, 1);
+  const start = new Date(first);
+  start.setDate(first.getDate() - first.getDay());
+  const heads = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'].map(d=>`<div class="editorial-calendar-head">${d}</div>`).join('');
+  const cells = [];
+  const today = todayStr();
+  for(let i=0;i<42;i++){
+    const d = new Date(start);
+    d.setDate(start.getDate()+i);
+    const dateStr = fmt(d);
+    const dayTasks = tasks.filter(t=>t.data===dateStr && editorialStageForTask(t)!=='demanda').sort(byDueDate);
+    cells.push(`<div class="editorial-day ${d.getMonth()!==month?'muted':''} ${dateStr===today?'today':''}">
+      <div class="editorial-day-num"><span>${d.getDate()}</span><span>${dateStr===today ? '<span class="editorial-today-pill">Hoje</span>' : (dayTasks.length || '')}</span></div>
+      ${dayTasks.slice(0,4).map(t=>{
+        const stage = editorialStages().find(s=>s.key===editorialStageForTask(t));
+        return `<div class="editorial-day-task ${editorialChannelClass(t.channel)}" onclick="openTaskModal('${t.id}')">
+          <div>${escapeHtml(t.nome)}</div>
+          <div class="editorial-day-meta"><span>${escapeHtml(stage?.label || 'Etapa')}</span><span>${escapeHtml(t.channel||'Instagram')}</span></div>
+        </div>`;
+      }).join('')}
+      ${dayTasks.length>4 ? `<div class="editorial-day-task">+ ${dayTasks.length-4}</div>` : ''}
+    </div>`);
+  }
+  return `<div class="editorial-calendar">${heads}${cells.join('')}</div>`;
+}
+function editorialCalendarDate(){
+  const d = new Date();
+  d.setMonth(d.getMonth() + (ui.marketingMonthOffset || 0), 1);
+  return d;
+}
+function editorialCalendarMonthLabel(){
+  return editorialCalendarDate().toLocaleDateString('pt-BR',{month:'long',year:'numeric'});
+}
+function shiftMarketingCalendar(delta){
+  ui.marketingMonthOffset = (ui.marketingMonthOffset || 0) + delta;
+  render({preserveScroll:true});
+  saveUiPrefs(currentScrollTop());
+}
+function toggleMarketingOpenDeliveries(){
+  ui.showMarketingOpenDeliveries = !ui.showMarketingOpenDeliveries;
+  render({preserveScroll:true});
+  saveUiPrefs(currentScrollTop());
+}
+function openNewEditorialTask(stage='ideia'){
+  modalState = { type:'task', id:null, draft:{
+    nome:'',
+    area:'Marketing Personnallité',
+    tipo:'Tarefa única',
+    status:editorialStatusForStage(stage),
+    data:'',
+    prioridade:'Normal',
+    notas:'',
+    link:'',
+    parentId:null,
+    recorrencia:null,
+    energia:'Média',
+    tempoEstimado:'',
+    editorialStage:stage,
+    channel:'Instagram'
+  }};
+  renderModal();
+}
+function addEditorialTask(stageOverride=''){
+  const title = (document.getElementById('editorialTitle')?.value || '').trim() || 'Nova entrega Doc4doc';
+  const date = document.getElementById('editorialDate')?.value || '';
+  const channel = document.getElementById('editorialChannel')?.value || 'Instagram';
+  const stage = stageOverride || document.getElementById('editorialStage')?.value || 'demanda';
+  state.tasks.push({id:genId(), nome:title, area:'Marketing Personnallité', tipo:'Tarefa única', status:editorialStatusForStage(stage), data:date, prioridade:'Normal', notas:'', link:'', parentId:null, recorrencia:null, completedAt:stage==='postado'?Date.now():null, energia:'Média', tempoEstimado:'', editorialStage:stage, channel});
+  saveState();
+  render({preserveScroll:true});
+}
+function dropEditorialTaskOnStage(event, stage){
+  event.preventDefault();
+  event.stopPropagation();
+  event.currentTarget.classList.remove('drag-over');
+  const taskId = (event.dataTransfer && event.dataTransfer.getData('text/plain')) || draggedTaskId;
+  const task = state.tasks.find(t=>t.id===taskId);
+  if(!task || task.area!=='Marketing Personnallité' || isProject(task)) return;
+  task.editorialStage = stage;
+  task.status = editorialStatusForStage(stage);
+  task.completedAt = stage === 'postado' ? Date.now() : null;
+  if(!task.channel) task.channel = 'Instagram';
+  saveState();
+  render({preserveScroll:true});
 }
 function renderClientAccess(config){
   const value = state[config.accessKey] || '';
@@ -2112,10 +2527,11 @@ function renderLendoSaficos(){
   <div class="pill-tabs">
     <div class="pill-tab ${tab==='conteudo'?'active':''}" onclick="setLendoTab('conteudo')">Painel</div>
     <div class="pill-tab ${tab==='ideias'?'active':''}" onclick="setLendoTab('ideias')">Ideias</div>
+    <div class="pill-tab ${tab==='videos'?'active':''}" onclick="setLendoTab('videos')">Vídeos</div>
     <div class="pill-tab ${tab==='listas'?'active':''}" onclick="setLendoTab('listas')">Gerador de listas</div>
     <div class="pill-tab ${tab==='vendas'?'active':''}" onclick="setLendoTab('vendas')">Vendas &amp; Financeiro</div>
   </div>
-  ${tab==='conteudo' ? renderLendoConteudo() : (tab==='ideias' ? renderLendoIdeiasPage() : (tab==='listas' ? renderLendoListGenerator() : renderLendoVendas()))}
+  ${tab==='conteudo' ? renderLendoConteudo() : (tab==='ideias' ? renderLendoIdeiasPage() : (tab==='videos' ? renderLendoVideos() : (tab==='listas' ? renderLendoListGenerator() : renderLendoVendas())))}
   </section>`;
 }
 function renderLendoConteudo(){
@@ -2212,6 +2628,119 @@ function lendoTypeTagClass(type){
   if(type==='Comunidade') return 'tag-green';
   return 'tag-gray';
 }
+function videoStages(){
+  return [
+    {key:'ideia', label:'Ideia', icon:'✦', hint:'capturar sem julgar', cls:'ideia'},
+    {key:'roteiro', label:'Roteiro', icon:'✍', hint:'estrutura e gancho', cls:'roteiro'},
+    {key:'edicao', label:'Edição', icon:'✂', hint:'cortar, legendar, revisar', cls:'edicao'},
+    {key:'publicacao', label:'Publicação', icon:'☑', hint:'postar e acompanhar', cls:'publicacao'}
+  ];
+}
+function isLendoVideoTask(t){
+  if(!t || t.area!=='Lendo Sáficos' || isProject(t)) return false;
+  if(t.isVideo || t.videoStage) return true;
+  const text = `${t.nome||''} ${t.notas||''}`.toLowerCase();
+  return text.includes('vídeo') || text.includes('video') || text.includes('reels') || text.includes('gravar');
+}
+function lendoVideoStage(t){
+  if(t.videoStage) return t.videoStage;
+  if(t.status==='Feito') return 'publicacao';
+  if(t.status==='Fazendo') return 'roteiro';
+  if(t.status==='Aguardando') return 'edicao';
+  return 'ideia';
+}
+function videoStatusForStage(stage){
+  if(stage==='ideia') return 'A fazer';
+  if(stage==='publicacao') return 'Aguardando';
+  return 'Fazendo';
+}
+function renderLendoVideos(){
+  const videos = state.tasks.filter(isLendoVideoTask);
+  const stages = videoStages();
+  const byStage = stage => videos.filter(t=>lendoVideoStage(t)===stage.key).sort(byDueDate);
+  const ready = byStage(stages[3]).filter(t=>t.status!=='Feito').length;
+  return `<div class="video-studio">
+    <section class="video-studio-hero">
+      <div>
+        <h2 class="video-studio-title">Estúdio de vídeos</h2>
+        <div class="video-studio-copy">Um fluxo leve para transformar faísca em post: ideia, roteiro, edição e publicação sem virar uma pilha mental.</div>
+      </div>
+      <div class="video-quick-add">
+        <input id="newVideoTitle" type="text" placeholder="Ideia de vídeo, Reels, resenha...">
+        <input id="newVideoDate" type="date">
+        <button class="btn btn-primary" onclick="addLendoVideo()">+ Criar</button>
+      </div>
+    </section>
+    <div class="video-metrics">
+      ${stages.map(stage=>`<div class="video-metric">
+        <div class="video-metric-icon">${stage.icon}</div>
+        <div><div class="video-metric-label">${stage.label}</div><div class="video-metric-num">${byStage(stage).length}</div></div>
+      </div>`).join('')}
+    </div>
+    <section class="video-board">
+      ${stages.map(stage=>renderVideoColumn(stage, byStage(stage))).join('')}
+    </section>
+    ${ready ? `<div class="callout" style="margin-top:18px"><div>☑</div><div><div class="callout-label">Pronto para postar</div><div>${ready} vídeo${ready===1?'':'s'} esperando publicação.</div></div></div>` : ''}
+  </div>`;
+}
+function renderVideoColumn(stage, items){
+  return `<div class="video-col ${stage.cls}" ondragover="allowTaskDrop(event)" ondragleave="clearDragOver(event)" ondrop="dropLendoVideoOnStage(event,'${stage.key}')">
+    <div class="lendo-flow-head"><span>${stage.icon} ${stage.label} <span class="lendo-flow-count">${items.length}</span></span><span>${escapeHtml(stage.hint)}</span></div>
+    ${items.map(renderVideoCard).join('') || '<div class="marketing-empty">Arraste um vídeo para cá</div>'}
+    <button class="lendo-add-task" onclick="addLendoVideo('${stage.key}')">+ Novo vídeo</button>
+  </div>`;
+}
+function renderVideoCard(t){
+  const project = getTaskProject(t);
+  const note = stripHtml(t.notas || '').trim();
+  return `<article class="video-card drag-enabled" draggable="true" ondragstart="startTaskDrag(event,'${t.id}')" ondragend="endTaskDrag(event)" onclick="if(ignoreDragClick()) return; openTaskModal('${t.id}')">
+    <div class="lendo-task-title">${escapeHtml(t.nome)}</div>
+    <div class="lendo-task-meta">
+      ${project ? `<span class="tag tag-purple">${escapeHtml(project.nome)}</span>` : '<span class="tag tag-pink">vídeo</span>'}
+      ${t.data ? `<span>□ ${formatDate(t.data)}</span>` : '<span>sem data</span>'}
+      ${t.status==='Feito' ? '<span class="tag tag-green">publicado</span>' : ''}
+    </div>
+    ${note ? `<div class="video-card-note">${escapeHtml(note)}</div>` : ''}
+    ${lendoVideoStage(t)==='publicacao' && t.status!=='Feito' ? `<button class="field-link-btn" onclick="event.stopPropagation();markVideoPublished('${t.id}')">Marcar publicado</button>` : ''}
+  </article>`;
+}
+function stripHtml(value){
+  return String(value || '').replace(/<[^>]*>/g,' ');
+}
+function addLendoVideo(stage='ideia'){
+  const titleInput = document.getElementById('newVideoTitle');
+  const dateInput = document.getElementById('newVideoDate');
+  const nome = (titleInput?.value || '').trim() || 'Novo vídeo';
+  const data = dateInput?.value || '';
+  state.tasks.push({id:genId(), nome, area:'Lendo Sáficos', tipo:'Tarefa única', status:videoStatusForStage(stage), data, prioridade:'Normal', notas:'', link:'', parentId:null, recorrencia:null, completedAt:null, energia:'Média', tempoEstimado:'', isConteudo:true, isVideo:true, videoStage:stage});
+  saveState();
+  render({preserveScroll:true});
+}
+function dropLendoVideoOnStage(event, stage){
+  event.preventDefault();
+  event.stopPropagation();
+  event.currentTarget.classList.remove('drag-over');
+  const taskId = (event.dataTransfer && event.dataTransfer.getData('text/plain')) || draggedTaskId;
+  const task = state.tasks.find(t=>t.id===taskId);
+  if(!task || task.area!=='Lendo Sáficos' || isProject(task)) return;
+  task.isVideo = true;
+  task.isConteudo = true;
+  task.videoStage = stage;
+  if(task.status!=='Feito') task.status = videoStatusForStage(stage);
+  saveState();
+  render({preserveScroll:true});
+}
+function markVideoPublished(id){
+  const task = state.tasks.find(t=>t.id===id);
+  if(!task) return;
+  task.isVideo = true;
+  task.isConteudo = true;
+  task.videoStage = 'publicacao';
+  task.status = 'Feito';
+  task.completedAt = Date.now();
+  saveState();
+  render({preserveScroll:true});
+}
 function renderLendoProjectsPanel(projects){
   const list = projects.filter(p=>p.projectStatus!=='Concluído').slice(0,5);
   return `<section class="lendo-panel">
@@ -2286,21 +2815,21 @@ function renderLendoListGenerator(){
       <div class="field"><label>Tropes</label><input type="text" id="bookTropes" placeholder="slow burn, rivals to lovers, fantasia"></div>
       <button class="btn btn-primary" onclick="addLendoBook()">+ Adicionar livro</button>
       <div class="lendo-trope-grid">
-        ${Object.keys(tropes).length ? Object.keys(tropes).sort((a,b)=>a.localeCompare(b)).map(trope=>`<button class="lendo-trope-chip ${trope===selectedTrope?'active':''}" onclick="selectLendoTrope(${jsArg(trope)})">${escapeHtml(trope)} · ${tropes[trope].length}</button>`).join('') : '<div class="empty">Cadastre tropes para organizar os livros.</div>'}
+        ${Object.keys(tropes).length ? Object.keys(tropes).sort((a,b)=>a.localeCompare(b)).map(trope=>`<button class="lendo-trope-chip ${trope===selectedTrope?'active':''}" onclick="selectLendoTrope(${jsArg(trope)})">${escapeHtml(formatLendoTrope(trope))} · ${tropes[trope].length}</button>`).join('') : '<div class="empty">Cadastre tropes para organizar os livros.</div>'}
       </div>
       <div class="lendo-book-list">
-        ${selectedTrope ? `<h3 class="lendo-panel-title" style="font-size:17px">${escapeHtml(selectedTrope)}</h3>${tropes[selectedTrope].map(renderLendoBookCard).join('')}` : ''}
+        ${selectedTrope ? `<h3 class="lendo-panel-title" style="font-size:17px">${escapeHtml(formatLendoTrope(selectedTrope))}</h3>${tropes[selectedTrope].map(renderLendoBookCard).join('')}` : ''}
       </div>
     </section>
     <section class="lendo-panel">
       <h2 class="lendo-panel-title">Gerar lista por trope</h2>
       <p class="lendo-subtitle">Escolha um trope e eu peço a quantidade de livros. A lista sai mesclada e evita repetir livros usados nas últimas 5 gerações.</p>
-      <div class="field"><label>Trope desejado</label><input type="text" id="generateTrope" value="${escapeAttr(selectedTrope)}" placeholder="Ex: slow burn"></div>
+      <div class="field"><label>Trope desejado</label><input type="text" id="generateTrope" value="${escapeAttr(formatLendoTrope(selectedTrope))}" placeholder="Ex: slow burn"></div>
       <button class="btn btn-primary" onclick="generateLendoList()">Gerar lista</button>
       <div class="lendo-generated-list">
         ${lendoCurrentGeneratedList.map((b,i)=>`<div class="lendo-generated-item">
           <div class="lendo-book-title">${i+1}. ${escapeHtml(b.titulo)}</div>
-          <div class="lendo-book-meta">${escapeHtml(b.autora)} · ${escapeHtml((b.tropes||[]).join(', '))}</div>
+          <div class="lendo-book-meta">${escapeHtml(b.autora)} · ${escapeHtml(displayLendoTropes(b))}</div>
           ${b.link ? `<a href="${escapeAttr(b.link)}" target="_blank" rel="noopener">Abrir link</a>` : ''}
         </div>`).join('')}
       </div>
@@ -2316,7 +2845,7 @@ function renderLendoListGenerator(){
 function renderLendoBookCard(book){
   return `<div class="lendo-book-card">
     <div class="lendo-book-title">${escapeHtml(book.titulo)}</div>
-    <div class="lendo-book-meta">${escapeHtml(book.autora)} · ${escapeHtml((book.tropes||[]).join(', '))}</div>
+    <div class="lendo-book-meta">${escapeHtml(book.autora)} · ${escapeHtml(displayLendoTropes(book))}</div>
     ${book.link ? `<a href="${escapeAttr(book.link)}" target="_blank" rel="noopener" class="lendo-panel-link" style="margin-top:6px">Amazon →</a>` : ''}
     <button class="icon-btn" style="float:right;margin-top:-26px" onclick="deleteLendoBook('${book.id}')">✕</button>
   </div>`;
@@ -2329,14 +2858,19 @@ function renderGeneratedHistoryCard(entry){
 }
 function lendoTropeGroups(books){
   return books.reduce((groups, book)=>{
+    const usedInBook = new Set();
     (book.tropes || []).forEach(t=>{
-      const trope = t.trim();
-      if(!trope) return;
+      const trope = normalizeLendoTrope(t);
+      if(!trope || usedInBook.has(trope)) return;
+      usedInBook.add(trope);
       if(!groups[trope]) groups[trope] = [];
       groups[trope].push(book);
     });
     return groups;
   }, {});
+}
+function displayLendoTropes(book){
+  return (book.tropes || []).map(formatLendoTrope).filter(Boolean).join(', ');
 }
 function selectLendoTrope(trope){
   ui.selectedLendoTrope = trope;
@@ -2500,7 +3034,13 @@ function addLendoBook(){
   const tropesRaw = document.getElementById('bookTropes')?.value.trim();
   if(!titulo || !autora){ alert('Preencha pelo menos nome do livro e autora.'); return; }
   if(!state.lendoBooks) state.lendoBooks = [];
-  state.lendoBooks.push({id:genId(), titulo, autora, link:link||'', tropes:(tropesRaw||'').split(',').map(t=>t.trim()).filter(Boolean)});
+  const seenTropes = new Set();
+  const tropes = (tropesRaw||'').split(',').map(normalizeLendoTrope).filter(trope=>{
+    if(!trope || seenTropes.has(trope)) return false;
+    seenTropes.add(trope);
+    return true;
+  });
+  state.lendoBooks.push({id:genId(), titulo, autora, link:link||'', tropes});
   saveState();
   render({preserveScroll:true});
 }
@@ -2514,12 +3054,12 @@ function generateLendoList(){
   if(!trope){ alert('Digite um trope para gerar a lista.'); return; }
   const qty = Number(prompt('Quantos livros você quer nessa lista?'));
   if(!qty || qty < 1) return;
-  const normalized = trope.toLowerCase();
+  const normalized = normalizeLendoTrope(trope);
   const seen = new Set();
   const matches = (state.lendoBooks || []).filter(b=>{
     const key = `${(b.titulo||'').toLowerCase()}|${(b.autora||'').toLowerCase()}`;
     if(seen.has(key)) return false;
-    const ok = (b.tropes||[]).some(t=>t.toLowerCase().includes(normalized));
+    const ok = (b.tropes||[]).some(t=>normalizeLendoTrope(t).includes(normalized));
     if(ok) seen.add(key);
     return ok;
   });
@@ -2665,6 +3205,14 @@ function renderTaskModal(){
         </select></div>
         <div class="field"><label>Tempo estimado</label><input type="text" value="${escapeAttr(d.tempoEstimado||'')}" oninput="modalState.draft.tempoEstimado=this.value" placeholder="ex: 25 min"></div>
       </div>` : ''}
+      ${!isProjectDraft && d.area==='Marketing Personnallité' ? `<div class="field-row">
+        <div class="field"><label>Etapa editorial</label><select onchange="modalState.draft.editorialStage=this.value; modalState.draft.status=editorialStatusForStage(this.value); renderModal({preserveScroll:true});">
+          ${editorialStages().map(stage=>`<option value="${stage.key}" ${(d.editorialStage||editorialStageForTask(d))===stage.key?'selected':''}>${stage.label}</option>`).join('')}
+        </select></div>
+        <div class="field"><label>Canal</label><select onchange="modalState.draft.channel=this.value">
+          ${editorialChannels().map(channel=>`<option value="${channel}" ${(d.channel||'Instagram')===channel?'selected':''}>${channel}</option>`).join('')}
+        </select></div>
+      </div>` : ''}
       ${linkedProject && !returnProject ? `<button class="btn btn-return-project" onclick="openLinkedProjectFromTask()">Ir para ${escapeHtml(linkedProject.nome)} →</button>` : ''}
       ${isProjectDraft ? renderProjectFields(d) : ''}
       ${!isProjectDraft && d.area==='Lendo Sáficos' ? `<label class="field-check"><input type="checkbox" ${d.isConteudo?'checked':''} onchange="modalState.draft.isConteudo=this.checked"> Contabilizar como conteúdo do mês</label>` : ''}
@@ -2795,6 +3343,10 @@ function saveModalTask(){
     d.energia = d.energia || 'Média';
     d.dataFim = d.dataFim || d.data || '';
     d.data = d.dataFim || d.data;
+  } else if(d.area==='Marketing Personnallité'){
+    d.editorialStage = d.editorialStage || editorialStageForTask(d);
+    d.channel = d.channel || 'Instagram';
+    d.status = editorialStatusForStage(d.editorialStage);
   }
   if(modalState.id){
     const idx = state.tasks.findIndex(t=>t.id===modalState.id);
